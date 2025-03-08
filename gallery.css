@@ -1,0 +1,220 @@
+    /*general styling*/
+    p, h3, h2, h4 {
+        color: white;
+        line-height: 125%;
+    }
+
+
+    /*page layout*/
+    div.pagewrapper{
+        width: 100%;
+        top: 0px;
+        left: 0px;
+    }
+
+    div.mainwrapper{
+        max-width: 1200px;
+        margin: 50px auto;
+        display: flex;
+        padding-top: 60px;
+    }
+
+    div.entrywrapper{
+        width: 900px;
+        margin: auto;
+        margin-left:10%;
+        margin-top:0px;
+        display:block;
+    }
+
+    div.contentwrapper{
+        width: 900px;
+        margin: 50px auto;
+        margin-left: 18%;
+        margin-top: 0px;
+        display: block;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%; /* Adjust width as needed */
+        max-width: 5000px; /* Set a maximum width */
+        background-color: black; /* Adjust background color as needed */
+        z-index: 1; /* Ensure it's above other content */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px; /* Adjust padding as needed */
+        box-sizing: border-box;
+    }
+        .nav small {
+            padding: 20px; /* Adjust the padding as needed */
+        }
+    div.navimage{
+        width: 200px;
+        bottom: 65px;
+        margin: auto;
+        position: absolute;
+    }
+
+    /*contentcontaianers*/
+    div.thoughtscontainer{
+        width: 700px;
+        margin-left: 25px;
+        margin-top: -8px;
+        color: white;
+    }
+
+    div.titlecontainer{
+        width: 700px;
+        margin-left: 25px;
+        margin-top: 13px;
+        color: white;
+    }
+
+    /*PHOTO CONTAINERS*/
+    div.imgcontainer{
+        width: 800px;
+        clip: rect(0px,800px,535px,0px);
+        margin: 25px;
+    }
+
+    div.imgcontainerV{
+        width: 545;
+        clip: rect(0px,545px,800px,0px);
+        margin: 25px;
+    }
+      div.footer{
+        width:380px;
+        margin:auto;
+      }
+    .button{
+        background-color: aqua;
+    }
+
+    /* collapsible */
+    details {
+    user-select: text;
+    }
+
+    details>summary span.icon {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    }
+
+    details[open] summary span.icon {
+    transform: rotate(180deg);
+    }
+
+    summary {
+    display: flex;
+    cursor: pointer;
+    width: 100px;
+    }
+
+    summary::-webkit-details-marker {
+    display: none;
+    }
+	/* Disable selection and highlighting of images */
+	img {
+    user-select: none;
+    -webkit-user-drag: none;
+	}
+/* collapsible end */   
+
+    #highlight{
+        z-index: 3;
+    }
+* {
+    box-sizing: border-box;
+    font-family: ＭＳ Ｐゴシック;
+}
+   
+   
+   @font-face {
+       font-family: ＭＳ Ｐゴシック;
+       src: url(ms-gothic.ttf);
+   }
+
+   a:link{
+    text-decoration:none;
+    color: white;
+   }
+
+   a:hover{
+    text-decoration: underline;
+   }
+
+   a:visited{
+    color: white;
+   }
+
+::selection{
+    color: black;
+    background-color: white;
+}
+   
+
+   /*scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(32, 32, 32)26, 26, 26)5; 
+  }
+/* For screens smaller than 600px (typical mobile phones) */
+@media screen and (max-width: 600px) {
+    div.entrywrapper,
+    div.contentwrapper {
+        width: 100%;
+        margin: 10px auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
+
+
+    div.imgcontainer,
+    div.imgcontainerV {
+        width: 100%;
+        margin: 0;
+    }
+
+    div.imgcontainer img,
+    div.imgcontainerV img {
+        width: 100vw; /* Ensure images take up the entire screen width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    div.thoughtscontainer,
+    div.titlecontainer {
+        margin: 15px 0; /* Adjust margins for vertical space */
+        padding: 0 15px; /* Add padding to prevent horizontal scrolling */
+        max-width: 100%; /* Ensure text doesn't overflow horizontally */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+    /* Adjust font sizes or paddings as needed */
+    p,
+    h3,
+    h2,
+    h4 {
+        font-size: 14px; /* Example font size adjustment */
+    }
+}

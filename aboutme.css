@@ -1,0 +1,411 @@
+  body {
+    background: url(https://lluck.neocities.org/screenshot133.png) no-repeat center center fixed #000; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  image-rendering: pixelated;
+  font-size: 0.800em;
+  font-family: "ＭＳ Ｐゴシック";
+  padding: 0;
+  margin: 0;
+  }
+
+.wrapper {
+  backdrop-filter: blur(5px);
+  background-image: url();
+  top: 0;
+  margin: 0 auto;
+  width: 1005px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  }
+	  
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 1; /* Ensure it's above other content */
+}
+/* Center the enlarged image */
+.overlay.active .enlarged-image {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%; /* Adjust the maximum width as needed */
+  max-height: 80%; /* Adjust the maximum height as needed */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  transition: 0.3s ease-in-out;
+  z-index: 2;
+}
+.enlarged-image-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%; /* Adjust the maximum width as needed */
+    max-height: 80%; /* Adjust the maximum height as needed */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    transition: 0.3s ease-in-out;
+    z-index: 2;
+}
+
+/* Add blurred background effect */
+.blurred {
+    filter: blur(5px); /* Adjust the blur amount as needed */
+}
+  
+.sidebar-left, .sidebar-right {
+  width: 175px;
+  }
+  
+.main {
+  width: 525px;
+  margin-left: 300px;
+  image-rendering: pixelated;
+  }
+  
+.sidebar-left {
+  width: 290px;
+  margin-left: 0px;
+  float: left;
+    margin-left: 5px;
+  margin-right: 5px;
+  image-rendering: pixelated;
+  }
+  
+  .sidebar-right {
+  margin-left: 0px;
+  float: right;
+    margin-left: 5px;
+  margin-right: 5px;
+  }
+  
+  
+.wrapper, .links a {
+  color: #000;
+  }
+  
+.box {
+
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  }
+  
+  .mainbox {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 798px;
+   overflow: scroll;
+  opacity: .65;
+  }
+  
+    .leftbox1 {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 380px;
+  width: 285px;
+    overflow: hidden;
+  opacity: .65;
+  }
+  
+      .leftbox2 {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 158px;
+  opacity: .65;
+  }
+  
+        .leftbox3 {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 240px;
+  opacity: .65;
+  }
+  
+  .rightbox1 {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 394px;
+  opacity: .65;
+  }
+  
+    .rightbox2 {
+  border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 394px;
+    opacity: .65;
+  }
+  
+.log {
+  height:179px;
+  overflow: scroll; 
+    border: 2px solid #000;
+  background: white;
+  padding: 0;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  width: 991px;
+  opacity: .65;
+  }
+  
+  .boxy {
+
+
+  }
+  
+.header {
+  border: 3px double #000;
+  background: black;
+  background-image: url(' ');
+  image-rendering: pixelated;
+  background-size: cover;
+  text-align: center;
+  padding-top: 15px;
+  margin-top: 5px;
+  margin-bottom: 9px;
+  margin-left: 5px;
+  margin-right: 5px;
+  top: 0;
+  height: 85px;
+  }
+  
+.links {
+  margin-top: 1em;
+  }
+  
+.title { /*suppress title, since we're putting the title as text in the header box*/
+  display: none;
+  }
+
+.footer {
+  height: 0;
+  }
+  
+.box h1, .box h2, .box h3, .box h4 {
+  background: black;
+  margin: 0;
+  padding: 0.35em 0.25em 0.3em 0.25em;
+  text-align: center;
+  border-bottom: 3px double #000;
+  }
+  
+.inner {
+  padding: 0.25em 1em 0.3em 1em;
+  font-size: 1.075em;
+  }
+.leftbox2 h3 {
+    color: white;
+}
+.mainbox h2 {
+    color: white;
+}
+* {
+ box-sizing: border-box; 
+ font-family: msgothic;
+}
+
+
+@font-face {
+    src: url(ms-gothic.ttf);
+    font-family: msgothic;
+
+}
+
+
+.default {
+  cursor: crosshair;
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-family: msgothic;
+  
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited{
+  color: black;  
+}
+
+a:hover{
+  color:rgb(190, 190, 190)
+}
+
+
+.header{
+  padding: 100px;
+  
+  }
+  
+  
+      ::selection{
+      color: white;
+      background-color: black;
+      }
+
+
+.flex-container {
+  display: flex grid;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.flex-container > div {
+  border: 10px black;
+  
+}
+
+/*scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 66, 66); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(32, 32, 32)26, 26, 26)5; 
+}
+/* Mobile styles */
+@media screen and (max-width: 767px) {
+  .wrapper {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  /* Adjustments for the boxes */
+  .leftbox1,
+  .mainbox,
+  .leftbox3,
+  .rightbox1,
+  .rightbox2,
+  .leftbox2 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Text adjustments */
+  .leftbox1,
+  .mainbox,
+  .leftbox3,
+  .rightbox1,
+  .rightbox2,
+  .leftbox2,
+  .box h2,
+  .box h3 {
+    text-align: center;
+  }
+
+  /* Order of the boxes */
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    width: 100%;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Specify the order for each box */
+  .leftbox1 {
+    order: 1; /* First */
+  }
+
+  .mainbox {
+    order: 2; /* Second */
+  }
+
+  .leftbox3 {
+    order: 3; /* Third */
+  }
+
+  .rightbox1 {
+    order: 4; /* Fourth */
+  }
+
+  .rightbox2 {
+    order: 5; /* Fifth */
+  }
+
+  .leftbox2 {
+    order: 6; /* Sixth */
+  }
+  /* Adjustments for right boxes to fit side by side */
+  .rightbox1,
+  .rightbox2 {
+    width: 46%; /* Set the width to occupy nearly half of the screen with a little space in between */
+    margin: 0 1%; /* Add a small margin between the boxes */
+  }
+
+  /* Flexbox to display them side by side */
+  .rightbox1,
+  .rightbox2 {
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+  }
+}

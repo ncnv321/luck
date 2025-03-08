@@ -1,0 +1,232 @@
+{
+ box-sizing: border-box; 
+ font-family: 'ms ui gothic';
+ color: white;
+}
+
+
+@font-face {
+    font-family: 'ms ui gothic';
+}
+
+
+.default {
+  cursor: crosshair;
+  /*
+  cursor: url('D:\personal work\neocities\theme01\images\cursor_plain_01.png');
+  */
+}
+
+
+a:link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+
+a:visited{
+  color: rgb(255, 255, 255);
+}
+
+a:hover{
+  color:rgb(190, 190, 190)
+}
+
+hr{
+    color:rgb(57, 57, 57);
+}
+
+::selection{
+    color: black;
+    background-color: white;
+}
+
+
+
+.header{
+  padding: 100px;
+  
+  }
+
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.flex-container > div {
+  border: 10px black;
+  
+}
+
+/*scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 66, 66); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(32, 32, 32)26, 26, 26)5; 
+}
+      
+        div.mainwrapper{
+            width: 99%;
+            position: fixed;
+            margin: auto;
+        }
+
+        div.bodywrapper{
+            width: 850px;
+            grid: flex;
+            margin: 25px auto;
+        }
+
+        div.contentwrapper{
+            width: 850px;
+            display: flex;
+            margin: auto;
+        }
+
+        div.headerimg{
+            width: 840px;
+            height: 150px;
+            margin: auto;
+        }
+
+        nav{
+            width: 98.8%;
+            margin: auto;
+            margin-top:5px;
+            padding-top:4px;
+            height: 25px;
+        }
+
+        div.leftcontainerwrapper{
+            width: 190px;
+            margin: 5px auto;
+        }
+
+        div.leftcontainercontainerone{
+            width: 180px;
+            height:425px;
+            margin: 5px auto;
+            border: .75px solid rgb(105, 106, 131);
+            opacity: .95;
+        }
+
+        div.leftcontainercontainer{
+            width: 180px;
+            margin: 5px auto;
+            border: .75px solid rgb(105, 106, 131);
+            opacity: .95;
+        }
+
+        div.leftcontainercontent{
+            width: 160px;
+            margin: 10px auto;
+        }
+
+        div.contentcontainer{
+            width:640px;
+            margin: 5px auto;
+            margin-right:10px;
+        }
+
+        div.contentcopy{
+            
+            width:640px;
+            height: 500px;
+            margin:5px auto;
+            border: .75px solid rgb(105, 106, 131);
+            overflow-y:scroll;
+            
+        }
+
+        div.copycopy{
+            width:600px;
+            margin:20px auto;
+        }
+
+        div.updatelog{
+            width: 500px;
+            margin:  10px auto;
+            margin-top:20px;
+            margin-bottom:35px;
+            height: 175px;
+            border: 1px solid gray;
+            overflow-y: scroll;
+        }
+
+        div.updatelogcopy{
+            width: 450px;
+            margin:25px auto;
+        }
+
+        div.banner{
+            width: 100%;
+            height:200px;
+            margin-bottom:1%;
+        }
+
+        body{
+            background-color: black;
+            /*
+            background: url(https://i.imgur.com/vuFTx39.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            */
+        }
+
+        #white{
+            color: white;
+        }
+
+        button{
+            width: 13%;
+            background-color:rgb(0, 0, 0);
+            color: rgb(213, 213, 213);
+            border: 0;
+        }
+
+        button:hover{
+            color:rgb(68, 68, 74);
+        }
+
+        p{
+            font-family: 'ms ui gothic';
+        }
+
+        /*scroll bar */
+        /* width */
+        ::-webkit-scrollbar {
+        width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        background: black; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: rgb(161, 161, 161); 
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: rgb(255, 255, 255)26, 26, 26)5; 
+        }

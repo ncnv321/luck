@@ -1,0 +1,257 @@
+        div.mainwrapper{
+            max-width: 860px;
+            margin: auto;
+            display: flex;
+        
+        }
+
+        div.header{
+            width: 860px;
+
+            margin:  5px auto;
+            border: 1px solid white;
+
+        }
+
+        div.banner{
+            width: 860px;
+            height: 25px;
+            margin: 3px;
+            background-color: white;
+
+        }
+
+        div.header02{
+            width: 438px;
+            height: 215px;
+            margin: 5px auto;
+            right: 100px;
+
+        }
+
+        .favibox{
+            width: 11px;
+            height: 11px;
+        }
+
+    
+
+
+        div.sideframe{
+            width: 175px;
+            height: 500px;
+            border: 1px solid white;
+
+        }
+        
+
+        div.sidecontent{
+            width: 165px;
+            margin: 10px;
+
+        }
+
+        .changelog{
+            width: 150px;
+            height: 200px;
+            border: 1px solid white;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .cbox{
+            width: 150px;
+            height: 200px;
+            border: 1px solid white;
+            overflow: hidden
+        }
+
+        div.mainframe{
+            width: 500px;
+            height: 500px;
+            border: 1px solid white;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+      div.maincontent{
+        width: 450px;
+        margin: 10px;
+      }
+
+		* {
+ box-sizing: border-box; 
+ font-family: msgothic;
+}
+
+
+@font-face {
+    src: url(ms-gothic.ttf);
+    font-family: msgothic;
+
+}
+
+
+body {
+  background-color: black;
+  color: white;
+  font-family: msgothic;
+  
+}
+
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+a:visited{
+  color: white;  
+}
+
+a:hover{
+  color:rgb(190, 190, 190)
+}
+
+
+.header{
+  padding: 100px;
+  
+  }
+  
+  
+      ::selection{
+      color: black;
+      background-color: white;
+      }
+
+
+.flex-container {
+  display: flex grid;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.flex-container > div {
+  border: 10px white;
+  
+}
+
+/*scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 66, 66); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(32, 32, 32)26, 26, 26)5; 
+}
+
+#leftalign {
+  text-align: left;
+}
+
+#paragraphstyling {
+  text-align: center;
+  line-height: 13px;
+  margin: 15px;
+}
+
+#paragraphstyling2 {
+  text-align: left;
+  line-height: 13px;
+  margin: 15px;
+}
+
+#deadlinkstyling {
+  color: gray;
+  margin-top: -15px;
+}
+
+#changelogparagraphstyling {
+  text-align: left;
+  line-height: 13px;
+  margin: 9px;
+  line-height: 10px;
+}
+
+#bannertype {
+  color: white;
+  font-weight: bold;
+  margin-top: 3px;
+}
+
+#h3navmargins {
+  margin-bottom: -5px;
+}
+
+#hleading {
+  line-height: 18px;
+}
+
+#h3rightmargins {
+  margin-bottom: 10px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    div.mainwrapper {
+        max-width: 100%;
+        flex-direction: column; /* Stack items vertically */
+        /* ... */
+    }
+
+    div.sideframe,
+    div.mainframe {
+        width: 100%;
+        margin: 5px 0;
+        /* ... */
+    }
+
+    div.sideframe,
+    div.mainframe,
+    div.header02 {
+        max-width: 100%;
+        /* ... */
+    }
+    div.sideframe {
+      height: 265px;
+    }
+
+    body {
+        font-size: 14px; /* Adjust the font size */
+    }
+
+    div.banner {
+        width: 100%;
+        height: auto; 
+        margin: 0 auto; 
+
+    }
+
+    div.maincontent {
+        width: 70%;
+        margin: 0 auto; 
+        text-align: center;
+    }
+    div.sidecontent {
+        margin: 0 auto; 
+        text-align: center; 
+        /* ... */
+    }
+    .header02 {
+        display: none; 
+    }
+}
