@@ -1,411 +1,456 @@
-  body {
-    background: url(https://lluck.neocities.org/screenshot133.png) no-repeat center center fixed #000; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  image-rendering: pixelated;
-  font-size: 0.800em;
-  font-family: "ＭＳ Ｐゴシック";
-  padding: 0;
-  margin: 0;
-  }
-
-.wrapper {
-  backdrop-filter: blur(5px);
-  background-image: url();
-  top: 0;
-  margin: 0 auto;
-  width: 1005px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  }
-	  
-/* Overlay */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-    z-index: 1; /* Ensure it's above other content */
-}
-/* Center the enlarged image */
-.overlay.active .enlarged-image {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%; /* Adjust the maximum width as needed */
-  max-height: 80%; /* Adjust the maximum height as needed */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-  transition: 0.3s ease-in-out;
-  z-index: 2;
-}
-.enlarged-image-container {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 80%; /* Adjust the maximum width as needed */
-    max-height: 80%; /* Adjust the maximum height as needed */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    transition: 0.3s ease-in-out;
-    z-index: 2;
-}
-
-/* Add blurred background effect */
-.blurred {
-    filter: blur(5px); /* Adjust the blur amount as needed */
-}
-  
-.sidebar-left, .sidebar-right {
-  width: 175px;
-  }
-  
-.main {
-  width: 525px;
-  margin-left: 300px;
-  image-rendering: pixelated;
-  }
-  
-.sidebar-left {
-  width: 290px;
-  margin-left: 0px;
-  float: left;
-    margin-left: 5px;
-  margin-right: 5px;
-  image-rendering: pixelated;
-  }
-  
-  .sidebar-right {
-  margin-left: 0px;
-  float: right;
-    margin-left: 5px;
-  margin-right: 5px;
-  }
-  
-  
-.wrapper, .links a {
-  color: #000;
-  }
-  
-.box {
-
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  }
-  
-  .mainbox {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 798px;
-   overflow: scroll;
-  opacity: .65;
-  }
-  
-    .leftbox1 {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 380px;
-  width: 285px;
-    overflow: hidden;
-  opacity: .65;
-  }
-  
-      .leftbox2 {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 158px;
-  opacity: .65;
-  }
-  
-        .leftbox3 {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 240px;
-  opacity: .65;
-  }
-  
-  .rightbox1 {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 394px;
-  opacity: .65;
-  }
-  
-    .rightbox2 {
-  border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  height: 394px;
-    opacity: .65;
-  }
-  
-.log {
-  height:179px;
-  overflow: scroll; 
-    border: 2px solid #000;
-  background: white;
-  padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  width: 991px;
-  opacity: .65;
-  }
-  
-  .boxy {
-
-
-  }
-  
-.header {
-  border: 3px double #000;
-  background: black;
-  background-image: url(' ');
-  image-rendering: pixelated;
-  background-size: cover;
-  text-align: center;
-  padding-top: 15px;
-  margin-top: 5px;
-  margin-bottom: 9px;
-  margin-left: 5px;
-  margin-right: 5px;
-  top: 0;
-  height: 85px;
-  }
-  
-.links {
-  margin-top: 1em;
-  }
-  
-.title { /*suppress title, since we're putting the title as text in the header box*/
-  display: none;
-  }
-
-.footer {
-  height: 0;
-  }
-  
-.box h1, .box h2, .box h3, .box h4 {
-  background: black;
-  margin: 0;
-  padding: 0.35em 0.25em 0.3em 0.25em;
-  text-align: center;
-  border-bottom: 3px double #000;
-  }
-  
-.inner {
-  padding: 0.25em 1em 0.3em 1em;
-  font-size: 1.075em;
-  }
-.leftbox2 h3 {
-    color: white;
-}
-.mainbox h2 {
-    color: white;
-}
 * {
- box-sizing: border-box; 
- font-family: msgothic;
-}
-
-
-@font-face {
-    src: url(ms-gothic.ttf);
-    font-family: msgothic;
-
-}
-
-
-.default {
-  cursor: crosshair;
+  box-sizing: border-box;
+  font-family: "MS Gothic", "MS PGothic", sans-serif;
 }
 
 body {
-  background-color: white;
-  color: black;
-  font-family: msgothic;
-  
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
 }
 
-a:link {
-  color: black;
+a {
+  color: white;
   text-decoration: none;
 }
 
-a:visited{
-  color: black;  
+a:hover {
+  color: rgb(190, 190, 190);
 }
 
-a:hover{
-  color:rgb(190, 190, 190)
+::selection {
+  color: black;
+  background-color: white;
 }
 
+/* ===================== */
+/* == Layout Structure == */
+/* ===================== */
 
-.header{
-  padding: 100px;
-  
-  }
-  
-  
-      ::selection{
-      color: white;
-      background-color: black;
-      }
-
-
-.flex-container {
-  display: flex grid;
-  justify-content: center;
-  align-items: center;
-  
+.mainwrapper {
+  max-width: 860px;
+  margin: auto;
+  /* display: flex; /* Applied via inline style in HTML or parent div */
 }
 
-.flex-container > div {
-  border: 10px black;
-  
+/* Header placeholder - Style if needed */
+div.header02 {
+  width: 438px; /* Or adjust as needed */
+  height: 215px; /* Adjust based on content */
+  margin: 5px auto;
+  /* right: 100px; /* Position if necessary */
 }
 
-/*scroll bar */
-/* width */
+footer {
+  text-align: center;
+  margin: 20px auto;
+}
+
+/* ============ */
+/* == Banners == */
+/* ============ */
+
+.banner {
+  max-width: 100%;
+  width: 860px; /* Match mainwrapper width */
+  height: 25px;
+  margin: 3px auto; /* Centers banner */
+  background-color: white;
+  /* margin-top: 2rem; /* Applied inline in HTML */
+}
+
+.banner2 {
+  max-width: 100%;
+  width: 860px; /* Match mainwrapper width */
+  /* height: 5px; /* Height seems too small? Adjust as needed */
+  height: auto; /* Let content define height */
+  min-height: 20px;
+  margin: 3px auto; /* Centers banner */
+  background-color: #a37a7a;
+  /* margin-top: 0rem; /* Applied inline in HTML */
+  padding: 3px 0; /* Keep padding */
+}
+
+#bannertype {
+  /* Applied within banner marquee */
+  color: black; /* Text color on white banner */
+  font-weight: bold;
+  margin-top: 3px; /* Adjust vertical alignment */
+}
+
+/* --- Custom Banner Progress Bar Styles (Updated) --- */
+
+.banner {
+  /* Default state: Visible, full width */
+  opacity: 1;
+  transform: scaleX(1);
+  transform-origin: left center; /* Scale from the left */
+  background-color: white; /* Ensure it has a background */
+  height: 25px; /* Ensure height is set */
+  width: 860px; /* Ensure width is set */
+  max-width: 100%;
+  margin: 3px auto; /* Keep centering */
+  transition: transform 0.3s ease-out, opacity 0.2s ease-out; /* Base transitions */
+}
+
+/* State for the initial quick fade-out */
+.banner.is-fading-out {
+  opacity: 0;
+  transition-duration: 0.2s; /* Quick fade */
+}
+
+/* State while loading (after fade-in reset) */
+html.is-changing .banner.is-loading {
+  opacity: 1; /* Should be visible while loading */
+  transform: scaleX(1); /* Animate TO full width */
+  transition-property: transform; /* Only transition transform */
+  transition-duration: 1.5s; /* Duration of the loading bar fill */
+  transition-timing-function: cubic-bezier(
+    0.23,
+    1,
+    0.32,
+    1
+  ); /* Smoother easing */
+}
+
+/* Ensure banner stays visible at the end */
+/* No specific rule needed as the default state is visible/full width */
+/* We remove helper classes via JS */
+
+/* --- End Custom Banner Progress Bar Styles --- */
+
+/* ================================= */
+/* == Main Columns (Side & Main) == */
+/* ================================= */
+
+.sideframe {
+  width: 175px;
+  /* height: 500px; */ /* Use min-height for flexibility */
+  /* min-height: 500px; */ /* REMOVE this or comment out */
+  height: 500px; /* ADD THIS - Restore fixed height from index.html */
+  border: 1px solid white;
+  box-sizing: border-box; /* Include border in width */
+  overflow-y: auto; /* ADD THIS - Allow sideframe content to scroll if needed */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.mainframe {
+  /* width: 500px; /* Original width */
+  width: 510px; /* Adjusted width: 860 (total) - 175*2 (sides) = 510 - Keep this */
+  /* height: 500px; */ /* Use min-height for flexibility */
+  /* min-height: 500px; */ /* REMOVE this or comment out */
+  height: 500px; /* ADD THIS - Restore fixed height from index.html */
+  border: 1px solid white;
+  position: relative; /* Needed if children use absolute positioning */
+  overflow-x: hidden;
+  overflow-y: scroll; /* Keep scroll for main content */
+  box-sizing: border-box; /* Include border in width */
+}
+
+.sidecontent {
+  /* width: 165px; /* Let it fill sideframe better */
+  width: auto;
+  margin: 10px; /* Padding inside the sideframe */
+}
+
+.maincontent {
+  /* width: 450px; /* Let it fill mainframe better */
+  width: auto;
+  margin: 10px; /* Padding inside the mainframe */
+}
+
+/* Clearfix for floated elements inside maincontent */
+.maincontent::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ======================== */
+/* == Left Sideframe Split == */
+/* ======================== */
+
+.sideframe.left-sideframe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Adjust as needed */
+  /* height: 500px; /* Height defined in .sideframe */
+}
+
+.left-section {
+  border-bottom: 1px dashed white;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+
+.left-top-section {
+  min-height: 230px;
+  flex-basis: 40%; /* Approx height */
+  /* border-bottom: 1px dashed white; /* Already defined in .left-section */
+}
+
+.left-bottom-section {
+  min-height: 250px;
+  flex-basis: 60%; /* Approx height */
+  border-bottom: none; /* Override default section border */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove bottom border from the last section */
+.sideframe.left-sideframe .left-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.left-section .sidecontent {
+  margin: 5px; /* Inner margin for section content */
+  width: auto;
+}
+
+/* Quick Links (Bottom Left) */
+.quick-links p {
+  line-height: 1.8;
+  margin: 0;
+  text-align: left; /* Ensure links align left */
+}
+.quick-links img {
+  margin-right: 5px;
+  vertical-align: middle; /* Align icons better */
+}
+.quick-links a {
+  color: white;
+}
+.quick-links a:hover {
+  color: rgb(190, 190, 190);
+}
+
+/* Bnuuy Link Hover */
+.about-link {
+  cursor: pointer;
+}
+
+/* ========================= */
+/* == Right Sideframe Content == */
+/* ========================= */
+
+/* Kins Marquee Container (Used .changelog class in HTML) */
+.changelog {
+  width: 150px; /* Specific width from HTML */
+  height: 120px; /* Specific height from HTML */
+  border: 1px solid white;
+  overflow: hidden; /* Hide marquee overflow */
+  margin: 0 auto 10px auto; /* Center and add bottom margin */
+}
+
+/* Likes/Dislikes Container */
+.likes-dislikes {
+  border: 1px solid white;
+  padding: 5px 10px; /* Padding inside */
+  /* height: 150px; /* Height from HTML */
+  min-height: 150px; /* Allow growth */
+  overflow-y: auto;
+  margin-bottom: 10px; /* Space below */
+  text-align: left;
+}
+.likes-dislikes b {
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* Social Links Container */
+.social-links {
+  text-align: center; /* Center align social links */
+  margin-bottom: 10px;
+}
+.social-links p {
+  margin-bottom: 5px;
+}
+
+/* Visitor Counter / Time */
+/* Styles are mostly inline in HTML, add classes if needed */
+
+/* ============================== */
+/* == Typography & ID Styles == */
+/* ============================== */
+
+h2,
+h3 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+#h3navmargins {
+  /* Applied to h3 in left sideframe */
+  margin-bottom: -5px;
+}
+
+#h3rightmargins {
+  /* Applied to h3 in right sideframe */
+  margin-bottom: 10px;
+}
+
+#hleading {
+  /* Applied to h2 in mainframe */
+  line-height: 18px;
+}
+
+#paragraphstyling {
+  /* Used for footer */
+  text-align: center;
+  line-height: 13px;
+  margin: 15px;
+}
+
+#paragraphstyling2 {
+  /* Used for main content paragraphs */
+  text-align: left;
+  line-height: 1.4; /* Increased slightly for readability */
+  margin: 15px;
+}
+
+#changelogparagraphstyling {
+  /* Used for likes/dislikes text */
+  text-align: left;
+  line-height: 1.3; /* Adjusted line height */
+  margin: 9px;
+}
+
+#leftalign {
+  /* Utility class if needed */
+  text-align: left;
+}
+
+#deadlinkstyling {
+  /* Utility class if needed */
+  color: gray;
+  margin-top: -15px;
+}
+
+/* =================== */
+/* == Scrollbar Styles == */
+/* =================== */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #333; /* Darker track */
 }
- 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
-  background: rgb(66, 66, 66); 
+  background: rgb(100, 100, 100); /* Slightly lighter handle */
+  border: 1px solid #333; /* Match track */
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(32, 32, 32)26, 26, 26)5; 
+  background: rgb(150, 150, 150); /* Lighter on hover */
 }
-/* Mobile styles */
-@media screen and (max-width: 767px) {
-  .wrapper {
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+
+/* ===================== */
+/* == Responsive Styles == */
+/* ===================== */
+
+@media screen and (max-width: 870px) {
+  /* Slightly wider breakpoint */
+  .mainwrapper,
+  .banner,
+  .banner2 {
+    width: 98%; /* Use percentage width below max */
+    max-width: 860px; /* Keep max width */
   }
-  /* Adjustments for the boxes */
-  .leftbox1,
-  .mainbox,
-  .leftbox3,
-  .rightbox1,
-  .rightbox2,
-  .leftbox2 {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .mainwrapper {
+    /* max-width: 100%; /* Already handled above */
+    flex-direction: column; /* Stack columns */
+    display: flex; /* Ensure flex is applied on mobile */
   }
 
-  /* Text adjustments */
-  .leftbox1,
-  .mainbox,
-  .leftbox3,
-  .rightbox1,
-  .rightbox2,
-  .leftbox2,
-  .box h2,
-  .box h3 {
+  .sideframe,
+  .mainframe {
+    width: 100%; /* Full width */
+    margin: 5px 0;
+    min-height: unset; /* Remove min-height */
+    height: auto; /* Auto height */
+  }
+
+  /* Specific height override from original mobile CSS */
+  /* Re-evaluate if needed */
+  /* div.sideframe { height: 265px; } */
+
+  .banner,
+  .banner2 {
+    /* width: 100%; /* Already handled above */
+    height: auto;
+    margin: 5px auto; /* Adjust margin */
+  }
+
+  /* Adjust banner2 flex layout for mobile */
+  .banner2 > div[style*="display: flex"] {
+    flex-wrap: wrap; /* Allow icons to wrap */
+    justify-content: center; /* Center icons */
+  }
+  .banner2 > div[style*="display: flex"] a {
+    padding: 5px 10px; /* Adjust padding */
+  }
+
+  .maincontent {
+    width: 90%; /* More padding */
+    margin: 10px auto;
+    text-align: center; /* Center text content */
+  }
+  .maincontent img[style*="float: right"] {
+    float: none; /* Disable float */
+    display: block;
+    margin: 15px auto; /* Center image */
+    height: 200px; /* Optional resize */
+    max-width: 90%;
+  }
+  .maincontent p#paragraphstyling2 {
+    text-align: center; /* Center paragraphs on mobile */
+  }
+
+  .sidecontent {
+    margin: 10px auto;
+    text-align: center;
+    width: 90%; /* More padding */
+  }
+  /* Ensure left/right frame content is centered */
+  .sideframe .sidecontent {
     text-align: center;
   }
-
-  /* Order of the boxes */
-  .main {
-    margin-left: 0;
-    width: 100%;
+  .sideframe .sidecontent .quick-links p,
+  .sideframe .sidecontent .likes-dislikes,
+  .sideframe .sidecontent #changelogparagraphstyling {
+    text-align: center; /* Center text */
   }
 
-  .sidebar-left,
-  .sidebar-right {
-    width: 100%;
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
+  .header02 {
+    display: none; /* Hide header image */
   }
 
-  /* Specify the order for each box */
-  .leftbox1 {
-    order: 1; /* First */
+  /* Left frame split mobile */
+  .sideframe.left-sideframe {
+    height: auto;
+    flex-direction: column;
   }
-
-  .mainbox {
-    order: 2; /* Second */
+  .left-section {
+    border-bottom: 1px dashed white;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    min-height: unset;
+    flex-basis: auto;
   }
-
-  .leftbox3 {
-    order: 3; /* Third */
+  .left-section:last-child {
+    border-bottom: none;
   }
-
-  .rightbox1 {
-    order: 4; /* Fourth */
-  }
-
-  .rightbox2 {
-    order: 5; /* Fifth */
-  }
-
-  .leftbox2 {
-    order: 6; /* Sixth */
-  }
-  /* Adjustments for right boxes to fit side by side */
-  .rightbox1,
-  .rightbox2 {
-    width: 46%; /* Set the width to occupy nearly half of the screen with a little space in between */
-    margin: 0 1%; /* Add a small margin between the boxes */
-  }
-
-  /* Flexbox to display them side by side */
-  .rightbox1,
-  .rightbox2 {
-    float: none;
-    display: inline-block;
-    vertical-align: top;
+  .quick-links p {
+    text-align: center !important; /* Override specificity if needed */
   }
 }

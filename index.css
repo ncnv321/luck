@@ -1,166 +1,171 @@
-        div.mainwrapper{
-            max-width: 860px;
-            margin: auto;
-            display: flex;
-        
-        }
+/* ================================ */
+/* == CSS For Index (Home) Page == */
+/* ============================== */
 
-        div.header{
-            width: 860px;
-
-            margin:  5px auto;
-            border: 1px solid white;
-
-        }
-
-        div.banner{
-            width: 860px;
-            height: 25px;
-            margin: 3px;
-            background-color: white;
-
-        }
-
-        div.header02{
-            width: 438px;
-            height: 215px;
-            margin: 5px auto;
-            right: 100px;
-
-        }
-
-        .favibox{
-            width: 11px;
-            height: 11px;
-        }
-
-    
-
-
-        div.sideframe{
-            width: 175px;
-            height: 500px;
-            border: 1px solid white;
-
-        }
-        
-
-        div.sidecontent{
-            width: 165px;
-            margin: 10px;
-
-        }
-
-        .changelog{
-            width: 150px;
-            height: 200px;
-            border: 1px solid white;
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
-
-        .cbox{
-            width: 150px;
-            height: 200px;
-            border: 1px solid white;
-            overflow: hidden
-        }
-
-        div.mainframe{
-            width: 500px;
-            height: 500px;
-            border: 1px solid white;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
-
-      div.maincontent{
-        width: 450px;
-        margin: 10px;
-      }
-
-		* {
- box-sizing: border-box; 
- font-family: msgothic;
+* {
+  box-sizing: border-box;
+  font-family: "MS Gothic", "MS PGothic", msgothic, sans-serif;
 }
-
-
-@font-face {
-    src: url(ms-gothic.ttf);
-    font-family: msgothic;
-
-}
-
 
 body {
   background-color: black;
   color: white;
-  font-family: msgothic;
-  
+  margin: 0;
+  padding: 0;
 }
 
-a:link {
+a {
   color: white;
   text-decoration: none;
 }
 
-a:visited{
-  color: white;  
+a:hover {
+  color: rgb(190, 190, 190);
 }
 
-a:hover{
-  color:rgb(190, 190, 190)
+::selection {
+  color: black;
+  background-color: white;
 }
 
-
-.header{
-  padding: 100px;
-  
-  }
-  
-  
-      ::selection{
-      color: black;
-      background-color: white;
-      }
-
-
-.flex-container {
-  display: flex grid;
-  justify-content: center;
-  align-items: center;
-  
+.mainwrapper {
+  max-width: 860px;
+  margin: auto;
 }
 
-.flex-container > div {
-  border: 10px white;
-  
+div.header02 {
+  width: 438px;
+  height: 215px;
+  margin: 5px auto;
 }
 
-/*scroll bar */
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
+footer {
+  text-align: center;
+  margin: 20px auto;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(66, 66, 66); 
+div.banner {
+  max-width: 100%;
+  width: 860px;
+  height: 25px;
+  margin: 3px auto;
+  background-color: white;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(32, 32, 32)26, 26, 26)5; 
+#bannertype {
+  color: black;
+  font-weight: bold;
+  margin-top: 3px;
 }
 
-#leftalign {
-  text-align: left;
+/* --- Custom Banner Progress Bar Styles (Add this section) --- */
+
+.banner {
+  /* Default state needs opacity:1 / transform:scaleX(1) for this */
+  /* Make sure previous .banner rule doesn't conflict */
+  opacity: 1;
+  transform: scaleX(1);
+  transform-origin: left center;
+  /* Add base transition needed for animations */
+  transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+  /* Ensure pointer-events are default unless animating */
+  pointer-events: auto;
+}
+
+/* State for the initial quick fade-out */
+.banner.is-fading-out {
+  opacity: 0;
+  transition-duration: 0.2s;
+  pointer-events: none; /* Disable clicks while fading */
+}
+
+/* State while loading (after fade-in reset) */
+html.is-changing .banner.is-loading {
+  opacity: 1; /* Make it visible */
+  transform: scaleX(1); /* Animate TO full width */
+  transition-property: transform; /* Only transition transform */
+  transition-duration: 1.5s; /* Duration of the loading bar fill */
+  transition-timing-function: cubic-bezier(
+    0.23,
+    1,
+    0.32,
+    1
+  ); /* Smoother easing */
+  pointer-events: none; /* Disable clicks while loading */
+}
+
+/* --- End Custom Banner Progress Bar Styles --- */
+
+/* ================================= */
+/* == Main Columns (Side & Main) == */
+/* ================================= */
+
+div.sideframe {
+  width: 175px;
+  height: 500px;
+  border: 1px solid white;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+div.mainframe {
+  width: 510px;
+  height: 500px;
+  border: 1px solid white;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+div.sidecontent {
+  width: auto;
+  margin: 10px;
+}
+
+div.maincontent {
+  width: auto;
+  margin: 10px;
+}
+
+/* ============================ */
+/* == Specific Content Areas == */
+/* ============================ */
+
+.changelog {
+  width: 150px;
+  height: 200px;
+  border: 1px solid white;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0 auto 10px auto;
+}
+
+.favibox {
+  width: 11px;
+  height: 11px;
+}
+
+/* ============================== */
+/* == Typography & ID Styles == */
+/* ============================== */
+
+h2,
+h3 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+#h3navmargins {
+  margin-bottom: -5px;
+}
+
+#h3rightmargins {
+  margin-bottom: 10px;
+}
+
+#hleading {
+  line-height: 18px;
 }
 
 #paragraphstyling {
@@ -180,78 +185,117 @@ a:hover{
   margin-top: -15px;
 }
 
-#changelogparagraphstyling {
+#changelogparagraphstyling p {
   text-align: left;
-  line-height: 13px;
+  line-height: 1.4;
   margin: 9px;
-  line-height: 10px;
 }
 
-#bannertype {
-  color: white;
-  font-weight: bold;
-  margin-top: 3px;
+#leftalign {
+  text-align: left;
 }
 
-#h3navmargins {
-  margin-bottom: -5px;
+/* =================== */
+/* == Scrollbar Styles == */
+/* =================== */
+
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-#hleading {
-  line-height: 18px;
+::-webkit-scrollbar-track {
+  background: #333;
 }
 
-#h3rightmargins {
-  margin-bottom: 10px;
+::-webkit-scrollbar-thumb {
+  background: rgb(100, 100, 100);
+  border: 1px solid #333;
 }
 
-/* Media query for smaller screens */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(150, 150, 150);
+}
+
+/* ========================== */
+/* == Swup Transition Styles == */
+/* ========================== */
+
+#swup {
+  transition: opacity 0.4s ease-in-out;
+}
+
+html.is-changing .transition-fade {
+  opacity: 0;
+}
+
+.swup-progress-bar {
+  height: 3px;
+  background-color: white;
+}
+
+@media screen and (max-width: 870px) {
+  .mainwrapper,
+  .banner {
+    width: 98%;
+    max-width: 860px;
+  }
+}
+
 @media screen and (max-width: 600px) {
-    div.mainwrapper {
-        max-width: 100%;
-        flex-direction: column; /* Stack items vertically */
-        /* ... */
-    }
+  .mainwrapper > div[style*="display: flex"] {
+    flex-direction: column;
+  }
 
-    div.sideframe,
-    div.mainframe {
-        width: 100%;
-        margin: 5px 0;
-        /* ... */
-    }
+  div.sideframe,
+  div.mainframe {
+    width: 100%;
+    margin: 5px 0;
+    height: auto;
+    min-height: unset;
+    overflow-y: visible;
+  }
 
-    div.sideframe,
-    div.mainframe,
-    div.header02 {
-        max-width: 100%;
-        /* ... */
-    }
-    div.sideframe {
-      height: 265px;
-    }
+  div.sideframe {
+    /* Optional fixed mobile height if needed */
+  }
 
-    body {
-        font-size: 14px; /* Adjust the font size */
-    }
+  div.mainframe {
+    overflow-y: hidden;
+  }
 
-    div.banner {
-        width: 100%;
-        height: auto; 
-        margin: 0 auto; 
+  body {
+    font-size: 14px;
+  }
 
-    }
+  div.banner {
+    height: auto;
+    margin: 5px auto;
+  }
 
-    div.maincontent {
-        width: 70%;
-        margin: 0 auto; 
-        text-align: center;
-    }
-    div.sidecontent {
-        margin: 0 auto; 
-        text-align: center; 
-        /* ... */
-    }
-    .header02 {
-        display: none; 
-    }
+  div.maincontent {
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+  }
+  div.maincontent img {
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+  }
+
+  div.sidecontent {
+    margin: 10px auto;
+    text-align: center;
+    width: 90%;
+  }
+
+  .changelog {
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .header02 {
+    display: none;
+  }
 }
