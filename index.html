@@ -153,13 +153,10 @@
         },
         false
       );
-    </script>
-
-    <script>
       const swup = new Swup({
         plugins: [
           new SwupProgressPlugin({
-            showProgressBar: false, // Disable default bar
+            showProgressBar: false, // <-- Make sure this option is here!
           }),
         ],
       });

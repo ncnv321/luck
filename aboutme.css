@@ -70,44 +70,37 @@ footer {
   margin-top: 3px; /* Adjust vertical alignment */
 }
 
-/* --- Custom Banner Progress Bar Styles (Updated) --- */
+/* --- Custom Banner Progress Bar Styles (Updated for Shrink/Grow) --- */
 
 .banner {
   /* Default state: Visible, full width */
   opacity: 1;
   transform: scaleX(1);
   transform-origin: left center; /* Scale from the left */
-  background-color: white; /* Ensure it has a background */
-  height: 25px; /* Ensure height is set */
-  width: 860px; /* Ensure width is set */
+  background-color: white;
+  height: 25px;
+  width: 860px;
   max-width: 100%;
-  margin: 3px auto; /* Keep centering */
-  transition: transform 0.3s ease-out, opacity 0.2s ease-out; /* Base transitions */
+  margin: 3px auto;
+  /* Define transitions for transform and potentially opacity */
+  transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+  /* Ensure it's interactable by default */
+  pointer-events: auto;
 }
 
-/* State for the initial quick fade-out */
-.banner.is-fading-out {
-  opacity: 0;
-  transition-duration: 0.2s; /* Quick fade */
-}
-
-/* State while loading (after fade-in reset) */
+/* State when loading: Animate width from small size to full */
 html.is-changing .banner.is-loading {
-  opacity: 1; /* Should be visible while loading */
-  transform: scaleX(1); /* Animate TO full width */
-  transition-property: transform; /* Only transition transform */
-  transition-duration: 1.5s; /* Duration of the loading bar fill */
-  transition-timing-function: cubic-bezier(
-    0.23,
-    1,
-    0.32,
-    1
-  ); /* Smoother easing */
+  opacity: 1; /* Keep it visible */
+  transform: scaleX(1); /* Target is full width */
+  /* Control the animation speed */
+  transition-property: transform; /* Only animate transform during loading */
+  transition-duration: 1.2s; /* Adjust duration as needed */
+  transition-timing-function: ease-out; /* Smoother easing */
+  pointer-events: none; /* Disable clicks while loading */
 }
 
-/* Ensure banner stays visible at the end */
-/* No specific rule needed as the default state is visible/full width */
-/* We remove helper classes via JS */
+/* Remove the .is-fading-out class if not used */
+/* Remove or comment out html.is-animating .banner rule */
 
 /* --- End Custom Banner Progress Bar Styles --- */
 
