@@ -51,15 +51,6 @@ footer {
 /* == Banners == */
 /* ============ */
 
-.banner {
-  max-width: 100%;
-  width: 860px; /* Match mainwrapper width */
-  height: 25px;
-  margin: 3px auto; /* Centers banner */
-  background-color: white;
-  /* margin-top: 2rem; /* Applied inline in HTML */
-}
-
 .banner2 {
   max-width: 100%;
   width: 860px; /* Match mainwrapper width */
