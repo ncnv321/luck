@@ -340,38 +340,65 @@
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const aboutLink = document.querySelector(".about-link");
-        const defaultIcon = aboutLink
-          ? aboutLink.querySelector(".icon-default")
-          : null;
-        const hoverIcon = aboutLink
-          ? aboutLink.querySelector(".icon-hover")
-          : null;
-
-        if (aboutLink && defaultIcon && hoverIcon) {
-          aboutLink.addEventListener("mouseenter", function () {
-            defaultIcon.style.display = "none";
-            hoverIcon.style.display = "block";
-          });
-
-          aboutLink.addEventListener("mouseleave", function () {
-            defaultIcon.style.display = "block";
-            hoverIcon.style.display = "none";
-          });
-        }
-      });
-    </script>
-
-    <script>
-      const swup = new Swup({
+      // Make swup a global variable so bannerbar.js can access it
+      window.swup = new Swup({
         plugins: [
           new SwupProgressPlugin({
-            showProgressBar: false, // *This is so I can make the white bar a loading bar //
+            showProgressBar: false, // This disables the default progress bar
           }),
         ],
+        cache: false, // Disable content caching for consistent behavior
+        animateHistoryBrowsing: true, // Force animation on history navigation
+        animationSelector: '[class*="transition-"]', // Select elements with transition class
+        containers: ["#swup"], // The container that will be replaced
+      });
+
+      // Handle initial page load animation
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("Page loaded, running initial animation");
+
+        // Force animation on initial page load
+        const banner = document.querySelector(".banner");
+        if (banner) {
+          // First set initial state
+          banner.style.transition = "none";
+          banner.style.transform = "scaleX(0.05)";
+
+          // Force reflow
+          void banner.offsetWidth;
+
+          // Then animate to full width
+          banner.style.transition = "transform 1.2s ease-out";
+          banner.style.transform = "scaleX(1)";
+        }
+      });
+
+      // Handle page transitions and history navigation
+      window.swup.hooks.on("content:replace", () => {
+        const banner = document.querySelector(".banner");
+        if (banner) {
+          // Reset to initial state
+          banner.style.transition = "none";
+          banner.style.transform = "scaleX(0.05)";
+
+          // Force reflow
+          void banner.offsetWidth;
+
+          // Animate to full width
+          banner.style.transition = "transform 1.2s ease-out";
+          banner.style.transform = "scaleX(1)";
+        }
+      });
+
+      // Initialize page scripts after each navigation
+      window.swup.hooks.on("page:view", () => {
+        setTimeout(() => {
+          // Re-initialize your page scripts here
+          initializePageScripts();
+        }, 100);
       });
     </script>
+
     <script src="/bannerbar.js"></script>
   </body>
 </html>

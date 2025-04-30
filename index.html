@@ -135,30 +135,63 @@
 
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
-
     <script>
-      document.addEventListener(
-        "contextmenu",
-        function (e) {
-          e.preventDefault();
-        },
-        false
-      );
-      document.addEventListener(
-        "dragstart",
-        function (e) {
-          if (e.target.tagName === "IMG") {
-            e.preventDefault();
-          }
-        },
-        false
-      );
-      const swup = new Swup({
+      // Make swup a global variable so bannerbar.js can access it
+      window.swup = new Swup({
         plugins: [
           new SwupProgressPlugin({
-            showProgressBar: false, // <-- Make sure this option is here!
+            showProgressBar: false, // This disables the default progress bar
           }),
         ],
+        cache: false, // Disable content caching for consistent behavior
+        animateHistoryBrowsing: true, // Force animation on history navigation
+        animationSelector: '[class*="transition-"]', // Select elements with transition class
+        containers: ["#swup"], // The container that will be replaced
+      });
+
+      // Handle initial page load animation
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("Page loaded, running initial animation");
+
+        // Force animation on initial page load
+        const banner = document.querySelector(".banner");
+        if (banner) {
+          // First set initial state
+          banner.style.transition = "none";
+          banner.style.transform = "scaleX(0.05)";
+
+          // Force reflow
+          void banner.offsetWidth;
+
+          // Then animate to full width
+          banner.style.transition = "transform 1.2s ease-out";
+          banner.style.transform = "scaleX(1)";
+        }
+      });
+
+      // Handle page transitions and history navigation
+      window.swup.hooks.on("content:replace", () => {
+        const banner = document.querySelector(".banner");
+        if (banner) {
+          // Reset to initial state
+          banner.style.transition = "none";
+          banner.style.transform = "scaleX(0.05)";
+
+          // Force reflow
+          void banner.offsetWidth;
+
+          // Animate to full width
+          banner.style.transition = "transform 1.2s ease-out";
+          banner.style.transform = "scaleX(1)";
+        }
+      });
+
+      // Initialize page scripts after each navigation
+      window.swup.hooks.on("page:view", () => {
+        setTimeout(() => {
+          // Re-initialize your page scripts here
+          initializePageScripts();
+        }, 100);
       });
     </script>
 

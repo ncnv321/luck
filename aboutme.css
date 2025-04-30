@@ -70,7 +70,7 @@ footer {
   margin-top: 3px; /* Adjust vertical alignment */
 }
 
-/* --- Custom Banner Progress Bar Styles (Updated for Shrink/Grow) --- */
+/* --- Custom Banner Progress Bar Styles --- */
 
 .banner {
   /* Default state: Visible, full width */
@@ -83,7 +83,7 @@ footer {
   max-width: 100%;
   margin: 3px auto;
   /* Define transitions for transform and potentially opacity */
-  transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+  transition: transform 0.3s ease-in, opacity 0.2s ease-in;
   /* Ensure it's interactable by default */
   pointer-events: auto;
 }
@@ -91,17 +91,23 @@ footer {
 /* State when loading: Animate width from small size to full */
 html.is-changing .banner.is-loading {
   opacity: 1; /* Keep it visible */
-  transform: scaleX(1); /* Target is full width */
-  /* Control the animation speed */
+  /* Don't set transform here - let JS control the animation */
   transition-property: transform; /* Only animate transform during loading */
   transition-duration: 1.2s; /* Adjust duration as needed */
-  transition-timing-function: ease-out; /* Smoother easing */
+  transition-timing-function: ease-in; /* Smoother easing */
   pointer-events: none; /* Disable clicks while loading */
 }
 
-/* Remove the .is-fading-out class if not used */
-/* Remove or comment out html.is-animating .banner rule */
+/* Ensure swup progress bar is hidden */
+.swup-progress-bar {
+  display: none !important;
+}
 
+:root {
+  --banner-shrink-duration: 3s; /* How quickly banner shrinks */
+  --banner-expand-duration: 3s; /* How slowly banner expands */
+  --content-fade-duration: 0.4s; /* How quickly content fades */
+}
 /* --- End Custom Banner Progress Bar Styles --- */
 
 /* ================================= */
