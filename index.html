@@ -31,7 +31,7 @@
                 <img src="/aboutmeee.png" style="height: 15px" alt="icon" />
                 <a href="/aboutme.html">about me</a><br />
                 <img src="/galleryy.png" style="height: 15px" alt="icon" />
-                <a href="/artgallery.html">art gallery</a><br />
+                <a href="/art.html">art gallery</a><br />
                 <img src="/paperr.png" style="height: 15px" alt="icon" />
                 <a href="/journal.html">journal</a><br />
                 <img src="/musicc.png" style="height: 15px" alt="icon" />
@@ -136,20 +136,18 @@
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
     <script>
-      // Make swup a global variable so bannerbar.js can access it
       window.swup = new Swup({
         plugins: [
           new SwupProgressPlugin({
             showProgressBar: false, // This disables the default progress bar
           }),
         ],
-        cache: false, // Disable content caching for consistent behavior
-        animateHistoryBrowsing: true, // Force animation on history navigation
-        animationSelector: '[class*="transition-"]', // Select elements with transition class
-        containers: ["#swup"], // The container that will be replaced
+        cache: false,
+        animateHistoryBrowsing: true, // Forces animation on history navigation
+        animationSelector: '[class*="transition-"]',
+        containers: ["#swup"],
       });
 
-      // Handle initial page load animation
       document.addEventListener("DOMContentLoaded", () => {
         console.log("Page loaded, running initial animation");
 
@@ -163,7 +161,7 @@
           // Force reflow
           void banner.offsetWidth;
 
-          // Then animate to full width
+          // Then animates it to full width
           banner.style.transition = "transform 1.2s ease-out";
           banner.style.transform = "scaleX(1)";
         }

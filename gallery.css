@@ -1,220 +1,154 @@
-    /*general styling*/
-    p, h3, h2, h4 {
-        color: white;
-        line-height: 125%;
-    }
+/* gallery.css */
 
+/* Make sure index.css is linked first in HTML */
 
-    /*page layout*/
-    div.pagewrapper{
-        width: 100%;
-        top: 0px;
-        left: 0px;
-    }
-
-    div.mainwrapper{
-        max-width: 1200px;
-        margin: 50px auto;
-        display: flex;
-        padding-top: 60px;
-    }
-
-    div.entrywrapper{
-        width: 900px;
-        margin: auto;
-        margin-left:10%;
-        margin-top:0px;
-        display:block;
-    }
-
-    div.contentwrapper{
-        width: 900px;
-        margin: 50px auto;
-        margin-left: 18%;
-        margin-top: 0px;
-        display: block;
-    }
-
-    .nav {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%; /* Adjust width as needed */
-        max-width: 5000px; /* Set a maximum width */
-        background-color: black; /* Adjust background color as needed */
-        z-index: 1; /* Ensure it's above other content */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 5px; /* Adjust padding as needed */
-        box-sizing: border-box;
-    }
-        .nav small {
-            padding: 20px; /* Adjust the padding as needed */
-        }
-    div.navimage{
-        width: 200px;
-        bottom: 65px;
-        margin: auto;
-        position: absolute;
-    }
-
-    /*contentcontaianers*/
-    div.thoughtscontainer{
-        width: 700px;
-        margin-left: 25px;
-        margin-top: -8px;
-        color: white;
-    }
-
-    div.titlecontainer{
-        width: 700px;
-        margin-left: 25px;
-        margin-top: 13px;
-        color: white;
-    }
-
-    /*PHOTO CONTAINERS*/
-    div.imgcontainer{
-        width: 800px;
-        clip: rect(0px,800px,535px,0px);
-        margin: 25px;
-    }
-
-    div.imgcontainerV{
-        width: 545;
-        clip: rect(0px,545px,800px,0px);
-        margin: 25px;
-    }
-      div.footer{
-        width:380px;
-        margin:auto;
-      }
-    .button{
-        background-color: aqua;
-    }
-
-    /* collapsible */
-    details {
-    user-select: text;
-    }
-
-    details>summary span.icon {
-    width: 24px;
-    height: 24px;
-    margin-left: auto;
-    }
-
-    details[open] summary span.icon {
-    transform: rotate(180deg);
-    }
-
-    summary {
-    display: flex;
-    cursor: pointer;
-    width: 100px;
-    }
-
-    summary::-webkit-details-marker {
-    display: none;
-    }
-	/* Disable selection and highlighting of images */
-	img {
-    user-select: none;
-    -webkit-user-drag: none;
-	}
-/* collapsible end */   
-
-    #highlight{
-        z-index: 3;
-    }
-* {
-    box-sizing: border-box;
-    font-family: ＭＳ Ｐゴシック;
+/* Define CSS Variables */
+:root {
+  --thumbnail-size: 120px; /* Default thumbnail size */
+  /* Copy banner variables from index.css if not already global */
+  --banner-shrink-duration: 0.1s;
+  --banner-expand-duration: 1.2s;
 }
-   
-   
-   @font-face {
-       font-family: ＭＳ Ｐゴシック;
-       src: url(ms-gothic.ttf);
-   }
 
-   a:link{
-    text-decoration:none;
-    color: white;
-   }
-
-   a:hover{
-    text-decoration: underline;
-   }
-
-   a:visited{
-    color: white;
-   }
-
-::selection{
-    color: black;
-    background-color: white;
+/* Override mainframe width */
+div.mainframe {
+  width: 685px; /* 860px - 175px = 685px */
+  overflow-y: scroll; /* Ensure mainframe content scrolls */
+  height: 500px; /* Keep consistent fixed height */
 }
-   
 
-   /*scroll bar */
-/* width */
-::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(0, 0, 0); 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(32, 32, 32)26, 26, 26)5; 
-  }
-/* For screens smaller than 600px (typical mobile phones) */
+/* Style the content area within the mainframe */
+.gallery-content {
+  width: auto; /* Fill the wider mainframe */
+  margin: 10px;
+}
+.gallery-content h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed white;
+  padding-bottom: 10px;
+  font-size: 1.3em; /* Adjust size */
+}
+
+/* Left Sideframe Split Styles (Copied from aboutme.css, adjust as needed) */
+.sideframe.left-sideframe {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to top */
+  height: 500px; /* Match other frames */
+}
+
+.left-section {
+  border-bottom: 1px dashed white;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  /* Remove flex-grow/flex-basis if using fixed heights or allow natural height */
+}
+.left-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-section {
+  min-height: 150px; /* Example minimum height */
+  /* Or let content define height */
+}
+
+.nav-section {
+  /* Let content define height or set min-height */
+  text-align: left; /* Align nav links left */
+}
+.nav-section .sidecontent {
+  text-align: left;
+}
+.nav-section .quick-links p {
+  line-height: 1.8;
+  margin: 0;
+  text-align: left;
+}
+.nav-section .quick-links img {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.left-section .sidecontent {
+  margin: 5px;
+  width: auto;
+}
+
+/* Filters Placeholder Style */
+.filters {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px dashed #666;
+  text-align: center;
+  min-height: 100px; /* Example height */
+}
+
+/* Year Headers Styling */
+.year-section h2 {
+  font-size: 1.1em; /* Smaller size */
+  font-weight: normal; /* Not bold */
+  text-align: center; /* Center align like Filters H3 */
+  border-bottom: 1px dashed white;
+  padding-bottom: 5px;
+  margin: 20px 0 15px 0; /* Adjust spacing */
+}
+
+/* Thumbnail Grid Styling */
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--thumbnail-size), 1fr)
+  ); /* Use variable */
+  gap: 10px; /* Adjust gap */
+}
+
+.thumbnail a {
+  display: block;
+  border: 1px solid #555;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail a:hover {
+  border-color: white;
+}
+
+.thumbnail img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Ensure Swup banner styles are present if not loading index.css */
+/* If index.css IS loaded first, these might not be needed */
+/* .banner { ... } */
+/* html.is-changing .banner.is-loading { ... } */
+
+/* Responsive Styles */
 @media screen and (max-width: 600px) {
-    div.entrywrapper,
-    div.contentwrapper {
-        width: 100%;
-        margin: 10px auto;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 10px;
-    }
-
-
-    div.imgcontainer,
-    div.imgcontainerV {
-        width: 100%;
-        margin: 0;
-    }
-
-    div.imgcontainer img,
-    div.imgcontainerV img {
-        width: 100vw; /* Ensure images take up the entire screen width */
-        height: auto; /* Maintain aspect ratio */
-    }
-
-    div.thoughtscontainer,
-    div.titlecontainer {
-        margin: 15px 0; /* Adjust margins for vertical space */
-        padding: 0 15px; /* Add padding to prevent horizontal scrolling */
-        max-width: 100%; /* Ensure text doesn't overflow horizontally */
-        box-sizing: border-box; /* Include padding in width calculation */
-    }
-    /* Adjust font sizes or paddings as needed */
-    p,
-    h3,
-    h2,
-    h4 {
-        font-size: 14px; /* Example font size adjustment */
-    }
+  div.mainframe {
+    width: 100%;
+    height: auto;
+    min-height: unset;
+  }
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 5px;
+  } /* Even smaller */
+  .year-section h2 {
+    font-size: 1em;
+  }
+  /* Add mobile styles for split left frame if needed */
+  .sideframe.left-sideframe {
+    height: auto;
+  }
+  .left-section {
+    min-height: unset;
+    flex-basis: auto;
+  }
 }

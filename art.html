@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/index.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/gallery.css" rel="stylesheet" type="text/css" media="all" />
+    <title>Art Gallery | luck</title>
+    <link rel="icon" type="image/x-icon" href=" " />
+  </head>
+
+  <body>
+    <div class="header02">
+      <a href="/"> <img src="" /> </a>
+    </div>
+
+    <div class="banner"></div>
+
+    <main id="swup" class="transition-fade">
+      <div class="mainwrapper">
+        <div style="display: flex">
+          <div class="sideframe left-sideframe">
+            <div class="left-section left-top-section filter-section">
+              <center><h3 id="h3navmargins">Filters</h3></center>
+              <div class="sidecontent">
+                <section class="filters">
+                  <p>(Filters coming soon)</p>
+                </section>
+              </div>
+            </div>
+
+            <div class="left-section left-bottom-section">
+              <center></center>
+              <div class="sidecontent">
+                <center>
+                  <div style="margin: 0px 0">
+                    <a
+                      href="/"
+                      style="display: inline-block"
+                      class="about-link"
+                      title="Wah!"
+                    >
+                      <img
+                        src="/bnuuy_closed.png"
+                        alt="Home"
+                        class="icon-default"
+                        style="
+                          width: 75px;
+                          height: 103px;
+                          vertical-align: middle;
+                        "
+                      />
+                      <img
+                        src="/bnuuy_open.png"
+                        alt="Home Hover"
+                        class="icon-hover"
+                        style="
+                          width: 75px;
+                          height: 103px;
+                          display: none;
+                          vertical-align: middle;
+                        "
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="quick-links"
+                    style="text-align: left; margin-top: 15px"
+                  >
+                    <p>
+                      <img
+                        src="/aboutmeee.png"
+                        style="height: 15px"
+                        alt="icon"
+                      />
+                      <a href="/aboutme.html">About me</a><br />
+                      <img
+                        src="/paperr.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a href="/journal.html">Journal</a><br />
+                      <img
+                        src="/musicc.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a href="/music.html">Music</a> <br />
+                      <img
+                        src="/chatt.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a
+                        href="http://users.smartgb.com/g/g.php?a=s&i=g19-00984-40"
+                        target="_blank"
+                        >Guestbook</a
+                      >
+                    </p>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
+          <div class="mainframe">
+            <center>
+              <div class="maincontent gallery-content">
+                <h1>Art Gallery</h1>
+
+                <section class="artworks">
+                  <div class="year-section" id="year-2024">
+                    <h2>2024</h2>
+                    <div class="thumbnail-grid">
+                      <div class="thumbnail">
+                        <a
+                          href="/alternate.jpg"
+                          data-description="Alternate versions of me. Digitally drawn."
+                        >
+                          <img
+                            src="/alternate.jpg"
+                            alt="Alternate versions of me"
+                            title="Alternate versions of me"
+                            loading="lazy"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="year-section" id="year-2023">
+                    <h2>2023</h2>
+                    <div class="thumbnail-grid">
+                      <div class="thumbnail">
+                        <a
+                          href="/GCZ0Eh2WQAAe5jO.png"
+                          data-description="I drew this for fun not even in a horny way. December 28."
+                        >
+                          <img
+                            src="/GCZ0Eh2WQAAe5jO.png"
+                            alt="Fun drawing Dec 28"
+                            title="Fun drawing Dec 28"
+                            loading="lazy"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="year-section" id="year-2022">
+                    <h2>2022</h2>
+                    <div class="thumbnail-grid">
+                      <div class="thumbnail">
+                        <a
+                          href="/FSbEfd8XIAIqNnc.png"
+                          data-description="2022 drawing."
+                        >
+                          <img
+                            src="/FSbEfd8XIAIqNnc.png"
+                            alt="2022 Drawing"
+                            title="2022 Drawing"
+                            loading="lazy"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="year-section" id="sketches">
+                    <h2>Sketches & Scraps</h2>
+                    <div class="thumbnail-grid">
+                      <div class="thumbnail">
+                        <a
+                          href="/sadbnuuy.jpg"
+                          data-description="Notebook sketch. no comment."
+                        >
+                          <img
+                            src="/sadbnuuy.jpg"
+                            alt="Sad Bnuuy Sketch"
+                            title="Sad Bnuuy Sketch"
+                            loading="lazy"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </center>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p id="paragraphstyling"><small> luck est. 2023 </small></p>
+    </footer>
+
+    <script src="https://unpkg.com/swup@4"></script>
+    <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
+    <script>
+      // Initialize Swup globally (same as index.html/aboutme.html)
+      window.swup = new Swup({
+        plugins: [new SwupProgressPlugin({ showProgressBar: false })],
+        cache: false,
+        animateHistoryBrowse: true,
+        animationSelector: '[class*="transition-"]',
+        containers: ["#swup"],
+      });
+    </script>
+    <script src="/bannerbar.js"></script>
+  </body>
+</html>

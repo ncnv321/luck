@@ -98,9 +98,6 @@ html.is-changing .banner.is-loading {
   --content-fade-duration: 0.4s; /* How quickly content fades */
 }
 
-/* Remove the .is-fading-out class if not used */
-/* Remove or comment out html.is-animating .banner rule */
-
 /* --- End Custom Banner Progress Bar Styles --- */
 
 /* ================================= */
