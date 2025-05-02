@@ -182,86 +182,77 @@
 
 /* Medium screens */
 /* Medium screens (tablets, small laptops) */
+/* Simple mobile styles - Add this to the bottom of each of your CSS files */
+
 @media screen and (max-width: 767px) {
-  .wrapper {
+  /* Make container full width */
+  .mainwrapper {
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
   }
-  /* Adjustments for the boxes */
-  .leftbox1,
-  .mainbox,
-  .leftbox3,
-  .rightbox1,
-  .rightbox2,
-  .leftbox2 {
-    width: 100%;
+
+  /* Force flex display in column direction */
+  .mainwrapper > div,
+  .mainwrapper > div[style*="display: flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* Make all frames full width */
+  .sideframe,
+  .mainframe,
+  .sideframe.left-sideframe,
+  .art-gallery-right-sideframe {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
+    margin: 0 0 15px 0 !important;
+    float: none !important;
+  }
+
+  /* Allow mainframe to expand with content */
+  .mainframe {
+    overflow-y: visible !important;
+    min-height: 300px !important;
+  }
+
+  /* Center content */
+  .maincontent,
+  .sidecontent {
+    width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  /* Center images */
+  img {
+    display: block;
     margin-left: auto;
     margin-right: auto;
+    max-width: 100%;
+    height: auto;
   }
 
-  /* Text adjustments */
-  .leftbox1,
-  .mainbox,
-  .leftbox3,
-  .rightbox1,
-  .rightbox2,
-  .leftbox2,
-  .box h2,
-  .box h3 {
-    text-align: center;
+  /* Reset floats for images */
+  .maincontent img[style*="float"] {
+    float: none !important;
+    display: block;
+    margin: 15px auto;
   }
 
-  /* Order of the boxes */
-  .main {
-    margin-left: 0;
-    width: 100%;
+  /* Small screens - hide empty art gallery right sidebar */
+  .art-gallery-right-sideframe {
+    display: none !important;
   }
 
-  .sidebar-left,
-  .sidebar-right {
-    width: 100%;
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Specify the order for each box */
-  .leftbox1 {
-    order: 1; /* First */
-  }
-
-  .mainbox {
-    order: 2; /* Second */
-  }
-
-  .leftbox3 {
-    order: 3; /* Third */
-  }
-
-  .rightbox1 {
-    order: 4; /* Fourth */
-  }
-
-  .rightbox2 {
-    order: 5; /* Fifth */
-  }
-
-  .leftbox2 {
-    order: 6; /* Sixth */
-  }
-  /* Adjustments for right boxes to fit side by side */
-  .rightbox1,
-  .rightbox2 {
-    width: 46%; /* Set the width to occupy nearly half of the screen with a little space in between */
-    margin: 0 1%; /* Add a small margin between the boxes */
-  }
-
-  /* Flexbox to display them side by side */
-  .rightbox1,
-  .rightbox2 {
-    float: none;
-    display: inline-block;
-    vertical-align: top;
+  /* Make text centered on mobile */
+  h2,
+  h3,
+  p,
+  #paragraphstyling2 {
+    text-align: center !important;
   }
 }
