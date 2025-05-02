@@ -39,26 +39,10 @@ function loadGalleryContent() {
   try {
     console.log("Initializing Sanity client");
     
-    // Check which Sanity client version is available
-    if (typeof sanityClient !== 'undefined') {
-      console.log("Using global sanityClient");
-      var client = sanityClient({
-        projectId: 'asrslodd',
-        dataset: 'production',
-        apiVersion: '2025-05-03',
-        useCdn: true
-      });
-    } else if (typeof SanityClient !== 'undefined') {
-      console.log("Using global SanityClient");
-      var client = SanityClient({
-        projectId: 'asrslodd',
-        dataset: 'production',
-        apiVersion: '2025-05-03',
-        useCdn: true
-      });
-    } else if (window.SanityClient) {
-      console.log("Using window.SanityClient");
-      var client = new window.SanityClient({
+    // Check if createClient is available
+    if (typeof window.createClient === 'function') {
+      console.log("Using window.createClient");
+      var client = window.createClient({
         projectId: 'asrslodd',
         dataset: 'production',
         apiVersion: '2025-05-03',
@@ -66,6 +50,11 @@ function loadGalleryContent() {
       });
     } else {
       console.error("Sanity client not found. Make sure the library is loaded properly.");
+      console.log("Available global objects:", {
+        createClient: typeof window.createClient,
+        SanityClient: typeof window.SanityClient,
+        sanityClient: typeof window.sanityClient
+      });
       artworksContainer.innerHTML = '<div style="text-align: center; padding: 20px;">Error: Sanity client not available. Please check the console for details.</div>';
       return;
     }

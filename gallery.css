@@ -4,7 +4,7 @@
 
 /* Define CSS Variables */
 :root {
-  --thumbnail-size: 180px; /* Thumbnail size (max 200px) */
+  --thumbnail-size: 90px; /* Thumbnail size (max 200px) */
   --banner-shrink-duration: 1s;
   --banner-expand-duration: 1.2s;
 }
