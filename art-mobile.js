@@ -4,11 +4,11 @@
  */
 
 // Wait until DOM is ready
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Only apply fixes to art.html page
   if (window.location.pathname.includes("art.html")) {
     console.log("Art Gallery page detected - applying specific fixes");
-    
+
     // Create and append art gallery specific styles
     const styleElement = document.createElement("style");
     styleElement.id = "art-gallery-responsive-fix";
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       /* MOBILE STYLES - Only apply on small screens */
       @media screen and (max-width: 767px) {
-        /* Force layout to stack vertically */
+        /* Stack layout vertically */
         .mainwrapper > div {
           display: block !important;
         }
@@ -69,11 +69,17 @@ document.addEventListener("DOMContentLoaded", function() {
           display: none !important;
         }
         
-        /* Center filter box */
+        /* Center filter box - Specific targeting for the dotted box */
         .filters {
           width: 90% !important;
           max-width: 280px !important;
-          margin: 10px auto !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        
+        /* Add centering for the sidecontent container */
+        .left-section.filter-section .sidecontent {
+          text-align: center !important;
         }
         
         /* Fix thumbnail grid */
@@ -86,9 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         /* Fix icon sizes in navigation */
-        .quick-links img,
-        .left-sideframe .quick-links img,
-        .sidecontent .quick-links img {
+        .quick-links img {
           height: 15px !important;
           width: auto !important;
           max-height: 15px !important;
@@ -96,40 +100,53 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
     `;
-    
+
     // Add the style element to the head
     document.head.appendChild(styleElement);
-    
+
     // Apply layout fixes function
     function applyArtGalleryLayoutFixes() {
-      // Only do this on the art gallery page
+      // Only run on art gallery page
       if (!window.location.pathname.includes("art.html")) return;
-      
+
       const isDesktop = window.innerWidth >= 768;
-      const mainWrapper = document.querySelector('.mainwrapper > div');
-      
+      const mainWrapper = document.querySelector(".mainwrapper > div");
+
       if (mainWrapper) {
         if (isDesktop) {
           // Desktop layout
-          if (mainWrapper.style.display !== 'flex') {
-            mainWrapper.style.display = 'flex';
+          if (mainWrapper.style.display !== "flex") {
+            mainWrapper.style.display = "flex";
           }
         } else {
           // Mobile layout
-          if (mainWrapper.style.display !== 'block') {
-            mainWrapper.style.display = 'block';
+          if (mainWrapper.style.display !== "block") {
+            mainWrapper.style.display = "block";
+
+            // Center filters box directly
+            const filters = document.querySelector(".filters");
+            if (filters) {
+              filters.style.width = "90%";
+              filters.style.maxWidth = "280px";
+              filters.style.marginLeft = "auto";
+              filters.style.marginRight = "auto";
+            }
+
+            // Center the parent container
+            const filterSection = document.querySelector(
+              ".left-section.filter-section .sidecontent"
+            );
+            if (filterSection) {
+              filterSection.style.textAlign = "center";
+            }
           }
         }
       }
     }
-    
-    // Run layout fixes after page has loaded
-    window.addEventListener('load', applyArtGalleryLayoutFixes);
-    
-    // Run layout fixes when window is resized
-    window.addEventListener('resize', applyArtGalleryLayoutFixes);
-    
-    // Also run layout fixes now
-    applyArtGalleryLayoutFixes();
+
+    // Run on load, resize, and delayed start
+    window.addEventListener("load", applyArtGalleryLayoutFixes);
+    window.addEventListener("resize", applyArtGalleryLayoutFixes);
+    setTimeout(applyArtGalleryLayoutFixes, 100);
   }
 });
