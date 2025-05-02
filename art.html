@@ -7,6 +7,15 @@
     <link href="/gallery.css" rel="stylesheet" type="text/css" media="all" />
     <title>Art Gallery | luck</title>
     <link rel="icon" type="image/x-icon" href=" " />
+    <!-- Sanity client library -->
+    <script src="https://cdn.jsdelivr.net/npm/@sanity/client@5.4.2/dist/index.browser.min.js"></script>
+
+    <!-- SimpleLightbox for image gallery -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.js"></script>
     <style>
       /* Critical styles for immediate application */
       .mainframe {
@@ -231,132 +240,12 @@
               </h2>
 
               <section class="artworks">
-                <div class="year-section" id="year-2025">
-                  <h2
-                    style="
-                      text-align: center !important;
-                      border-bottom: 1px dashed white !important;
-                      padding-bottom: 5px !important;
-                      margin: 20px 0 15px 0 !important;
-                    "
-                  >
-                    2025
-                  </h2>
-                  <div class="thumbnail-grid">
-                    <!-- Add 2025 thumbnails here when you have them -->
-                  </div>
-                </div>
-
-                <div class="year-section" id="year-2024">
-                  <h2
-                    style="
-                      text-align: center !important;
-                      border-bottom: 1px dashed white !important;
-                      padding-bottom: 5px !important;
-                      margin: 20px 0 15px 0 !important;
-                    "
-                  >
-                    2024
-                  </h2>
-                  <div class="thumbnail-grid">
-                    <div class="thumbnail">
-                      <a
-                        href="/alternate.jpg"
-                        data-description="Alternate versions of me. Digitally drawn."
-                      >
-                        <img
-                          src="/alternate.jpg"
-                          alt="Alternate versions of me"
-                          title="Alternate versions of me"
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="year-section" id="year-2023">
-                  <h2
-                    style="
-                      text-align: center !important;
-                      border-bottom: 1px dashed white !important;
-                      padding-bottom: 5px !important;
-                      margin: 20px 0 15px 0 !important;
-                    "
-                  >
-                    2023
-                  </h2>
-                  <div class="thumbnail-grid">
-                    <div class="thumbnail">
-                      <a
-                        href="/GCZ0Eh2WQAAe5jO.png"
-                        data-description="I drew this for fun not even in a horny way. December 28."
-                      >
-                        <img
-                          src="/GCZ0Eh2WQAAe5jO.png"
-                          alt="Fun drawing Dec 28"
-                          title="Fun drawing Dec 28"
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="year-section" id="year-2022">
-                  <h2
-                    style="
-                      text-align: center !important;
-                      border-bottom: 1px dashed white !important;
-                      padding-bottom: 5px !important;
-                      margin: 20px 0 15px 0 !important;
-                    "
-                  >
-                    2022
-                  </h2>
-                  <div class="thumbnail-grid">
-                    <div class="thumbnail">
-                      <a
-                        href="/FSbEfd8XIAIqNnc.png"
-                        data-description="2022 drawing."
-                      >
-                        <img
-                          src="/FSbEfd8XIAIqNnc.png"
-                          alt="2022 Drawing"
-                          title="2022 Drawing"
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="year-section" id="sketches">
-                  <h2
-                    style="
-                      text-align: center !important;
-                      border-bottom: 1px dashed white !important;
-                      padding-bottom: 5px !important;
-                      margin: 20px 0 15px 0 !important;
-                    "
-                  >
-                    Sketches & Scraps
-                  </h2>
-                  <div class="thumbnail-grid">
-                    <div class="thumbnail">
-                      <a
-                        href="/sadbnuuy.jpg"
-                        data-description="Notebook sketch. no comment."
-                      >
-                        <img
-                          src="/sadbnuuy.jpg"
-                          alt="Sad Bnuuy Sketch"
-                          title="Sad Bnuuy Sketch"
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                  </div>
+                <!-- Dynamic content will be loaded here by sanity-gallery.js -->
+                <div
+                  class="loading-indicator"
+                  style="text-align: center; padding: 20px"
+                >
+                  Loading gallery...
                 </div>
               </section>
             </div>
@@ -515,5 +404,7 @@
       });
     </script>
     <script src="/bannerbar.js"></script>
+    <!-- Gallery Script -->
+    <script src="/sanity-gallery.js"></script>
   </body>
 </html>
