@@ -187,12 +187,19 @@ p {
 /* Medium screens (tablets, small laptops) */
 /* Simple mobile styles - Add this to the bottom of each of your CSS files */
 
+/* Mobile-specific improvements - Add to the bottom of your CSS files */
+
 @media screen and (max-width: 767px) {
   /* Make container full width */
   .mainwrapper {
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  /* Hide empty header space */
+  .header02 {
+    display: none !important;
   }
 
   /* Force flex display in column direction */
@@ -213,6 +220,7 @@ p {
     min-height: 200px !important;
     margin: 0 0 15px 0 !important;
     float: none !important;
+    box-sizing: border-box !important;
   }
 
   /* Allow mainframe to expand with content */
@@ -230,13 +238,112 @@ p {
     text-align: center !important;
   }
 
-  /* Center images */
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    height: auto;
+  /* Quick links icons - keep icons next to text */
+  .quick-links img {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 5px !important;
+  }
+
+  .quick-links p {
+    text-align: center !important;
+    line-height: 2 !important; /* Better spacing between links */
+  }
+
+  .quick-links a {
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  /* Kins image marquee - keep horizontal scrolling */
+  .changelog {
+    width: 90% !important;
+    max-width: 300px !important; /* Same width as likes/dislikes box */
+    height: 80px !important; /* Fixed height */
+    margin: 0 auto 15px auto !important;
+    overflow: hidden !important; /* Ensure no vertical overflow */
+  }
+
+  .changelog marquee {
+    white-space: nowrap !important; /* Keep images in a row */
+    height: 80px !important;
+  }
+
+  .changelog marquee img {
+    display: inline-block !important; /* Keep horizontal */
+    vertical-align: middle !important;
+    margin: 0 5px !important;
+  }
+
+  /* Likes/dislikes box styling */
+  .likes-dislikes {
+    width: 90% !important;
+    max-width: 300px !important; /* Match the kins marquee */
+    margin: 0 auto 15px auto !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Art gallery specific fixes */
+  /* Make sure gallery container fits screen width */
+  .gallery-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Adjust gallery title to fit */
+  .gallery-title {
+    width: 100% !important;
+    font-size: 1.3em !important;
+    margin: 10px 0 !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Year sections responsive width */
+  .year-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 5px !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Ensure dotted lines don't overflow */
+  .year-section h2 {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-bottom: 5px !important;
+    margin: 10px 0 !important;
+    font-size: 1.1em !important;
+  }
+
+  /* Make thumbnail grid responsive */
+  .thumbnail-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 5px !important;
+  }
+
+  /* Adjust thumbnail sizes */
+  .thumbnail {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .thumbnail img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1/1 !important;
   }
 
   /* Reset floats for images */
@@ -244,6 +351,7 @@ p {
     float: none !important;
     display: block;
     margin: 15px auto;
+    max-width: 100% !important;
   }
 
   /* Small screens - hide empty art gallery right sidebar */
@@ -254,8 +362,16 @@ p {
   /* Make text centered on mobile */
   h2,
   h3,
-  p,
-  #paragraphstyling2 {
+  p {
     text-align: center !important;
+  }
+
+  /* Fix filter container in gallery */
+  .filters {
+    width: 90% !important;
+    max-width: 300px !important;
+    margin: 0 auto 15px auto !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
   }
 }
