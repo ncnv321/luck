@@ -58,55 +58,6 @@ div.banner {
   margin-top: 3px;
 }
 
-/* --- Custom Banner Progress Bar Styles --- */
-
-.banner {
-  /* Default state: Visible, full width */
-  opacity: 1;
-  transform: scaleX(1);
-  transform-origin: left center; /* Scale from the left */
-  background-color: white;
-  height: 25px;
-  width: 860px;
-  max-width: 100%;
-  margin: 3px auto;
-  /* Define transitions for transform and potentially opacity */
-  transition: transform var(--banner-shrink-duration) ease-out,
-    opacity 0.2s ease-out;
-  /* Ensure it's interactable by default */
-  pointer-events: auto;
-  transition-property: transform !important;
-  transition-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) !important;
-}
-
-/* State when loading: Animate width from small size to full */
-html.is-changing .banner.is-loading {
-  opacity: 1; /* Keep it visible */
-  /* Don't set transform here - let JS control the animation */
-  transition-property: transform; /* Only animate transform during loading */
-  transition-duration: var(--banner-expand-duration);
-  transition-timing-function: ease-out; /* Smoother easing */
-  pointer-events: none; /* Disable clicks while loading */
-}
-
-html.is-changing #swup * {
-  transition: none !important;
-  animation: none !important;
-}
-
-/* Ensure swup progress bar is hidden */
-.swup-progress-bar {
-  display: none !important;
-}
-
-:root {
-  --banner-shrink-duration: 3s; /* How quickly banner shrinks */
-  --banner-expand-duration: 3s; /* How slowly banner expands */
-  --content-fade-duration: 0.4s; /* How quickly content fades */
-}
-
-/* --- End Custom Banner Progress Bar Styles --- */
-
 /* ================================= */
 /* == Main Columns (Side & Main) == */
 /* ================================= */
@@ -233,94 +184,192 @@ p {
   background: rgb(150, 150, 150);
 }
 
-/* ========================== */
-/* == Swup Transition Styles == */
-/* ========================== */
-
-#swup {
-  transition: opacity 0.4s ease-out;
-}
-
-html.is-changing .transition-fade {
-  opacity: 0;
-}
-
-.transition-fade {
-  transition: opacity 0.4s ease-in-out !important;
-}
-
-html.is-animating .transition-fade {
-  opacity: 0 !important;
-}
-
-.swup-progress-bar {
-  height: 3px;
-  background-color: white;
-}
-
+/* Medium screens (tablets, small laptops) */
 @media screen and (max-width: 870px) {
+  /* Adjust container widths */
   .mainwrapper,
-  .banner {
-    width: 98%;
-    max-width: 860px;
+  .banner,
+  .mainwrapper > div {
+    width: 100% !important;
+    max-width: 860px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Adjust column widths proportionally */
+  .sideframe {
+    width: 20% !important;
+    min-width: 150px !important;
+  }
+
+  .mainframe {
+    width: 60% !important;
+    flex-grow: 1 !important;
+  }
+
+  /* Ensure content fits in smaller containers */
+  .sidecontent {
+    padding: 5px !important;
   }
 }
 
+/* Small screens (mobile) */
 @media screen and (max-width: 600px) {
-  .mainwrapper > div[style*="display: flex"] {
-    flex-direction: column;
-  }
-
-  div.sideframe,
-  div.mainframe {
-    width: 100%;
-    margin: 5px 0;
-    height: auto;
-    min-height: unset;
-    overflow-y: visible;
-  }
-
-  div.sideframe {
-    /* Optional fixed mobile height if needed */
-  }
-
-  div.mainframe {
-    overflow-y: hidden;
-  }
-
-  body {
-    font-size: 14px;
-  }
-
-  div.banner {
-    height: auto;
-    margin: 5px auto;
-  }
-
-  div.maincontent {
-    width: 90%;
-    margin: 10px auto;
-    text-align: center;
-  }
-  div.maincontent img {
-    max-width: 100%;
-    height: auto;
-    margin: 15px auto;
-  }
-
-  div.sidecontent {
-    margin: 10px auto;
-    text-align: center;
-    width: 90%;
-  }
-
-  .changelog {
-    height: auto;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-
+  /* Header adjustments */
   .header02 {
-    display: none;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100px !important;
+  }
+
+  .header02 img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Banner always on top */
+  .banner {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 25px !important;
+    margin: 0 0 10px 0 !important;
+    position: relative !important;
+    z-index: 100 !important;
+  }
+
+  /* Stack columns vertically */
+  .mainwrapper > div,
+  .mainwrapper > div[style*="display: flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* Full-width containers in the correct order */
+  .sideframe,
+  .mainframe,
+  .sideframe.left-sideframe,
+  .art-gallery-right-sideframe {
+    width: 100% !important;
+    flex-basis: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 0 10px 0 !important;
+    border: 1px solid white !important;
+  }
+
+  /* Hide empty/decorative frames on mobile */
+  .art-gallery-right-sideframe {
+    display: none !important;
+  }
+
+  /* Make sideframes collapsible on mobile */
+  .sideframe {
+    max-height: 250px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Ensure mainframe expands to show all content */
+  .mainframe {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 300px !important;
+  }
+
+  /* Center content in frames */
+  .maincontent,
+  .sidecontent {
+    width: 95% !important;
+    margin: 10px auto !important;
+    text-align: center !important;
+  }
+
+  /* Fix paragraph alignment on mobile */
+  p,
+  #paragraphstyling2 {
+    text-align: center !important;
+  }
+
+  /* Left align text only where needed */
+  .quick-links p {
+    text-align: center !important;
+  }
+
+  /* Center all images */
+  img {
+    display: block !important;
+    margin: 0 auto 10px auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Exception for navbar icons */
+  .quick-links img {
+    display: inline-block !important;
+    margin: 0 5px 0 0 !important;
+  }
+
+  /* Float fix for images */
+  .maincontent img[style*="float:"],
+  .maincontent img[style*="float: "] {
+    float: none !important;
+    margin: 10px auto !important;
+  }
+
+  /* Thumbnails in gallery */
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+  }
+
+  /* Changelog/marquee size adjustments */
+  .changelog {
+    width: 90% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    min-height: 80px !important;
+    margin: 0 auto 10px auto !important;
+  }
+
+  /* Likes/dislikes boxes */
+  .likes-dislikes {
+    width: 90% !important;
+    max-width: 300px !important;
+    margin: 0 auto 10px auto !important;
+    text-align: center !important;
+  }
+
+  /* Fix for bunny navigation */
+  .about-link {
+    display: block !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
+/* Extra small screens (small phones) */
+@media screen and (max-width: 350px) {
+  /* Further text size reductions */
+  body {
+    font-size: 14px !important;
+  }
+
+  /* Even smaller thumbnails */
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)) !important;
+    gap: 5px !important;
+  }
+
+  /* Minimize padding */
+  .maincontent,
+  .sidecontent {
+    padding: 5px !important;
+    width: 98% !important;
+  }
+
+  /* Smaller bunny */
+  .about-link img {
+    width: 60px !important;
+    height: auto !important;
   }
 }

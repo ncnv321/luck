@@ -5,29 +5,6 @@
 /* Define CSS Variables */
 :root {
   --thumbnail-size: 90px; /* Thumbnail size (max 200px) */
-  --banner-shrink-duration: 1s;
-  --banner-expand-duration: 1.2s;
-}
-
-/* === Animation and Transition Fixes === */
-.transition-fade {
-  transition: opacity 0.4s ease-in-out !important;
-}
-
-html.is-animating .transition-fade {
-  opacity: 0 !important;
-}
-
-/* Ensure banner animation has priority */
-.banner {
-  transition-property: transform !important;
-  transition-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) !important;
-}
-
-/* Fix content spacing issues during transitions */
-html.is-changing #swup * {
-  transition: none !important;
-  animation: none !important;
 }
 
 /* === Two-Column Art Gallery Layout === */
@@ -137,8 +114,8 @@ html.is-changing #swup * {
 .thumbnail img {
   display: block !important;
   width: 100% !important;
-  max-width: 200px !important;
-  max-height: 200px !important;
+  max-width: 90px !important; /* Match --thumbnail-size */
+  max-height: 90px !important;
   height: auto !important;
   aspect-ratio: 1 / 1 !important;
   object-fit: cover !important;
@@ -204,38 +181,192 @@ html.is-changing #swup * {
 /* === Responsive Styles === */
 
 /* Medium screens */
+/* Medium screens (tablets, small laptops) */
 @media screen and (max-width: 870px) {
+  /* Adjust container widths */
   .mainwrapper,
+  .banner,
   .mainwrapper > div {
-    width: 98% !important;
+    width: 100% !important;
     max-width: 860px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Adjust column widths proportionally */
+  .sideframe {
+    width: 20% !important;
+    min-width: 150px !important;
+  }
+
+  .mainframe {
+    width: 60% !important;
+    flex-grow: 1 !important;
+  }
+
+  /* Ensure content fits in smaller containers */
+  .sidecontent {
+    padding: 5px !important;
   }
 }
 
 /* Small screens (mobile) */
 @media screen and (max-width: 600px) {
-  /* Stack columns vertically */
-  .mainwrapper > div {
-    flex-direction: column !important;
+  /* Header adjustments */
+  .header02 {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 100px !important;
   }
 
-  /* Full width containers */
+  .header02 img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Banner always on top */
+  .banner {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 25px !important;
+    margin: 0 0 10px 0 !important;
+    position: relative !important;
+    z-index: 100 !important;
+  }
+
+  /* Stack columns vertically */
+  .mainwrapper > div,
+  .mainwrapper > div[style*="display: flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* Full-width containers in the correct order */
+  .sideframe,
+  .mainframe,
   .sideframe.left-sideframe,
-  .mainframe {
+  .art-gallery-right-sideframe {
     width: 100% !important;
     flex-basis: auto !important;
     height: auto !important;
-    min-height: 200px !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 0 10px 0 !important;
+    border: 1px solid white !important;
   }
 
-  /* Smaller thumbnails on mobile */
-  .thumbnail-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
-    gap: 10px !important;
+  /* Hide empty/decorative frames on mobile */
+  .art-gallery-right-sideframe {
+    display: none !important;
   }
 
-  /* Center align text on mobile */
+  /* Make sideframes collapsible on mobile */
+  .sideframe {
+    max-height: 250px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Ensure mainframe expands to show all content */
+  .mainframe {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 300px !important;
+  }
+
+  /* Center content in frames */
+  .maincontent,
+  .sidecontent {
+    width: 95% !important;
+    margin: 10px auto !important;
+    text-align: center !important;
+  }
+
+  /* Fix paragraph alignment on mobile */
+  p,
+  #paragraphstyling2 {
+    text-align: center !important;
+  }
+
+  /* Left align text only where needed */
   .quick-links p {
     text-align: center !important;
+  }
+
+  /* Center all images */
+  img {
+    display: block !important;
+    margin: 0 auto 10px auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Exception for navbar icons */
+  .quick-links img {
+    display: inline-block !important;
+    margin: 0 5px 0 0 !important;
+  }
+
+  /* Float fix for images */
+  .maincontent img[style*="float:"],
+  .maincontent img[style*="float: "] {
+    float: none !important;
+    margin: 10px auto !important;
+  }
+
+  /* Thumbnails in gallery */
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
+  }
+
+  /* Changelog/marquee size adjustments */
+  .changelog {
+    width: 90% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    min-height: 80px !important;
+    margin: 0 auto 10px auto !important;
+  }
+
+  /* Likes/dislikes boxes */
+  .likes-dislikes {
+    width: 90% !important;
+    max-width: 300px !important;
+    margin: 0 auto 10px auto !important;
+    text-align: center !important;
+  }
+
+  /* Fix for bunny navigation */
+  .about-link {
+    display: block !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
+/* Extra small screens (small phones) */
+@media screen and (max-width: 350px) {
+  /* Further text size reductions */
+  body {
+    font-size: 14px !important;
+  }
+
+  /* Even smaller thumbnails */
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)) !important;
+    gap: 5px !important;
+  }
+
+  /* Minimize padding */
+  .maincontent,
+  .sidecontent {
+    padding: 5px !important;
+    width: 98% !important;
+  }
+
+  /* Smaller bunny */
+  .about-link img {
+    width: 60px !important;
+    height: auto !important;
   }
 }

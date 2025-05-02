@@ -1,67 +1,176 @@
-// sanity-gallery.js
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM loaded, starting gallery initialization");
-  loadGalleryContent();
-  
-  // Check if we have Swup initialized
-  if (window.swup) {
-    console.log("Swup detected, setting up hooks");
-    // Set up hooks for Swup events
-    window.swup.hooks.on('page:view', function() {
-      // Only reload gallery if we're on the art page
-      if (window.location.pathname.includes('/art.html')) {
-        console.log("Page view event detected for art gallery");
-        setTimeout(loadGalleryContent, 100);
-      }
-    });
-  }
-});
+// Simplified sanity-gallery.js - Fixed to work with Swup transitions
 
-function loadGalleryContent() {
-  console.log("loadGalleryContent called");
-  
-  // Only proceed if we're on the art gallery page
-  if (!window.location.pathname.includes('/art.html')) {
-    console.log("Not on art.html page, exiting");
+// Global variables
+let allArtworks = [];
+let galleryInitialized = false;
+
+// Main initialization function
+function initGallery() {
+  console.log("Initializing gallery");
+
+  // Only initialize once per page load
+  if (galleryInitialized && document.querySelector(".artworks .thumbnail")) {
+    console.log("Gallery already fully initialized and loaded");
     return;
   }
-  
-  // Get the container where artworks will be displayed
-  const artworksContainer = document.querySelector('.artworks');
+
+  // Only run on art gallery page
+  if (!window.location.pathname.includes("/art.html")) {
+    console.log("Not on art gallery page");
+    return;
+  }
+
+  console.log("Setting up gallery components");
+
+  // Initialize client if needed
+  initSanityClient();
+
+  // Setup filters
+  setupFilters();
+
+  // Initialize bunny hover effect
+  initBnuuyHover();
+
+  // Load content with a delay to ensure dependencies are loaded
+  setTimeout(loadGalleryContent, 300);
+
+  // Mark as initialized
+  galleryInitialized = true;
+}
+
+// Initialize Sanity client
+function initSanityClient() {
+  // Check if we already have a client
+  if (window.sanityClient) {
+    console.log("Sanity client already initialized");
+    return;
+  }
+
+  // Try direct initialization if SanityClient is available
+  if (typeof SanityClient !== "undefined") {
+    window.sanityClient = new SanityClient({
+      projectId: "asrslodd",
+      dataset: "production",
+      apiVersion: "2025-05-03",
+      useCdn: true,
+    });
+    console.log("Sanity client initialized via global SanityClient");
+    return;
+  }
+
+  // Try ESM import approach if available
+  if (typeof window.createClient !== "undefined") {
+    window.sanityClient = window.createClient({
+      projectId: "asrslodd",
+      dataset: "production",
+      apiVersion: "2025-05-03",
+      useCdn: true,
+    });
+    console.log("Sanity client initialized via ESM createClient");
+    return;
+  }
+
+  console.warn("Could not initialize Sanity client - missing dependencies");
+}
+
+// Setup filter functionality
+function setupFilters() {
+  console.log("Setting up filters");
+
+  const filterButton = document.getElementById("applyFilters");
+  if (!filterButton) {
+    console.log("Filter button not found");
+    return;
+  }
+
+  // Remove any existing listeners to prevent duplicates
+  const newFilterButton = filterButton.cloneNode(true);
+  filterButton.parentNode.replaceChild(newFilterButton, filterButton);
+
+  // Add event listener
+  newFilterButton.addEventListener("click", function () {
+    const yearFilter = document.getElementById("yearFilter").value;
+    console.log(`Filtering by year: ${yearFilter}`);
+
+    // Filter artworks
+    let filteredArtworks = allArtworks;
+
+    if (yearFilter !== "all") {
+      filteredArtworks = filteredArtworks.filter(
+        (artwork) => artwork.category === yearFilter
+      );
+    }
+
+    // Render filtered gallery
+    renderGallery(filteredArtworks);
+  });
+}
+
+// Initialize bunny hover effect
+function initBnuuyHover() {
+  const aboutLink = document.querySelector(".about-link");
+  if (!aboutLink) return;
+
+  const defaultIcon = aboutLink.querySelector(".icon-default");
+  const hoverIcon = aboutLink.querySelector(".icon-hover");
+
+  if (defaultIcon && hoverIcon) {
+    // Remove existing event listeners to prevent duplicates
+    aboutLink.removeEventListener("mouseenter", aboutLink._mouseEnterHandler);
+    aboutLink.removeEventListener("mouseleave", aboutLink._mouseLeaveHandler);
+
+    // Create handler functions
+    aboutLink._mouseEnterHandler = function () {
+      defaultIcon.style.display = "none";
+      hoverIcon.style.display = "block";
+    };
+
+    aboutLink._mouseLeaveHandler = function () {
+      defaultIcon.style.display = "block";
+      hoverIcon.style.display = "none";
+    };
+
+    // Add event listeners
+    aboutLink.addEventListener("mouseenter", aboutLink._mouseEnterHandler);
+    aboutLink.addEventListener("mouseleave", aboutLink._mouseLeaveHandler);
+
+    // Set initial state
+    defaultIcon.style.display = "block";
+    hoverIcon.style.display = "none";
+  }
+}
+
+// Load gallery content
+function loadGalleryContent() {
+  console.log("Loading gallery content");
+
+  // Get container
+  const artworksContainer = document.querySelector(".artworks");
   if (!artworksContainer) {
     console.error("Artworks container not found");
     return;
   }
-  
+
+  // If we already have artworks in the DOM, no need to fetch them again
+  if (document.querySelector(".artworks .thumbnail")) {
+    console.log("Gallery already has content - skipping fetch");
+    return;
+  }
+
   // Show loading indicator
-  artworksContainer.innerHTML = '<div class="loading-indicator" style="text-align: center; padding: 20px;">Loading gallery...</div>';
-  
+  artworksContainer.innerHTML =
+    '<div class="loading-indicator">Loading gallery...</div>';
+
+  // Check for Sanity client
+  if (!window.sanityClient) {
+    console.error("Sanity client not available");
+    artworksContainer.innerHTML =
+      '<div class="error-message">Unable to load gallery. Sanity client not available. Try refreshing the page.</div>';
+    return;
+  }
+
   try {
-    console.log("Initializing Sanity client");
-    
-    // Check if createClient is available
-    if (typeof window.createClient === 'function') {
-      console.log("Using window.createClient");
-      var client = window.createClient({
-        projectId: 'asrslodd',
-        dataset: 'production',
-        apiVersion: '2025-05-03',
-        useCdn: true
-      });
-    } else {
-      console.error("Sanity client not found. Make sure the library is loaded properly.");
-      console.log("Available global objects:", {
-        createClient: typeof window.createClient,
-        SanityClient: typeof window.SanityClient,
-        sanityClient: typeof window.sanityClient
-      });
-      artworksContainer.innerHTML = '<div style="text-align: center; padding: 20px;">Error: Sanity client not available. Please check the console for details.</div>';
-      return;
-    }
-    
-    console.log("Sanity client initialized successfully");
-    
-    // Query to fetch all artworks organized by category/year
+    // Query to fetch artworks
     const query = `*[_type == "artwork"] {
       _id,
       title,
@@ -70,106 +179,197 @@ function loadGalleryContent() {
       description,
       category
     } | order(year desc)`;
-    
-    console.log("Executing query:", query);
 
-    // Execute the query
-    client.fetch(query)
-      .then(artworks => {
-        console.log("Query successful, received artworks:", artworks);
-        
-        // If no artworks, show a message
-        if (!artworks || artworks.length === 0) {
-          artworksContainer.innerHTML = '<div style="text-align: center; padding: 20px;">No artworks found. Add some in your Sanity Studio!</div>';
-          return;
-        }
-        
-        // Group artworks by category
-        const categories = {};
-        artworks.forEach(artwork => {
-          if (!categories[artwork.category]) {
-            categories[artwork.category] = [];
-          }
-          categories[artwork.category].push(artwork);
-        });
+    console.log("Fetching artworks from Sanity");
 
-        // Clear the container
-        artworksContainer.innerHTML = '';
-        
-        // Categories to display in order
-        const orderedCategories = ['2025', '2024', '2023', '2022', 'sketches'];
-        
-        // Create sections for each category
-        orderedCategories.forEach(category => {
-          if (!categories[category] || categories[category].length === 0) {
-            return; // Skip empty categories
-          }
-          
-          console.log(`Creating section for category: ${category}`);
-          
-          // Create year section
-          const yearSection = document.createElement('div');
-          yearSection.className = 'year-section';
-          yearSection.id = `year-${category}`;
-          
-          // Add header
-          const header = document.createElement('h2');
-          header.style.textAlign = 'center';
-          header.style.borderBottom = '1px dashed white';
-          header.style.paddingBottom = '5px';
-          header.style.margin = '20px 0 15px 0';
-          header.textContent = category === 'sketches' ? 'Sketches & Scraps' : category;
-          yearSection.appendChild(header);
-          
-          // Create thumbnail grid
-          const thumbnailGrid = document.createElement('div');
-          thumbnailGrid.className = 'thumbnail-grid';
-          
-          // Add each artwork to the grid
-          categories[category].forEach(artwork => {
-            const thumbnail = document.createElement('div');
-            thumbnail.className = 'thumbnail';
-            
-            const link = document.createElement('a');
-            link.href = artwork.imageUrl;
-            link.dataset.description = artwork.description || '';
-            
-            const image = document.createElement('img');
-            image.src = `${artwork.imageUrl}?w=200&h=200&fit=crop`;
-            image.alt = artwork.title;
-            image.title = artwork.title;
-            image.setAttribute('loading', 'lazy');
-            
-            link.appendChild(image);
-            thumbnail.appendChild(link);
-            thumbnailGrid.appendChild(thumbnail);
-          });
-          
-          yearSection.appendChild(thumbnailGrid);
-          artworksContainer.appendChild(yearSection);
-        });
-        
-        console.log("Gallery rendering complete");
-        
-        // Initialize lightbox if available
-        if (typeof SimpleLightbox !== 'undefined') {
-          console.log("Initializing lightbox");
-          initLightbox();
-        }
+    // Fetch artworks
+    window.sanityClient
+      .fetch(query)
+      .then((artworks) => {
+        console.log(`Fetched ${artworks.length} artworks`);
+
+        // Store for filtering
+        allArtworks = artworks;
+
+        // Render gallery
+        renderGallery(artworks);
       })
-      .catch(error => {
-        console.error('Error fetching artworks:', error);
-        artworksContainer.innerHTML = '<div style="text-align: center; padding: 20px;">Error loading gallery. Please check the console for details.</div>';
+      .catch((error) => {
+        console.error("Error fetching artworks:", error);
+        artworksContainer.innerHTML =
+          '<div class="error-message">Error loading gallery. Please try again later.</div>';
       });
   } catch (error) {
-    console.error('Exception in gallery script:', error);
-    artworksContainer.innerHTML = '<div style="text-align: center; padding: 20px;">An error occurred while setting up the gallery. Please check the console for details.</div>';
+    console.error("Exception in gallery script:", error);
+    artworksContainer.innerHTML =
+      '<div class="error-message">An error occurred while setting up the gallery. Please check the console for details.</div>';
   }
 }
 
+// Render gallery with artworks
+function renderGallery(artworks) {
+  console.log("Rendering gallery");
+
+  // Get container
+  const artworksContainer = document.querySelector(".artworks");
+  if (!artworksContainer) return;
+
+  // If no artworks, show message
+  if (!artworks || artworks.length === 0) {
+    artworksContainer.innerHTML =
+      '<div class="loading-indicator">No artworks found that match your filters.</div>';
+    return;
+  }
+
+  // Group by category
+  const categories = {};
+  artworks.forEach((artwork) => {
+    if (!categories[artwork.category]) {
+      categories[artwork.category] = [];
+    }
+    categories[artwork.category].push(artwork);
+  });
+
+  // Clear container
+  artworksContainer.innerHTML = "";
+
+  // Categories to display in order
+  const orderedCategories = ["2025", "2024", "2023", "2022", "sketches"];
+
+  // Create sections for each category
+  orderedCategories.forEach((category) => {
+    if (!categories[category] || categories[category].length === 0) {
+      return; // Skip empty categories
+    }
+
+    // Create year section
+    const yearSection = document.createElement("div");
+    yearSection.className = "year-section";
+    yearSection.id = `year-${category}`;
+
+    // Add header
+    const header = document.createElement("h2");
+    header.style.textAlign = "center";
+    header.style.borderBottom = "1px dashed white";
+    header.style.paddingBottom = "5px";
+    header.style.margin = "20px 0 15px 0";
+    yearSection.appendChild(header);
+
+    // Create thumbnail grid
+    const thumbnailGrid = document.createElement("div");
+    thumbnailGrid.className = "thumbnail-grid";
+    thumbnailGrid.style.display = "grid";
+    thumbnailGrid.style.gridTemplateColumns =
+      "repeat(auto-fill, minmax(90px, 1fr))";
+    thumbnailGrid.style.gap = "15px";
+    thumbnailGrid.style.marginBottom = "25px";
+
+    // Add each artwork to the grid
+    categories[category].forEach((artwork) => {
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "thumbnail";
+
+      const link = document.createElement("a");
+      link.href = artwork.imageUrl;
+      link.dataset.description = artwork.description || "";
+
+      const image = document.createElement("img");
+      image.src = `${artwork.imageUrl}?w=90&h=90&fit=crop`;
+      image.alt = artwork.title;
+      image.title = artwork.title;
+      image.setAttribute("loading", "lazy");
+      image.style.maxWidth = "90px";
+      image.style.maxHeight = "90px";
+      image.style.width = "100%";
+      image.style.height = "auto";
+      image.style.aspectRatio = "1 / 1";
+      image.style.objectFit = "cover";
+
+      link.appendChild(image);
+      thumbnail.appendChild(link);
+      thumbnailGrid.appendChild(thumbnail);
+    });
+
+    yearSection.appendChild(thumbnailGrid);
+    artworksContainer.appendChild(yearSection);
+  });
+
+  // Initialize lightbox
+  setTimeout(initLightbox, 100);
+}
+
+// Initialize lightbox
 function initLightbox() {
-  new SimpleLightbox('.thumbnail a', {
-    captionsData: 'description',
-    captionDelay: 250
+  if (typeof SimpleLightbox === "undefined") {
+    console.warn("SimpleLightbox not available");
+    return;
+  }
+
+  // Check for existing lightbox
+  if (document.querySelector(".sl-overlay")) {
+    console.log("Lightbox already initialized");
+    return;
+  }
+
+  console.log("Initializing lightbox");
+
+  // Create new lightbox
+  new SimpleLightbox(".thumbnail a", {
+    captionsData: "description",
+    captionDelay: 0,
+    captionPosition: "bottom",
+    animationSpeed: 300,
+    fadeSpeed: 300,
+    overlay: true,
+    overlayOpacity: 0.9,
+    navText: ["←", "→"],
+    closeText: "×",
+    showCounter: false,
   });
 }
+
+// Event handlers for page transition events
+function setupEventListeners() {
+  console.log("Setting up event listeners");
+
+  // Handle regular page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.location.pathname.includes("/art.html")) {
+        setTimeout(initGallery, 300);
+      }
+    });
+  } else {
+    // DOM already loaded
+    if (window.location.pathname.includes("/art.html")) {
+      setTimeout(initGallery, 300);
+    }
+  }
+
+  // Handle Swup transitions
+  document.addEventListener("swup:contentReplaced", function () {
+    console.log("Swup content replaced - checking for art gallery");
+    if (window.location.pathname.includes("/art.html")) {
+      setTimeout(initGallery, 500);
+    }
+  });
+
+  // Also listen for conventional page transition events
+  window.addEventListener("popstate", function () {
+    console.log("Popstate event - checking for art gallery");
+    if (window.location.pathname.includes("/art.html")) {
+      setTimeout(initGallery, 300);
+    }
+  });
+}
+
+// Initialize on script load
+setupEventListeners();
+
+// Provide a global reset function that can be called manually if needed
+window.resetGallery = function () {
+  console.log("Manual gallery reset requested");
+  galleryInitialized = false;
+  allArtworks = [];
+  initGallery();
+};

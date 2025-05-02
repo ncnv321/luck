@@ -7,12 +7,15 @@
     <link href="/gallery.css" rel="stylesheet" type="text/css" media="all" />
     <title>Art Gallery | luck</title>
     <link rel="icon" type="image/x-icon" href=" " />
+
     <!-- SimpleLightbox for image gallery -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.js"></script>
+
+    <!-- Sanity Client Setup -->
     <script>
       // Include this script to load the ESM module
       window.global = window;
@@ -20,13 +23,18 @@
     <script type="module">
       import { createClient } from "https://esm.sh/@sanity/client";
       window.createClient = createClient;
+      // Signal that Sanity client is loaded
+      window.sanityClientLoaded = true;
     </script>
+
+    <!-- Centralized transitions -->
+    <script src="/transitions.js"></script>
+
     <style>
       /* Critical styles for immediate application */
       .mainframe {
         overflow-y: scroll !important;
         height: 500px !important;
-        /* Wider mainframe for gallery */
         width: 680px !important;
       }
 
@@ -38,11 +46,11 @@
 
       /* Special styling for right sideframe in art gallery only */
       .art-gallery-right-sideframe {
-        width: 5px !important; /* Ultra thin right sidebar */
-        border-left: none !important; /* Remove left border to avoid double border */
-        background-color: black !important; /* Match background */
-        opacity: 0 !important; /* Make invisible */
-        pointer-events: none !important; /* Prevent interaction */
+        width: 5px !important;
+        border-left: none !important;
+        background-color: black !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
 
       /* Ensure left sideframe is proper width */
@@ -88,24 +96,38 @@
       /* Thumbnail grid layout */
       .thumbnail-grid {
         display: grid !important;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
         gap: 15px !important;
         margin-bottom: 25px !important;
       }
 
       /* Force thumbnail images to display properly */
       .thumbnail img {
-        max-width: 200px !important;
-        max-height: 200px !important;
+        max-width: 90px !important;
+        max-height: 90px !important;
         width: 100% !important;
         height: auto !important;
         aspect-ratio: 1 / 1 !important;
         object-fit: cover !important;
       }
 
-      /* Hide the Swup progress bar */
-      .swup-progress-bar {
-        display: none !important;
+      /* Loading indicator and error messages */
+      .loading-indicator,
+      .error-message {
+        padding: 20px;
+        text-align: center;
+        color: white;
+      }
+
+      .error-message {
+        color: #ff6b6b;
+      }
+
+      /* Header placeholder - Style if needed */
+      .header02 {
+        width: 438px;
+        height: 215px;
+        margin: 5px auto;
       }
     </style>
   </head>
@@ -117,7 +139,7 @@
 
     <div class="banner"></div>
 
-    <main id="swup" class="transition-fade">
+    <main>
       <div class="mainwrapper">
         <!-- Keep the original flex layout structure to match other pages -->
         <div style="display: flex">
@@ -139,14 +161,32 @@
                     min-height: 100px !important;
                   "
                 >
-                  <p
-                    style="
-                      margin-top: 0.5em !important;
-                      margin-bottom: 0.5em !important;
-                    "
-                  >
-                    (Filters coming soon)
-                  </p>
+                  <div>
+                    <label>Year:</label>
+                    <select id="yearFilter">
+                      <option value="all">All Years</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="sketches">Sketches</option>
+                    </select>
+                  </div>
+                  <div style="margin-top: 10px">
+                    <button
+                      id="applyFilters"
+                      style="
+                        margin-top: 10px;
+                        padding: 5px 10px;
+                        background: #333;
+                        color: white;
+                        border: 1px solid white;
+                        cursor: pointer;
+                      "
+                    >
+                      Apply Filters
+                    </button>
+                  </div>
                 </section>
               </div>
             </div>
@@ -245,13 +285,8 @@
               </h2>
 
               <section class="artworks">
-                <!-- Dynamic content will be loaded here by sanity-gallery.js -->
-                <div
-                  class="loading-indicator"
-                  style="text-align: center; padding: 20px"
-                >
-                  Loading gallery...
-                </div>
+                <!-- Dynamic content will be loaded by the gallery script -->
+                <div class="loading-indicator">Loading gallery...</div>
               </section>
             </div>
           </div>
@@ -267,149 +302,295 @@
       <p id="paragraphstyling"><small> luck est. 2023 </small></p>
     </footer>
 
-    <script src="https://unpkg.com/swup@4"></script>
-    <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
     <script>
-      // Wait for DOM content to be loaded before initializing Swup
+      // Wait for Sanity client
+      function waitForSanity(callback) {
+        if (window.createClient) {
+          callback();
+        } else {
+          console.log("Waiting for Sanity client to load...");
+          setTimeout(() => waitForSanity(callback), 100);
+        }
+      }
+
+      // Initialize gallery
       document.addEventListener("DOMContentLoaded", function () {
-        // Force CSS reloading function
-        function forceStyleReload() {
-          // Create a duplicate of each stylesheet and replace the original
-          // This forces the browser to re-evaluate all CSS rules
-          const stylesheets = document.querySelectorAll(
-            'link[rel="stylesheet"]'
-          );
-          stylesheets.forEach((sheet) => {
-            // Skip if already processed
-            if (sheet.dataset.processed) return;
+        waitForSanity(() => {
+          // Get container
+          const artworksContainer = document.querySelector(".artworks");
 
-            // Clone the stylesheet
-            const newLink = document.createElement("link");
-            newLink.rel = "stylesheet";
-            newLink.href = sheet.href;
-            newLink.dataset.processed = "true";
-
-            // Insert the new one and remove the old one
-            sheet.parentNode.insertBefore(newLink, sheet);
-
-            // Slight delay before removing the old one
-            setTimeout(() => {
-              sheet.parentNode.removeChild(sheet);
-            }, 50);
-          });
-        }
-
-        // Apply art gallery specific styles with inline style forcing
-        function applyArtGalleryStyles() {
-          // Check if we're on the art gallery page
-          if (window.location.pathname.includes("/art.html")) {
-            console.log("Art Gallery page detected - applying layout fixes");
-
-            // Force all dotted borders with inline styles
-            const leftSections = document.querySelectorAll(
-              ".left-section:not(.left-bottom-section)"
-            );
-            leftSections.forEach((section) => {
-              section.style.borderBottom = "1px dashed white";
+          try {
+            // Create Sanity client
+            const client = window.createClient({
+              projectId: "asrslodd",
+              dataset: "production",
+              apiVersion: "2025-05-03",
+              useCdn: true,
             });
 
-            // Force filter box styling
-            const filtersBox = document.querySelector(".filters");
-            if (filtersBox) {
-              filtersBox.style.margin = "10px 0";
-              filtersBox.style.padding = "10px";
-              filtersBox.style.border = "1px dashed #666";
-              filtersBox.style.textAlign = "center";
-              filtersBox.style.minHeight = "100px";
-            }
+            // Query to fetch artworks
+            const query = `*[_type == "artwork"] {
+              _id,
+              title,
+              "imageUrl": image.asset->url,
+              year,
+              description,
+              category
+            } | order(year desc)`;
 
-            // Force all year section headings
-            const yearHeadings = document.querySelectorAll(".year-section h2");
-            yearHeadings.forEach((heading) => {
-              heading.style.textAlign = "center";
-              heading.style.borderBottom = "1px dashed white";
-              heading.style.paddingBottom = "5px";
-              heading.style.margin = "20px 0 15px 0";
-            });
+            // Fetch artworks
+            client
+              .fetch(query)
+              .then((artworks) => {
+                // Store for filtering
+                window.allArtworks = artworks;
 
-            // Force all paragraph margins
-            const paragraphs = document.querySelectorAll("p");
-            paragraphs.forEach((p) => {
-              p.style.marginTop = "0.5em";
-              p.style.marginBottom = "0.5em";
-            });
+                // Group by category
+                const categories = {};
+                artworks.forEach((artwork) => {
+                  if (!categories[artwork.category]) {
+                    categories[artwork.category] = [];
+                  }
+                  categories[artwork.category].push(artwork);
+                });
 
-            // Find the right sideframe and make it invisible
-            const sideframes = document.querySelectorAll(".sideframe");
-            if (sideframes.length > 1) {
-              const rightSideframe = sideframes[sideframes.length - 1];
-              if (!rightSideframe.classList.contains("left-sideframe")) {
-                rightSideframe.classList.add("art-gallery-right-sideframe");
-                rightSideframe.style.width = "5px";
-                rightSideframe.style.borderLeft = "none";
-                rightSideframe.style.backgroundColor = "black";
-                rightSideframe.style.opacity = "0";
-                rightSideframe.style.pointerEvents = "none";
-              }
-            }
+                // Clear container
+                artworksContainer.innerHTML = "";
 
-            // Ensure mainframe is the right size
-            const mainframe = document.querySelector(".mainframe");
-            if (mainframe) {
-              mainframe.style.width = "680px";
-              mainframe.style.overflowY = "scroll";
-            }
+                // Categories to display in order
+                const orderedCategories = [
+                  "2025",
+                  "2024",
+                  "2023",
+                  "2022",
+                  "sketches",
+                ];
 
-            // Force reload CSS to ensure all styles are applied
-            forceStyleReload();
+                // Create sections for each category
+                orderedCategories.forEach((category) => {
+                  if (
+                    !categories[category] ||
+                    categories[category].length === 0
+                  ) {
+                    return; // Skip empty categories
+                  }
+
+                  // Create year section
+                  const yearSection = document.createElement("div");
+                  yearSection.className = "year-section";
+                  yearSection.id = `year-${category}`;
+
+                  // Add header
+                  const header = document.createElement("h2");
+                  header.style.textAlign = "center";
+                  header.style.borderBottom = "1px dashed white";
+                  header.style.paddingBottom = "5px";
+                  header.style.margin = "20px 0 15px 0";
+                  header.textContent =
+                    category === "sketches" ? "Sketches & Scraps" : category;
+                  yearSection.appendChild(header);
+
+                  // Create thumbnail grid
+                  const thumbnailGrid = document.createElement("div");
+                  thumbnailGrid.className = "thumbnail-grid";
+                  thumbnailGrid.style.display = "grid";
+                  thumbnailGrid.style.gridTemplateColumns =
+                    "repeat(auto-fill, minmax(90px, 1fr))";
+                  thumbnailGrid.style.gap = "15px";
+                  thumbnailGrid.style.marginBottom = "25px";
+
+                  // Add each artwork to the grid
+                  categories[category].forEach((artwork) => {
+                    const thumbnail = document.createElement("div");
+                    thumbnail.className = "thumbnail";
+
+                    const link = document.createElement("a");
+                    link.href = artwork.imageUrl;
+                    link.dataset.description = artwork.description || "";
+
+                    const image = document.createElement("img");
+                    image.src = `${artwork.imageUrl}?w=90&h=90&fit=crop`;
+                    image.alt = artwork.title;
+                    image.title = artwork.title;
+                    image.setAttribute("loading", "lazy");
+                    image.style.maxWidth = "90px";
+                    image.style.maxHeight = "90px";
+                    image.style.width = "100%";
+                    image.style.height = "auto";
+                    image.style.aspectRatio = "1 / 1";
+                    image.style.objectFit = "cover";
+
+                    link.appendChild(image);
+                    thumbnail.appendChild(link);
+                    thumbnailGrid.appendChild(thumbnail);
+                  });
+
+                  yearSection.appendChild(thumbnailGrid);
+                  artworksContainer.appendChild(yearSection);
+                });
+
+                // Initialize lightbox
+                if (typeof SimpleLightbox !== "undefined") {
+                  setTimeout(() => {
+                    new SimpleLightbox(".thumbnail a", {
+                      captionsData: "description",
+                      captionDelay: 0,
+                      captionPosition: "bottom",
+                      animationSpeed: 300,
+                      fadeSpeed: 300,
+                      overlay: true,
+                      overlayOpacity: 0.9,
+                      navText: ["←", "→"],
+                      closeText: "×",
+                      showCounter: false,
+                    });
+                  }, 100);
+                }
+
+                // Set up filtering
+                setupFilters();
+              })
+              .catch((error) => {
+                console.error("Error fetching artworks:", error);
+                artworksContainer.innerHTML =
+                  '<div class="error-message">Error loading gallery. Please try again later.</div>';
+              });
+          } catch (error) {
+            console.error("Exception in gallery script:", error);
+            artworksContainer.innerHTML =
+              '<div class="error-message">An error occurred while setting up the gallery. Please check the console for details.</div>';
           }
-        }
-
-        // Apply styles immediately
-        applyArtGalleryStyles();
-
-        // Make swup a global variable so bannerbar.js can access it
-        window.swup = new Swup({
-          plugins: [
-            new SwupProgressPlugin({
-              showProgressBar: false, // Disable default progress bar
-            }),
-          ],
-          cache: false, // Disable content caching for consistent behavior
-          animateHistoryBrowsing: true, // Force animation on history navigation
-          animationSelector: '[class*="transition-"]', // Select elements with transition class
-          containers: ["#swup"], // The container that will be replaced
         });
-
-        // Add event listeners for Swup events
-        window.swup.hooks.on("content:replace", function () {
-          // Wait a bit for DOM to update
-          setTimeout(applyArtGalleryStyles, 100);
-        });
-
-        window.swup.hooks.on("page:view", function () {
-          // Apply styles after view is complete
-          setTimeout(applyArtGalleryStyles, 100);
-        });
-
-        // Also set up a MutationObserver to detect DOM changes
-        const observer = new MutationObserver(function (mutations) {
-          if (window.location.pathname.includes("/art.html")) {
-            applyArtGalleryStyles();
-          }
-        });
-
-        // Start observing
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true,
-        });
-
-        console.log("Swup initialized with enhanced art gallery layout fixes");
       });
+
+      // Set up filter functionality
+      function setupFilters() {
+        const filterButton = document.getElementById("applyFilters");
+        if (!filterButton) return;
+
+        filterButton.addEventListener("click", function () {
+          const yearFilter = document.getElementById("yearFilter").value;
+
+          // Get artworks
+          let filteredArtworks = window.allArtworks;
+
+          // Apply year filter
+          if (yearFilter !== "all") {
+            filteredArtworks = filteredArtworks.filter(
+              (artwork) => artwork.category === yearFilter
+            );
+          }
+
+          // Rerender gallery
+          renderGallery(filteredArtworks);
+        });
+      }
+
+      // Render gallery with filtered artworks
+      function renderGallery(artworks) {
+        const artworksContainer = document.querySelector(".artworks");
+        if (!artworksContainer) return;
+
+        // If no artworks, show a message
+        if (!artworks || artworks.length === 0) {
+          artworksContainer.innerHTML =
+            '<div class="loading-indicator">No artworks found that match your filters.</div>';
+          return;
+        }
+
+        // Group by category
+        const categories = {};
+        artworks.forEach((artwork) => {
+          if (!categories[artwork.category]) {
+            categories[artwork.category] = [];
+          }
+          categories[artwork.category].push(artwork);
+        });
+
+        // Clear container
+        artworksContainer.innerHTML = "";
+
+        // Categories to display in order
+        const orderedCategories = ["2025", "2024", "2023", "2022", "sketches"];
+
+        // Create sections for each category
+        orderedCategories.forEach((category) => {
+          if (!categories[category] || categories[category].length === 0) {
+            return; // Skip empty categories
+          }
+
+          // Create year section
+          const yearSection = document.createElement("div");
+          yearSection.className = "year-section";
+          yearSection.id = `year-${category}`;
+
+          // Add header
+          const header = document.createElement("h2");
+          header.style.textAlign = "center";
+          header.style.borderBottom = "1px dashed white";
+          header.style.paddingBottom = "5px";
+          header.style.margin = "20px 0 15px 0";
+          header.textContent =
+            category === "sketches" ? "Sketches & Scraps" : category;
+          yearSection.appendChild(header);
+
+          // Create thumbnail grid
+          const thumbnailGrid = document.createElement("div");
+          thumbnailGrid.className = "thumbnail-grid";
+          thumbnailGrid.style.display = "grid";
+          thumbnailGrid.style.gridTemplateColumns =
+            "repeat(auto-fill, minmax(90px, 1fr))";
+          thumbnailGrid.style.gap = "15px";
+          thumbnailGrid.style.marginBottom = "25px";
+
+          // Add each artwork to the grid
+          categories[category].forEach((artwork) => {
+            const thumbnail = document.createElement("div");
+            thumbnail.className = "thumbnail";
+
+            const link = document.createElement("a");
+            link.href = artwork.imageUrl;
+            link.dataset.description = artwork.description || "";
+
+            const image = document.createElement("img");
+            image.src = `${artwork.imageUrl}?w=90&h=90&fit=crop`;
+            image.alt = artwork.title;
+            image.title = artwork.title;
+            image.setAttribute("loading", "lazy");
+            image.style.maxWidth = "90px";
+            image.style.maxHeight = "90px";
+            image.style.width = "100%";
+            image.style.height = "auto";
+            image.style.aspectRatio = "1 / 1";
+            image.style.objectFit = "cover";
+
+            link.appendChild(image);
+            thumbnail.appendChild(link);
+            thumbnailGrid.appendChild(thumbnail);
+          });
+
+          yearSection.appendChild(thumbnailGrid);
+          artworksContainer.appendChild(yearSection);
+        });
+
+        // Initialize lightbox
+        if (typeof SimpleLightbox !== "undefined") {
+          setTimeout(() => {
+            new SimpleLightbox(".thumbnail a", {
+              captionsData: "description",
+              captionDelay: 0,
+              captionPosition: "bottom",
+              animationSpeed: 300,
+              fadeSpeed: 300,
+              overlay: true,
+              overlayOpacity: 0.9,
+              navText: ["←", "→"],
+              closeText: "×",
+              showCounter: false,
+            });
+          }, 100);
+        }
+      }
     </script>
-    <script src="/bannerbar.js"></script>
-    <!-- Gallery Script -->
-    <script src="/sanity-gallery.js"></script>
   </body>
 </html>
