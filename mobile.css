@@ -1,0 +1,195 @@
+/* Enhanced mobile.css - Fixes specific issues */
+
+/* =========== Mobile Media Query =========== */
+@media screen and (max-width: 767px) {
+  /* ===== Global Mobile Fixes ===== */
+
+  /* Hide header space */
+  .header02 {
+    display: none !important;
+  }
+
+  /* Force frames to full width and stack vertically */
+  .mainwrapper > div {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* Set all frames to full width */
+  .sideframe,
+  .mainframe {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 0 10px 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Center content and set to readable width */
+  .maincontent,
+  .sidecontent {
+    margin: 10px auto !important;
+    width: 90% !important;
+    max-width: 500px !important;
+  }
+
+  /* Prevent horizontal scrolling on all pages */
+  body,
+  html {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100vw !important;
+  }
+
+  /* ===== Index Page Specific Fixes ===== */
+
+  /* Auto-height sidebar on index page */
+  body[data-page="index"] .sideframe,
+  body:not([data-page]) .sideframe {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Fix changelog scrolling */
+  .changelog {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    height: 200px !important;
+    max-height: 200px !important;
+    width: 90% !important;
+    margin: 0 auto 10px auto !important;
+  }
+
+  /* ===== About Me Page Specific Fixes ===== */
+
+  /* Make kins marquee horizontal on mobile */
+  .changelog marquee {
+    white-space: nowrap !important;
+    display: block !important;
+  }
+
+  .changelog img {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin: 0 5px !important;
+  }
+
+  /* Match widths between kins and likes/dislikes */
+  .changelog,
+  .likes-dislikes {
+    width: 90% !important;
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ===== Art Gallery Specific Fixes ===== */
+
+  /* Mainframe needs to be auto-height and visible overflow */
+  .mainframe {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  /* Hide the empty right sideframe in art gallery */
+  .art-gallery-right-sideframe {
+    display: none !important;
+  }
+
+  /* Center filter box */
+  .filters {
+    margin: 10px auto !important;
+    width: 90% !important;
+    max-width: 300px !important;
+  }
+
+  /* Force left sideframe in gallery to show all content */
+  .art-gallery .left-sideframe,
+  .art-gallery .sideframe.left-sideframe,
+  .art.html .left-sideframe,
+  .art.html .sideframe.left-sideframe,
+  body[data-page="art"] .left-sideframe,
+  body[data-page="art"] .sideframe.left-sideframe {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Fix gallery horizontal scrolling */
+  .mainframe,
+  .maincontent,
+  .gallery-content,
+  .artworks {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Year sections need to fit width */
+  .year-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 5px !important;
+  }
+
+  /* Year section headers need to fit width */
+  .year-section h2 {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make thumbnail grid responsive */
+  .thumbnail-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 5px !important;
+    box-sizing: border-box !important;
+    padding: 0 5px !important;
+  }
+
+  /* Make thumbnails responsive */
+  .thumbnail {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .thumbnail img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    aspect-ratio: 1/1 !important;
+    object-fit: cover !important;
+  }
+}
+
+/* ===== JavaScript Fix Helper ===== */
+/* This script will be added to ensure mobile styles take precedence */
+@media screen and (max-width: 767px) {
+  /* Add !important to override any inline styles set by JavaScript */
+  [style*="width"] {
+    max-width: 100% !important;
+  }
+
+  [style*="overflow"] {
+    overflow-x: hidden !important;
+  }
+}
+
+/* Specific attribute selectors to override common JS properties */
+@media screen and (max-width: 767px) {
+  /* Keep images from breaking layout */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
