@@ -52,18 +52,43 @@ export default {
           {title: 'Sketches & Scraps', value: 'sketches'}
         ]
       }
+    },
+    {
+      name: 'medium',
+      title: 'Medium',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Traditional', value: 'traditional'},
+          {title: 'Digital', value: 'digital'},
+          {title: 'Mix', value: 'mix'}
+        ]
+      }
+    },
+    {
+      name: 'characters',
+      title: 'Characters',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        list: [
+          {title: 'bnuuy', value: 'bnuuy'},
+          {title: 'fanart', value: 'fanart'}
+        ]
+      }
     }
   ],
   preview: {
     select: {
       title: 'title',
       year: 'year',
+      medium: 'medium',
       media: 'image'
     },
-    prepare({title, year, media}) {
+    prepare({title, year, medium, media}) {
       return {
         title,
-        subtitle: `(${year})`,
+        subtitle: `(${year}) - ${medium || 'Unspecified medium'}`,
         media
       }
     }

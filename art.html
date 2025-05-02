@@ -131,6 +131,46 @@
         margin: 5px auto;
       }
     </style>
+
+    <!-- Lightbox styling - improved z-index and caption visibility -->
+    <style>
+      /* Fix for banner overlapping lightbox */
+      .sl-overlay {
+        background: rgba(0, 0, 0, 0.8) !important;
+        z-index: 10000 !important;
+      }
+
+      .sl-wrapper {
+        z-index: 10001 !important;
+      }
+
+      .sl-image {
+        z-index: 10002 !important;
+      }
+
+      .sl-close {
+        z-index: 10003 !important;
+      }
+
+      .sl-navigation button {
+        z-index: 10002 !important;
+      }
+
+      /* Force captions to be visible */
+      .sl-caption {
+        display: block !important;
+        opacity: 1 !important;
+        z-index: 10002 !important;
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        color: white !important;
+        padding: 15px !important;
+        font-size: 14px !important;
+        white-space: pre-line !important;
+        max-width: 80% !important;
+        margin: 0 auto !important;
+        border-radius: 4px !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -162,7 +202,8 @@
                     min-height: 100px !important;
                   "
                 >
-                  <div>
+                  <!-- Year filter -->
+                  <div style="margin-bottom: 10px">
                     <label>Year:</label>
                     <select id="yearFilter">
                       <option value="all">All Years</option>
@@ -173,11 +214,34 @@
                       <option value="sketches">Sketches</option>
                     </select>
                   </div>
+
+                  <!-- Medium filter -->
+                  <div style="margin-bottom: 10px">
+                    <label>Medium:</label>
+                    <select id="mediumFilter">
+                      <option value="all">All Mediums</option>
+                      <option value="traditional">Traditional</option>
+                      <option value="digital">Digital</option>
+                      <option value="mix">Mix</option>
+                    </select>
+                  </div>
+
+                  <!-- Character filter -->
+                  <div style="margin-bottom: 10px">
+                    <label>Character:</label>
+                    <select id="characterFilter">
+                      <option value="all">All Characters</option>
+                      <option value="bnuuy">bnuuy</option>
+                      <option value="fanart">fanart</option>
+                    </select>
+                  </div>
+
+                  <!-- Apply filters button -->
                   <div style="margin-top: 10px">
                     <button
                       id="applyFilters"
                       style="
-                        margin-top: 10px;
+                        margin-top: 5px;
                         padding: 5px 10px;
                         background: #333;
                         color: white;
@@ -329,14 +393,16 @@
               useCdn: true,
             });
 
-            // Query to fetch artworks
+            // Query to fetch artworks with all needed fields
             const query = `*[_type == "artwork"] {
               _id,
               title,
               "imageUrl": image.asset->url,
               year,
               description,
-              category
+              category,
+              medium,
+              characters
             } | order(year desc)`;
 
             // Fetch artworks
@@ -407,12 +473,21 @@
 
                     const link = document.createElement("a");
                     link.href = artwork.imageUrl;
-                    link.dataset.description = artwork.description || "";
+
+                    // Store the complete artwork data as a custom attribute
+                    // (this will help us access it for the lightbox caption)
+                    link.dataset.artworkJson = JSON.stringify({
+                      id: artwork._id,
+                      title: artwork.title,
+                      description: artwork.description,
+                      medium: artwork.medium,
+                      characters: artwork.characters,
+                    });
 
                     const image = document.createElement("img");
                     image.src = `${artwork.imageUrl}?w=90&h=90&fit=crop`;
-                    image.alt = artwork.title;
-                    image.title = artwork.title;
+                    image.alt = artwork.title || "Artwork";
+                    image.title = artwork.title || "Artwork";
                     image.setAttribute("loading", "lazy");
                     image.style.maxWidth = "90px";
                     image.style.maxHeight = "90px";
@@ -430,26 +505,11 @@
                   artworksContainer.appendChild(yearSection);
                 });
 
-                // Initialize lightbox
-                if (typeof SimpleLightbox !== "undefined") {
-                  setTimeout(() => {
-                    new SimpleLightbox(".thumbnail a", {
-                      captionsData: "description",
-                      captionDelay: 0,
-                      captionPosition: "bottom",
-                      animationSpeed: 300,
-                      fadeSpeed: 300,
-                      overlay: true,
-                      overlayOpacity: 0.9,
-                      navText: ["←", "→"],
-                      closeText: "×",
-                      showCounter: false,
-                    });
-                  }, 100);
-                }
-
                 // Set up filtering
                 setupFilters();
+
+                // Initialize custom lightbox
+                initializeCustomLightbox(artworks);
               })
               .catch((error) => {
                 console.error("Error fetching artworks:", error);
@@ -464,15 +524,135 @@
         });
       });
 
+      // Custom lightbox initialization to ensure descriptions work
+      function initializeCustomLightbox(artworks) {
+        if (typeof SimpleLightbox === "undefined") {
+          console.error("SimpleLightbox not available");
+          return;
+        }
+
+        // If a previous instance exists, destroy it
+        if (window.lightboxInstance) {
+          window.lightboxInstance.destroy();
+        }
+
+        // Process links to ensure captions work
+        document.querySelectorAll(".thumbnail a").forEach((link) => {
+          try {
+            // Get artwork data from our custom attribute
+            const artworkData = JSON.parse(link.dataset.artworkJson || "{}");
+
+            // Build caption content
+            let captionText = "";
+
+            // Add title
+            if (artworkData.title) {
+              captionText = artworkData.title;
+            }
+
+            // Add description
+            if (artworkData.description) {
+              captionText +=
+                (captionText ? "\n\n" : "") + artworkData.description;
+            }
+
+            // Add medium
+            if (artworkData.medium) {
+              captionText +=
+                (captionText ? "\n\n" : "") + "Medium: " + artworkData.medium;
+            }
+
+            // Add characters
+            if (artworkData.characters && artworkData.characters.length) {
+              captionText +=
+                (captionText ? "\n\n" : "") +
+                "Characters: " +
+                artworkData.characters.join(", ");
+            }
+
+            // Set all possible caption attributes for maximum compatibility
+            link.setAttribute("data-caption", captionText);
+            link.setAttribute("data-title", captionText);
+            link.setAttribute("title", captionText);
+            link.setAttribute("data-description", captionText);
+
+            // SimpleLightbox sometimes uses the img title too
+            const img = link.querySelector("img");
+            if (img) {
+              img.setAttribute("title", captionText);
+            }
+          } catch (e) {
+            console.error("Error processing link caption:", e);
+          }
+        });
+
+        // Create new lightbox instance with all caption options enabled
+        window.lightboxInstance = new SimpleLightbox(".thumbnail a", {
+          captionsData: ["caption", "title", "description"], // Try all possible attributes
+          captionType: "data", // Use data attributes
+          captionPosition: "bottom",
+          captionDelay: 0,
+          captions: true, // Must be true for captions to show
+          captionSelector: "self", // Look for captions on the <a> elements
+          docClose: true, // Close when clicking outside
+          disableScroll: true, // Prevent scrolling
+          alertError: false, // Don't show errors
+          history: false, // Don't update browser history
+          napText: ["←", "→"],
+          closeText: "×",
+          showCounter: false,
+          animationSpeed: 250,
+          animationSlide: true,
+          preloading: true,
+          enableKeyboard: true,
+          loop: true,
+          rel: false,
+          docClose: true,
+          swipeTolerance: 50,
+          className: "simple-lightbox",
+          widthRatio: 0.8,
+          heightRatio: 0.9,
+          scaleImageToRatio: false,
+          disableRightClick: false,
+          disableScroll: true,
+          alertError: false,
+          alertErrorMessage: "Image not found, next image will be loaded",
+          additionalHtml: false,
+          history: false,
+          throttleInterval: 0,
+          doubleTapZoom: 2,
+          maxZoom: 10,
+          htmlClass: "has-lightbox",
+          rtl: false,
+          fixedClass: "sl-fixed",
+          fadeSpeed: 300,
+          uniqueImages: true,
+          focus: true,
+          scrollZoom: true,
+          scrollZoomFactor: 0.5,
+          download: false,
+        });
+
+        console.log("Custom lightbox initialized");
+      }
+
       // Set up filter functionality
       function setupFilters() {
         const filterButton = document.getElementById("applyFilters");
         if (!filterButton) return;
 
         filterButton.addEventListener("click", function () {
+          // Get all filter values
           const yearFilter = document.getElementById("yearFilter").value;
+          const mediumFilter = document.getElementById("mediumFilter").value;
+          const characterFilter =
+            document.getElementById("characterFilter").value;
 
-          // Get artworks
+          console.log(
+            `Filtering - Year: ${yearFilter}, Medium: ${mediumFilter}, Character: ${characterFilter}`
+          );
+
+          // Start with all artworks
           let filteredArtworks = window.allArtworks;
 
           // Apply year filter
@@ -480,6 +660,24 @@
             filteredArtworks = filteredArtworks.filter(
               (artwork) => artwork.category === yearFilter
             );
+          }
+
+          // Apply medium filter
+          if (mediumFilter !== "all") {
+            filteredArtworks = filteredArtworks.filter(
+              (artwork) => artwork.medium === mediumFilter
+            );
+          }
+
+          // Apply character filter (arrays need different handling)
+          if (characterFilter !== "all") {
+            filteredArtworks = filteredArtworks.filter((artwork) => {
+              // Handle artwork without characters field
+              if (!artwork.characters) return false;
+
+              // Check if character exists in the array
+              return artwork.characters.includes(characterFilter);
+            });
           }
 
           // Rerender gallery
@@ -495,7 +693,7 @@
         // If no artworks, show a message
         if (!artworks || artworks.length === 0) {
           artworksContainer.innerHTML =
-            '<div class="loading-indicator">No artworks found that match your filters.</div>';
+            '<div class="loading-indicator">No artworks that match the filters just yet!</div>';
           return;
         }
 
@@ -551,12 +749,20 @@
 
             const link = document.createElement("a");
             link.href = artwork.imageUrl;
-            link.dataset.description = artwork.description || "";
+
+            // Store the complete artwork data as a custom attribute
+            link.dataset.artworkJson = JSON.stringify({
+              id: artwork._id,
+              title: artwork.title,
+              description: artwork.description,
+              medium: artwork.medium,
+              characters: artwork.characters,
+            });
 
             const image = document.createElement("img");
             image.src = `${artwork.imageUrl}?w=90&h=90&fit=crop`;
-            image.alt = artwork.title;
-            image.title = artwork.title;
+            image.alt = artwork.title || "Artwork";
+            image.title = artwork.title || "Artwork";
             image.setAttribute("loading", "lazy");
             image.style.maxWidth = "90px";
             image.style.maxHeight = "90px";
@@ -574,23 +780,8 @@
           artworksContainer.appendChild(yearSection);
         });
 
-        // Initialize lightbox
-        if (typeof SimpleLightbox !== "undefined") {
-          setTimeout(() => {
-            new SimpleLightbox(".thumbnail a", {
-              captionsData: "description",
-              captionDelay: 0,
-              captionPosition: "bottom",
-              animationSpeed: 300,
-              fadeSpeed: 300,
-              overlay: true,
-              overlayOpacity: 0.9,
-              navText: ["←", "→"],
-              closeText: "×",
-              showCounter: false,
-            });
-          }, 100);
-        }
+        // Initialize custom lightbox after rendering
+        initializeCustomLightbox(artworks);
       }
     </script>
 
