@@ -1,10 +1,64 @@
-// Fixed bannerbar.js
+// Updated bannerbar.js - Compatible with art gallery layout
 
 // Create a global function to handle style application and layout
 window.applyPageStyles = function () {
   console.log("Applying page styles and fixing layout");
 
-  // Fix mainframe scroll
+  // Detect if we're on the art gallery page
+  const isArtGallery = window.location.pathname.includes("/art.html");
+
+  if (isArtGallery) {
+    console.log("Art Gallery page detected - applying specific layout");
+
+    // Find the right sideframe and camouflage it
+    const sideframes = document.querySelectorAll(".sideframe");
+    if (sideframes.length > 1) {
+      const rightSideframe = sideframes[sideframes.length - 1];
+      if (!rightSideframe.classList.contains("left-sideframe")) {
+        rightSideframe.classList.add("art-gallery-right-sideframe");
+        rightSideframe.style.width = "5px";
+        rightSideframe.style.borderLeft = "none";
+        rightSideframe.style.backgroundColor = "black";
+        rightSideframe.style.opacity = "0";
+        rightSideframe.style.pointerEvents = "none";
+      }
+    }
+
+    // Ensure mainframe has the proper width
+    const mainframe = document.querySelector(".mainframe");
+    if (mainframe) {
+      mainframe.style.width = "680px";
+      mainframe.style.overflowY = "scroll";
+    }
+  } else {
+    // Standard layout for other pages - restore normal dimensions
+    console.log("Regular page layout applied");
+
+    // Reset mainframe to standard width
+    const mainframe = document.querySelector(".mainframe");
+    if (mainframe) {
+      mainframe.style.width = "510px"; // Standard width for 3-column layout
+      mainframe.style.overflowY = "scroll";
+    }
+
+    // Reset all sideframes to normal state
+    const sideframes = document.querySelectorAll(".sideframe");
+    sideframes.forEach((frame) => {
+      // Remove any gallery-specific classes
+      frame.classList.remove("art-gallery-right-sideframe");
+
+      // Reset styles for right sideframe
+      if (!frame.classList.contains("left-sideframe")) {
+        frame.style.width = "175px";
+        frame.style.borderLeft = "1px solid white";
+        frame.style.backgroundColor = "";
+        frame.style.opacity = "1";
+        frame.style.pointerEvents = "auto";
+      }
+    });
+  }
+
+  // Fix mainframe scroll for all pages
   const mainframe = document.querySelector(".mainframe");
   if (mainframe) {
     mainframe.style.overflowY = "scroll";
@@ -100,6 +154,12 @@ function animateBanner() {
   banner.style.transform = "scaleX(1)";
 }
 
+// Apply page-specific layouts after each navigation
+function handlePageChange() {
+  console.log("Handling page change");
+  setTimeout(window.applyPageStyles, 100);
+}
+
 // Set up the initial event listeners when the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM loaded - setting up page");
@@ -118,20 +178,33 @@ document.addEventListener("DOMContentLoaded", function () {
     window.swup.hooks.on("content:replace", function () {
       console.log("Content replaced - animating banner");
       animateBanner();
+      handlePageChange();
     });
 
     // When history navigation happens (back/forward)
     window.swup.hooks.on("navigate:history", function () {
       console.log("History navigation - animating banner");
       animateBanner();
+      handlePageChange();
     });
 
     // After page transition is complete
     window.swup.hooks.on("page:view", function () {
       console.log("Page view - applying styles");
-      setTimeout(window.applyPageStyles, 50);
+      handlePageChange();
     });
   } else {
     console.warn("Swup not found on DOMContentLoaded");
   }
 });
+
+// Monitor for URL changes to catch any missed transitions
+let lastUrl = location.href;
+new MutationObserver(() => {
+  const url = location.href;
+  if (url !== lastUrl) {
+    lastUrl = url;
+    console.log("URL changed - applying layout fixes");
+    setTimeout(handlePageChange, 150);
+  }
+}).observe(document, { subtree: true, childList: true });

@@ -12,6 +12,8 @@
       .mainframe {
         overflow-y: scroll !important;
         height: 500px !important;
+        /* Wider mainframe for gallery */
+        width: 680px !important;
       }
 
       .sideframe {
@@ -20,26 +22,67 @@
         height: 500px !important;
       }
 
+      /* Special styling for right sideframe in art gallery only */
+      .art-gallery-right-sideframe {
+        width: 5px !important; /* Ultra thin right sidebar */
+        border-left: none !important; /* Remove left border to avoid double border */
+        background-color: black !important; /* Match background */
+        opacity: 0 !important; /* Make invisible */
+        pointer-events: none !important; /* Prevent interaction */
+      }
+
+      /* Ensure left sideframe is proper width */
+      .left-sideframe {
+        width: 175px !important;
+      }
+
+      /* IMPORTANT: Force dotted borders on sections */
       .left-section:not(.left-bottom-section) {
         border-bottom: 1px dashed white !important;
       }
 
-      /* Ensure text spacing works properly */
+      /* Force proper text spacing */
       p {
         margin-top: 0.5em !important;
         margin-bottom: 0.5em !important;
       }
 
-      /* Make sure gallery elements display correctly */
+      /* Year sections with forced dotted underlines */
+      .year-section h2 {
+        text-align: center !important;
+        border-bottom: 1px dashed white !important;
+        padding-bottom: 5px !important;
+        margin: 20px 0 15px 0 !important;
+      }
+
+      /* Gallery title */
+      .gallery-title {
+        text-align: center !important;
+        margin-bottom: 20px !important;
+        font-size: 1.5em !important;
+      }
+
+      /* Filter box styles */
+      .filters {
+        margin: 10px 0 !important;
+        padding: 10px !important;
+        border: 1px dashed #666 !important;
+        text-align: center !important;
+        min-height: 100px !important;
+      }
+
+      /* Thumbnail grid layout */
       .thumbnail-grid {
         display: grid !important;
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
-        gap: 10px !important;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+        gap: 15px !important;
+        margin-bottom: 25px !important;
       }
 
       /* Force thumbnail images to display properly */
       .thumbnail img {
-        display: block !important;
+        max-width: 200px !important;
+        max-height: 200px !important;
         width: 100% !important;
         height: auto !important;
         aspect-ratio: 1 / 1 !important;
@@ -62,13 +105,34 @@
 
     <main id="swup" class="transition-fade">
       <div class="mainwrapper">
+        <!-- Keep the original flex layout structure to match other pages -->
         <div style="display: flex">
+          <!-- Left sideframe -->
           <div class="sideframe left-sideframe">
-            <div class="left-section left-top-section filter-section">
+            <div
+              class="left-section left-top-section filter-section"
+              style="border-bottom: 1px dashed white !important"
+            >
               <center><h3 id="h3navmargins">Filters</h3></center>
               <div class="sidecontent">
-                <section class="filters">
-                  <p>(Filters coming soon)</p>
+                <section
+                  class="filters"
+                  style="
+                    margin: 10px 0 !important;
+                    padding: 10px !important;
+                    border: 1px dashed #666 !important;
+                    text-align: center !important;
+                    min-height: 100px !important;
+                  "
+                >
+                  <p
+                    style="
+                      margin-top: 0.5em !important;
+                      margin-bottom: 0.5em !important;
+                    "
+                  >
+                    (Filters coming soon)
+                  </p>
                 </section>
               </div>
             </div>
@@ -111,7 +175,12 @@
                     class="quick-links"
                     style="text-align: left; margin-top: 15px"
                   >
-                    <p>
+                    <p
+                      style="
+                        margin-top: 0.5em !important;
+                        margin-bottom: 0.5em !important;
+                      "
+                    >
                       <img
                         src="/aboutmeee.png"
                         style="height: 15px"
@@ -146,90 +215,156 @@
               </div>
             </div>
           </div>
-          <div class="mainframe">
-            <center>
-              <div class="maincontent gallery-content">
-                <h1>Art Gallery</h1>
 
-                <section class="artworks">
-                  <div class="year-section" id="year-2024">
-                    <h2>2024</h2>
-                    <div class="thumbnail-grid">
-                      <div class="thumbnail">
-                        <a
-                          href="/alternate.jpg"
-                          data-description="Alternate versions of me. Digitally drawn."
-                        >
-                          <img
-                            src="/alternate.jpg"
-                            alt="Alternate versions of me"
-                            title="Alternate versions of me"
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
+          <!-- Mainframe with wider width -->
+          <div class="mainframe" style="width: 680px !important">
+            <div class="maincontent gallery-content">
+              <h2
+                class="gallery-title"
+                style="
+                  text-align: center !important;
+                  margin-bottom: 20px !important;
+                  font-size: 1.5em !important;
+                "
+              >
+                luck's art archive
+              </h2>
+
+              <section class="artworks">
+                <div class="year-section" id="year-2025">
+                  <h2
+                    style="
+                      text-align: center !important;
+                      border-bottom: 1px dashed white !important;
+                      padding-bottom: 5px !important;
+                      margin: 20px 0 15px 0 !important;
+                    "
+                  >
+                    2025
+                  </h2>
+                  <div class="thumbnail-grid">
+                    <!-- Add 2025 thumbnails here when you have them -->
+                  </div>
+                </div>
+
+                <div class="year-section" id="year-2024">
+                  <h2
+                    style="
+                      text-align: center !important;
+                      border-bottom: 1px dashed white !important;
+                      padding-bottom: 5px !important;
+                      margin: 20px 0 15px 0 !important;
+                    "
+                  >
+                    2024
+                  </h2>
+                  <div class="thumbnail-grid">
+                    <div class="thumbnail">
+                      <a
+                        href="/alternate.jpg"
+                        data-description="Alternate versions of me. Digitally drawn."
+                      >
+                        <img
+                          src="/alternate.jpg"
+                          alt="Alternate versions of me"
+                          title="Alternate versions of me"
+                          loading="lazy"
+                        />
+                      </a>
                     </div>
                   </div>
+                </div>
 
-                  <div class="year-section" id="year-2023">
-                    <h2>2023</h2>
-                    <div class="thumbnail-grid">
-                      <div class="thumbnail">
-                        <a
-                          href="/GCZ0Eh2WQAAe5jO.png"
-                          data-description="I drew this for fun not even in a horny way. December 28."
-                        >
-                          <img
-                            src="/GCZ0Eh2WQAAe5jO.png"
-                            alt="Fun drawing Dec 28"
-                            title="Fun drawing Dec 28"
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
+                <div class="year-section" id="year-2023">
+                  <h2
+                    style="
+                      text-align: center !important;
+                      border-bottom: 1px dashed white !important;
+                      padding-bottom: 5px !important;
+                      margin: 20px 0 15px 0 !important;
+                    "
+                  >
+                    2023
+                  </h2>
+                  <div class="thumbnail-grid">
+                    <div class="thumbnail">
+                      <a
+                        href="/GCZ0Eh2WQAAe5jO.png"
+                        data-description="I drew this for fun not even in a horny way. December 28."
+                      >
+                        <img
+                          src="/GCZ0Eh2WQAAe5jO.png"
+                          alt="Fun drawing Dec 28"
+                          title="Fun drawing Dec 28"
+                          loading="lazy"
+                        />
+                      </a>
                     </div>
                   </div>
+                </div>
 
-                  <div class="year-section" id="year-2022">
-                    <h2>2022</h2>
-                    <div class="thumbnail-grid">
-                      <div class="thumbnail">
-                        <a
-                          href="/FSbEfd8XIAIqNnc.png"
-                          data-description="2022 drawing."
-                        >
-                          <img
-                            src="/FSbEfd8XIAIqNnc.png"
-                            alt="2022 Drawing"
-                            title="2022 Drawing"
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
+                <div class="year-section" id="year-2022">
+                  <h2
+                    style="
+                      text-align: center !important;
+                      border-bottom: 1px dashed white !important;
+                      padding-bottom: 5px !important;
+                      margin: 20px 0 15px 0 !important;
+                    "
+                  >
+                    2022
+                  </h2>
+                  <div class="thumbnail-grid">
+                    <div class="thumbnail">
+                      <a
+                        href="/FSbEfd8XIAIqNnc.png"
+                        data-description="2022 drawing."
+                      >
+                        <img
+                          src="/FSbEfd8XIAIqNnc.png"
+                          alt="2022 Drawing"
+                          title="2022 Drawing"
+                          loading="lazy"
+                        />
+                      </a>
                     </div>
                   </div>
+                </div>
 
-                  <div class="year-section" id="sketches">
-                    <h2>Sketches & Scraps</h2>
-                    <div class="thumbnail-grid">
-                      <div class="thumbnail">
-                        <a
-                          href="/sadbnuuy.jpg"
-                          data-description="Notebook sketch. no comment."
-                        >
-                          <img
-                            src="/sadbnuuy.jpg"
-                            alt="Sad Bnuuy Sketch"
-                            title="Sad Bnuuy Sketch"
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
+                <div class="year-section" id="sketches">
+                  <h2
+                    style="
+                      text-align: center !important;
+                      border-bottom: 1px dashed white !important;
+                      padding-bottom: 5px !important;
+                      margin: 20px 0 15px 0 !important;
+                    "
+                  >
+                    Sketches & Scraps
+                  </h2>
+                  <div class="thumbnail-grid">
+                    <div class="thumbnail">
+                      <a
+                        href="/sadbnuuy.jpg"
+                        data-description="Notebook sketch. no comment."
+                      >
+                        <img
+                          src="/sadbnuuy.jpg"
+                          alt="Sad Bnuuy Sketch"
+                          title="Sad Bnuuy Sketch"
+                          loading="lazy"
+                        />
+                      </a>
                     </div>
                   </div>
-                </section>
-              </div>
-            </center>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- Camouflaged right sideframe (empty but preserves layout structure) -->
+          <div class="sideframe art-gallery-right-sideframe">
+            <!-- Intentionally empty -->
           </div>
         </div>
       </div>
@@ -243,6 +378,102 @@
     <script>
       // Wait for DOM content to be loaded before initializing Swup
       document.addEventListener("DOMContentLoaded", function () {
+        // Force CSS reloading function
+        function forceStyleReload() {
+          // Create a duplicate of each stylesheet and replace the original
+          // This forces the browser to re-evaluate all CSS rules
+          const stylesheets = document.querySelectorAll(
+            'link[rel="stylesheet"]'
+          );
+          stylesheets.forEach((sheet) => {
+            // Skip if already processed
+            if (sheet.dataset.processed) return;
+
+            // Clone the stylesheet
+            const newLink = document.createElement("link");
+            newLink.rel = "stylesheet";
+            newLink.href = sheet.href;
+            newLink.dataset.processed = "true";
+
+            // Insert the new one and remove the old one
+            sheet.parentNode.insertBefore(newLink, sheet);
+
+            // Slight delay before removing the old one
+            setTimeout(() => {
+              sheet.parentNode.removeChild(sheet);
+            }, 50);
+          });
+        }
+
+        // Apply art gallery specific styles with inline style forcing
+        function applyArtGalleryStyles() {
+          // Check if we're on the art gallery page
+          if (window.location.pathname.includes("/art.html")) {
+            console.log("Art Gallery page detected - applying layout fixes");
+
+            // Force all dotted borders with inline styles
+            const leftSections = document.querySelectorAll(
+              ".left-section:not(.left-bottom-section)"
+            );
+            leftSections.forEach((section) => {
+              section.style.borderBottom = "1px dashed white";
+            });
+
+            // Force filter box styling
+            const filtersBox = document.querySelector(".filters");
+            if (filtersBox) {
+              filtersBox.style.margin = "10px 0";
+              filtersBox.style.padding = "10px";
+              filtersBox.style.border = "1px dashed #666";
+              filtersBox.style.textAlign = "center";
+              filtersBox.style.minHeight = "100px";
+            }
+
+            // Force all year section headings
+            const yearHeadings = document.querySelectorAll(".year-section h2");
+            yearHeadings.forEach((heading) => {
+              heading.style.textAlign = "center";
+              heading.style.borderBottom = "1px dashed white";
+              heading.style.paddingBottom = "5px";
+              heading.style.margin = "20px 0 15px 0";
+            });
+
+            // Force all paragraph margins
+            const paragraphs = document.querySelectorAll("p");
+            paragraphs.forEach((p) => {
+              p.style.marginTop = "0.5em";
+              p.style.marginBottom = "0.5em";
+            });
+
+            // Find the right sideframe and make it invisible
+            const sideframes = document.querySelectorAll(".sideframe");
+            if (sideframes.length > 1) {
+              const rightSideframe = sideframes[sideframes.length - 1];
+              if (!rightSideframe.classList.contains("left-sideframe")) {
+                rightSideframe.classList.add("art-gallery-right-sideframe");
+                rightSideframe.style.width = "5px";
+                rightSideframe.style.borderLeft = "none";
+                rightSideframe.style.backgroundColor = "black";
+                rightSideframe.style.opacity = "0";
+                rightSideframe.style.pointerEvents = "none";
+              }
+            }
+
+            // Ensure mainframe is the right size
+            const mainframe = document.querySelector(".mainframe");
+            if (mainframe) {
+              mainframe.style.width = "680px";
+              mainframe.style.overflowY = "scroll";
+            }
+
+            // Force reload CSS to ensure all styles are applied
+            forceStyleReload();
+          }
+        }
+
+        // Apply styles immediately
+        applyArtGalleryStyles();
+
         // Make swup a global variable so bannerbar.js can access it
         window.swup = new Swup({
           plugins: [
@@ -256,7 +487,31 @@
           containers: ["#swup"], // The container that will be replaced
         });
 
-        console.log("Swup initialized");
+        // Add event listeners for Swup events
+        window.swup.hooks.on("content:replace", function () {
+          // Wait a bit for DOM to update
+          setTimeout(applyArtGalleryStyles, 100);
+        });
+
+        window.swup.hooks.on("page:view", function () {
+          // Apply styles after view is complete
+          setTimeout(applyArtGalleryStyles, 100);
+        });
+
+        // Also set up a MutationObserver to detect DOM changes
+        const observer = new MutationObserver(function (mutations) {
+          if (window.location.pathname.includes("/art.html")) {
+            applyArtGalleryStyles();
+          }
+        });
+
+        // Start observing
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+
+        console.log("Swup initialized with enhanced art gallery layout fixes");
       });
     </script>
     <script src="/bannerbar.js"></script>
