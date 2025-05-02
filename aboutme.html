@@ -395,6 +395,254 @@
 
     <script src="/lloadinfo.js"></script>
     <script src="/time.js"></script>
-    <script src="/mobile-fix.js"></script>
+    <!-- Add this just before the closing </body> tag in each HTML file -->
+
+    <!-- Guaranteed Mobile Styles -->
+    <style id="guaranteed-mobile-styles">
+      @media screen and (max-width: 767px) {
+        /* Force critical styles with maximum specificity */
+        html body .mainwrapper > div {
+          display: block !important;
+          width: 100% !important;
+        }
+
+        html body .header02 {
+          display: none !important;
+        }
+
+        html body .sideframe,
+        html body .mainframe {
+          width: 100% !important;
+          float: none !important;
+          margin: 0 0 10px 0 !important;
+          max-width: 100% !important;
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+        }
+
+        html body .mainframe {
+          overflow-y: visible !important;
+          overflow-x: hidden !important;
+        }
+
+        /* Kins horizontal display in About Me */
+        html body .changelog {
+          width: 90% !important;
+          max-width: 300px !important;
+          margin: 0 auto 10px auto !important;
+          height: 120px !important;
+          overflow-y: auto !important;
+        }
+
+        html body .changelog marquee {
+          white-space: nowrap !important;
+          height: 80px !important;
+        }
+
+        html body .changelog img {
+          display: inline-block !important;
+          vertical-align: middle !important;
+          margin: 0 5px !important;
+        }
+
+        /* Match widths in About Me */
+        html body .likes-dislikes {
+          width: 90% !important;
+          max-width: 300px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        /* Art gallery fixes */
+        html body .filters {
+          margin: 10px auto !important;
+          width: 90% !important;
+          max-width: 300px !important;
+        }
+
+        html body .art-gallery-right-sideframe {
+          display: none !important;
+        }
+
+        html body .thumbnail-grid {
+          display: grid !important;
+          grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)) !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          gap: 5px !important;
+          box-sizing: border-box !important;
+          padding: 0 5px !important;
+        }
+
+        html body .year-section {
+          width: 100% !important;
+          max-width: 100% !important;
+          box-sizing: border-box !important;
+          padding: 0 5px !important;
+        }
+
+        html body .thumbnail {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        html body .thumbnail img {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 100% !important;
+          aspect-ratio: 1/1 !important;
+          object-fit: cover !important;
+        }
+      }
+    </style>
+
+    <!-- Guaranteed Mobile Script -->
+    <script>
+      (function () {
+        // Force mobile styles regardless of other scripts
+        function forceMobileStyles() {
+          if (window.innerWidth <= 767) {
+            // Detect page type
+            const path = window.location.pathname;
+            const isIndex = path === "/" || path.includes("index.html");
+            const isAboutMe = path.includes("aboutme.html");
+            const isArtGallery = path.includes("art.html");
+
+            // Force layout to stack vertically
+            const mainWrapper = document.querySelector(".mainwrapper > div");
+            if (mainWrapper) {
+              mainWrapper.style.cssText =
+                "display: block !important; width: 100% !important;";
+            }
+
+            // Hide header
+            const header = document.querySelector(".header02");
+            if (header) {
+              header.style.cssText = "display: none !important;";
+            }
+
+            // Fix all frames
+            document
+              .querySelectorAll(".sideframe, .mainframe")
+              .forEach((frame) => {
+                frame.style.cssText =
+                  "width: 100% !important; max-width: 100% !important; height: auto !important; min-height: 0 !important; margin: 0 0 10px 0 !important; overflow: visible !important;";
+              });
+
+            // Ensure mainframe has correct overflow
+            const mainframe = document.querySelector(".mainframe");
+            if (mainframe) {
+              mainframe.style.cssText +=
+                "overflow-x: hidden !important; overflow-y: visible !important;";
+            }
+
+            // Page-specific fixes
+            if (isIndex) {
+              // Fix changelog scrolling
+              const changelog = document.querySelector(".changelog");
+              if (changelog) {
+                changelog.style.cssText =
+                  "overflow-y: auto !important; height: 200px !important; width: 90% !important; max-width: 300px !important; margin: 0 auto 10px auto !important;";
+              }
+            }
+
+            if (isAboutMe) {
+              // Fix kins marquee
+              const changelog = document.querySelector(".changelog");
+              if (changelog) {
+                changelog.style.cssText =
+                  "width: 90% !important; max-width: 300px !important; margin: 0 auto 10px auto !important; height: 80px !important; overflow: hidden !important;";
+              }
+
+              const marquee = document.querySelector(".changelog marquee");
+              if (marquee) {
+                marquee.style.cssText =
+                  "white-space: nowrap !important; height: 80px !important;";
+              }
+
+              // Make likes box match
+              const likesBox = document.querySelector(".likes-dislikes");
+              if (likesBox) {
+                likesBox.style.cssText =
+                  "width: 90% !important; max-width: 300px !important; margin-left: auto !important; margin-right: auto !important;";
+              }
+            }
+
+            if (isArtGallery) {
+              // Center filter box
+              const filters = document.querySelector(".filters");
+              if (filters) {
+                filters.style.cssText =
+                  "margin: 10px auto !important; width: 90% !important; max-width: 300px !important;";
+              }
+
+              // Hide right sideframe
+              const rightSideframe = document.querySelector(
+                ".sideframe:not(.left-sideframe)"
+              );
+              if (rightSideframe) {
+                rightSideframe.style.cssText = "display: none !important;";
+              }
+
+              // Fix thumbnail grid
+              document.querySelectorAll(".thumbnail-grid").forEach((grid) => {
+                grid.style.cssText =
+                  "display: grid !important; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)) !important; width: 100% !important; max-width: 100% !important; gap: 5px !important; padding: 0 5px !important; box-sizing: border-box !important;";
+              });
+
+              // Fix year sections
+              document.querySelectorAll(".year-section").forEach((section) => {
+                section.style.cssText =
+                  "width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; padding: 0 5px !important;";
+              });
+
+              // Fix thumbnails
+              document.querySelectorAll(".thumbnail").forEach((thumb) => {
+                thumb.style.cssText =
+                  "width: 100% !important; max-width: 100% !important;";
+              });
+
+              document.querySelectorAll(".thumbnail img").forEach((img) => {
+                img.style.cssText =
+                  "width: 100% !important; height: auto !important; max-width: 100% !important; aspect-ratio: 1/1 !important; object-fit: cover !important;";
+              });
+            }
+          }
+        }
+
+        // Run immediately
+        forceMobileStyles();
+
+        // Run after any DOM changes (via MutationObserver)
+        if (window.MutationObserver) {
+          // Create an observer to watch for style changes
+          const observer = new MutationObserver(function () {
+            // Only proceed if we're on mobile
+            if (window.innerWidth <= 767) {
+              forceMobileStyles();
+            }
+          });
+
+          // Observe everything
+          observer.observe(document.body, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+            attributeFilter: ["style", "class"],
+          });
+        }
+
+        // Run when window resizes
+        window.addEventListener("resize", forceMobileStyles);
+
+        // Run again after page fully loads
+        window.addEventListener("load", function () {
+          forceMobileStyles();
+          // Double-check after a delay to catch any late script changes
+          setTimeout(forceMobileStyles, 500);
+        });
+      })();
+    </script>
   </body>
 </html>

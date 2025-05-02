@@ -1,50 +1,36 @@
-/* gallery.css - Improved with no gap between columns */
+/* gallery.css - Simplified with mobile fixes */
 
-/* Make sure index.css is linked first in HTML */
-
-/* Define CSS Variables */
+/* === Variables === */
 :root {
-  --thumbnail-size: 90px; /* Thumbnail size (max 200px) */
+  --thumbnail-size: 90px;
 }
 
-/* === Two-Column Art Gallery Layout === */
-
-/* Main container */
+/* === Desktop Gallery Layout === */
 .mainwrapper {
   max-width: 860px;
   margin: 0 auto;
 }
 
-/* Flex container for the two columns */
-.mainwrapper > div {
-  display: flex !important;
-  width: 860px !important;
-  margin: 0 auto !important;
-  gap: 0 !important; /* Remove any gap between columns */
-}
-
 /* Left sideframe */
 .sideframe.left-sideframe {
-  width: 175px !important;
-  flex-shrink: 0 !important; /* Prevent shrinking */
-  flex-basis: 175px !important; /* Set base width */
-  height: 500px !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  margin: 0 !important; /* Remove margins */
+  width: 175px;
+  flex-shrink: 0;
+  flex-basis: 175px;
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Mainframe taking remaining space */
+/* Mainframe */
 .mainframe {
-  width: 685px !important; /* 860px - 175px = 685px */
-  flex-grow: 1 !important;
-  flex-basis: 685px !important;
-  overflow-y: scroll !important;
-  height: 500px !important;
-  margin: 0 !important; /* Remove margins */
-  border-left: none !important; /* Remove left border to avoid double borders */
+  width: 685px;
+  flex-grow: 1;
+  flex-basis: 685px;
+  overflow-y: scroll;
+  height: 500px;
+  border-left: none;
 }
 
 /* Gallery title */
@@ -57,19 +43,17 @@
 
 /* Content container */
 .gallery-content {
-  width: auto !important;
-  padding: 0 15px !important;
-  margin: 10px !important;
+  width: auto;
+  padding: 0 15px;
+  margin: 10px;
 }
-
-/* === Year Sections === */
 
 /* Year section headings */
 .year-section h2 {
   font-size: 1.1em;
   font-weight: normal;
   text-align: center;
-  border-bottom: 1px dashed white !important;
+  border-bottom: 1px dashed white;
   padding-bottom: 5px;
   margin: 20px 0 15px 0;
 }
@@ -79,17 +63,12 @@
   margin-bottom: 25px;
 }
 
-/* === Thumbnail Grid === */
-
 /* Grid layout */
 .thumbnail-grid {
-  display: grid !important;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(var(--thumbnail-size), 1fr)
-  ) !important;
-  gap: 15px !important;
-  margin-bottom: 20px !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--thumbnail-size), 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 /* Thumbnail containers */
@@ -112,31 +91,29 @@
 
 /* Thumbnail images */
 .thumbnail img {
-  display: block !important;
-  width: 100% !important;
-  max-width: 90px !important; /* Match --thumbnail-size */
-  max-height: 90px !important;
-  height: auto !important;
-  aspect-ratio: 1 / 1 !important;
-  object-fit: cover !important;
+  display: block;
+  width: 100%;
+  max-width: 90px;
+  max-height: 90px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
-
-/* === Left Sidebar Structure === */
 
 /* Left section containers */
 .left-section {
-  border-bottom: 1px dashed white !important;
+  border-bottom: 1px dashed white;
   padding-bottom: 10px;
   margin-bottom: 10px;
   flex-grow: 1;
 }
 
 .left-section:not(.left-bottom-section) {
-  border-bottom: 1px dashed white !important;
+  border-bottom: 1px dashed white;
 }
 
 .left-section:last-child {
-  border-bottom: none !important;
+  border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -152,8 +129,6 @@
   width: auto;
 }
 
-/* === Filters === */
-
 /* Filter container */
 .filters {
   margin: 10px 0;
@@ -163,13 +138,11 @@
   min-height: 100px;
 }
 
-/* === Quick Links === */
-
 /* Quick links container */
 .quick-links p {
   line-height: 1.8;
   margin: 0;
-  text-align: left !important;
+  text-align: left;
 }
 
 /* Quick link icons */
@@ -178,8 +151,65 @@
   vertical-align: middle;
 }
 
-/* === Responsive Styles === */
+/* === Mobile Gallery Styles === */
+@media screen and (max-width: 767px) {
+  /* Force columns to stack */
+  .mainwrapper > div {
+    display: block !important;
+    width: 100% !important;
+  }
 
-/* Medium screens */
-/* Medium screens (tablets, small laptops) */
-/* Simple mobile styles - Add this to the bottom of each of your CSS files */
+  /* Fix all frames */
+  .sideframe,
+  .mainframe {
+    width: 100% !important;
+    float: none !important;
+    margin: 0 0 10px 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Hide right sideframe */
+  .sideframe:not(.left-sideframe),
+  .art-gallery-right-sideframe {
+    display: none !important;
+  }
+
+  /* Center filter box */
+  .filters {
+    width: 90% !important;
+    max-width: 280px !important;
+    margin: 10px auto !important;
+  }
+
+  /* Adjust thumbnail grid for mobile */
+  .thumbnail-grid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)) !important;
+    gap: 8px !important;
+    padding: 0 5px !important;
+  }
+
+  /* Force content containers to fit screen */
+  .maincontent,
+  .gallery-content,
+  .artworks,
+  .year-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Make thumbnails responsive */
+  .thumbnail {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .thumbnail img {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
