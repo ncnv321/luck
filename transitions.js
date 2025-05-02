@@ -275,3 +275,89 @@ function applyPageSpecificStyles() {
     }
   }
 }
+
+// Detect current page and set data-page attribute
+document.addEventListener("DOMContentLoaded", function () {
+  // Set data-page attribute based on current URL
+  const path = window.location.pathname;
+  if (path === "/" || path.includes("index.html")) {
+    document.documentElement.setAttribute("data-page", "index");
+  } else if (path.includes("aboutme.html")) {
+    document.documentElement.setAttribute("data-page", "aboutme");
+  } else if (path.includes("art.html")) {
+    document.documentElement.setAttribute("data-page", "art");
+  }
+});
+
+// Fix art gallery mobile display issues
+function fixArtGalleryMobile() {
+  if (
+    window.innerWidth <= 767 &&
+    window.location.pathname.includes("art.html")
+  ) {
+    // Force all elements to stay within viewport
+    const container = document.querySelector(".mainframe");
+    if (container) {
+      container.style.width = window.innerWidth - 10 + "px";
+      container.style.maxWidth = "100%";
+      container.style.overflowX = "hidden";
+    }
+
+    // Fix any gallery content that might still be too wide
+    document
+      .querySelectorAll(".year-section, .thumbnail-grid")
+      .forEach((el) => {
+        el.style.width = "100%";
+        el.style.maxWidth = "100%";
+        el.style.overflowX = "hidden";
+      });
+
+    // Fix thumbnail grid to fit screen
+    const thumbnailGrid = document.querySelectorAll(".thumbnail-grid");
+    thumbnailGrid.forEach((grid) => {
+      grid.style.width = "100%";
+      grid.style.maxWidth = "100%";
+      grid.style.display = "grid";
+      grid.style.gridTemplateColumns = "repeat(auto-fill, minmax(60px, 1fr))";
+      grid.style.gap = "8px";
+    });
+  }
+}
+
+// Fix index page sidebar height
+function fixIndexSidebarHeight() {
+  if (
+    window.innerWidth <= 767 &&
+    (window.location.pathname === "/" ||
+      window.location.pathname.includes("index.html"))
+  ) {
+    const sidebar = document.querySelector(
+      ".mainwrapper > div > .sideframe:first-child"
+    );
+    if (sidebar) {
+      sidebar.style.height = "auto";
+      sidebar.style.minHeight = "auto";
+    }
+  }
+}
+
+// Fix changelog scrolling
+function fixChangelogScroll() {
+  const changelog = document.querySelector(".changelog");
+  if (changelog) {
+    changelog.style.overflowY = "auto";
+    changelog.style.webkitOverflowScrolling = "touch";
+  }
+}
+
+// Call all fixes on page load and resize
+window.addEventListener("DOMContentLoaded", function () {
+  fixArtGalleryMobile();
+  fixIndexSidebarHeight();
+  fixChangelogScroll();
+});
+
+window.addEventListener("resize", function () {
+  fixArtGalleryMobile();
+  fixIndexSidebarHeight();
+});
