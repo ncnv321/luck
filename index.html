@@ -6,6 +6,50 @@
     <link href="/index.css" rel="stylesheet" type="text/css" media="all" />
     <title>Home | luck</title>
     <link rel="icon" type="image/x-icon" href=" " />
+    <style>
+      /* Critical styles for immediate application */
+      .mainframe {
+        overflow-y: scroll !important;
+        height: 500px !important;
+      }
+
+      .sideframe {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: 500px !important;
+      }
+
+      .left-section:not(.left-bottom-section) {
+        border-bottom: 1px dashed white !important;
+      }
+
+      /* Ensure text spacing works properly */
+      p {
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+      }
+
+      /* Make sure gallery elements display correctly */
+      .thumbnail-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+        gap: 10px !important;
+      }
+
+      /* Force thumbnail images to display properly */
+      .thumbnail img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        object-fit: cover !important;
+      }
+
+      /* Hide the Swup progress bar */
+      .swup-progress-bar {
+        display: none !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -136,63 +180,24 @@
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://unpkg.com/@swup/progress-plugin@3"></script>
     <script>
-      window.swup = new Swup({
-        plugins: [
-          new SwupProgressPlugin({
-            showProgressBar: false, // This disables the default progress bar
-          }),
-        ],
-        cache: false,
-        animateHistoryBrowsing: true, // Forces animation on history navigation
-        animationSelector: '[class*="transition-"]',
-        containers: ["#swup"],
-      });
+      // Wait for DOM content to be loaded before initializing Swup
+      document.addEventListener("DOMContentLoaded", function () {
+        // Make swup a global variable so bannerbar.js can access it
+        window.swup = new Swup({
+          plugins: [
+            new SwupProgressPlugin({
+              showProgressBar: false, // Disable default progress bar
+            }),
+          ],
+          cache: false, // Disable content caching for consistent behavior
+          animateHistoryBrowsing: true, // Force animation on history navigation
+          animationSelector: '[class*="transition-"]', // Select elements with transition class
+          containers: ["#swup"], // The container that will be replaced
+        });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("Page loaded, running initial animation");
-
-        // Force animation on initial page load
-        const banner = document.querySelector(".banner");
-        if (banner) {
-          // First set initial state
-          banner.style.transition = "none";
-          banner.style.transform = "scaleX(0.05)";
-
-          // Force reflow
-          void banner.offsetWidth;
-
-          // Then animates it to full width
-          banner.style.transition = "transform 1.2s ease-out";
-          banner.style.transform = "scaleX(1)";
-        }
-      });
-
-      // Handle page transitions and history navigation
-      window.swup.hooks.on("content:replace", () => {
-        const banner = document.querySelector(".banner");
-        if (banner) {
-          // Reset to initial state
-          banner.style.transition = "none";
-          banner.style.transform = "scaleX(0.05)";
-
-          // Force reflow
-          void banner.offsetWidth;
-
-          // Animate to full width
-          banner.style.transition = "transform 1.2s ease-out";
-          banner.style.transform = "scaleX(1)";
-        }
-      });
-
-      // Initialize page scripts after each navigation
-      window.swup.hooks.on("page:view", () => {
-        setTimeout(() => {
-          // Re-initialize your page scripts here
-          initializePageScripts();
-        }, 100);
+        console.log("Swup initialized");
       });
     </script>
-
     <script src="/bannerbar.js"></script>
   </body>
 </html>

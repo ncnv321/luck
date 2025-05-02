@@ -6,15 +6,28 @@
 :root {
   --thumbnail-size: 120px; /* Default thumbnail size */
   /* Copy banner variables from index.css if not already global */
-  --banner-shrink-duration: 0.1s;
+  --banner-shrink-duration: 1s;
   --banner-expand-duration: 1.2s;
+}
+
+.transition-fade {
+  transition: opacity 0.4s ease-in-out !important;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0 !important;
+}
+
+p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
 }
 
 /* Override mainframe width */
 div.mainframe {
   width: 685px; /* 860px - 175px = 685px */
-  overflow-y: scroll; /* Ensure mainframe content scrolls */
-  height: 500px; /* Keep consistent fixed height */
+  overflow-y: scroll !important; /* Ensure mainframe content scrolls */
+  height: 500px !important; /* Keep consistent fixed height */
 }
 
 /* Style the content area within the mainframe */
@@ -35,7 +48,7 @@ div.mainframe {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Align items to top */
-  height: 500px; /* Match other frames */
+  height: 500px !important; /* Match other frames */
 }
 
 .left-section {
@@ -44,6 +57,11 @@ div.mainframe {
   margin-bottom: 10px;
   /* Remove flex-grow/flex-basis if using fixed heights or allow natural height */
 }
+
+.left-section:not(.left-bottom-section) {
+  border-bottom: 1px dashed white !important;
+}
+
 .left-section:last-child {
   border-bottom: none;
   margin-bottom: 0;
@@ -98,7 +116,7 @@ div.mainframe {
 
 /* Thumbnail Grid Styling */
 .thumbnail-grid {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(
     auto-fill,
     minmax(var(--thumbnail-size), 1fr)
@@ -128,6 +146,18 @@ div.mainframe {
 /* If index.css IS loaded first, these might not be needed */
 /* .banner { ... } */
 /* html.is-changing .banner.is-loading { ... } */
+
+/* Ensure banner animation has priority */
+.banner {
+  transition-property: transform !important;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) !important;
+}
+
+/* Fix content spacing issues during transitions */
+html.is-changing #swup * {
+  transition: none !important;
+  animation: none !important;
+}
 
 /* Responsive Styles */
 @media screen and (max-width: 600px) {

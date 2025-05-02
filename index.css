@@ -71,10 +71,12 @@ div.banner {
   max-width: 100%;
   margin: 3px auto;
   /* Define transitions for transform and potentially opacity */
-  transition: transform var(--banner-shrink-duration) ease-in,
-    opacity 0.2s ease-in;
+  transition: transform var(--banner-shrink-duration) ease-out,
+    opacity 0.2s ease-out;
   /* Ensure it's interactable by default */
   pointer-events: auto;
+  transition-property: transform !important;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) !important;
 }
 
 /* State when loading: Animate width from small size to full */
@@ -83,8 +85,13 @@ html.is-changing .banner.is-loading {
   /* Don't set transform here - let JS control the animation */
   transition-property: transform; /* Only animate transform during loading */
   transition-duration: var(--banner-expand-duration);
-  transition-timing-function: ease-in; /* Smoother easing */
+  transition-timing-function: ease-out; /* Smoother easing */
   pointer-events: none; /* Disable clicks while loading */
+}
+
+html.is-changing #swup * {
+  transition: none !important;
+  animation: none !important;
 }
 
 /* Ensure swup progress bar is hidden */
@@ -106,20 +113,21 @@ html.is-changing .banner.is-loading {
 
 div.sideframe {
   width: 175px;
-  height: 500px;
+  height: 500px !important;
   border: 1px solid white;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   box-sizing: border-box;
 }
 
 div.mainframe {
   width: 510px;
-  height: 500px;
+  height: 500px !important;
   border: 1px solid white;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  overflow-y: scroll !important;
 }
 
 div.sidecontent {
@@ -158,6 +166,11 @@ h2,
 h3 {
   margin: 10px 0;
   text-align: center;
+}
+
+p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
 }
 
 #h3navmargins {
@@ -225,11 +238,19 @@ h3 {
 /* ========================== */
 
 #swup {
-  transition: opacity 0.4s ease-in;
+  transition: opacity 0.4s ease-out;
 }
 
 html.is-changing .transition-fade {
   opacity: 0;
+}
+
+.transition-fade {
+  transition: opacity 0.4s ease-in-out !important;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0 !important;
 }
 
 .swup-progress-bar {

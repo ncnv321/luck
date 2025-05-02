@@ -83,9 +83,11 @@ footer {
   max-width: 100%;
   margin: 3px auto;
   /* Define transitions for transform and potentially opacity */
-  transition: transform 0.3s ease-in, opacity 0.2s ease-in;
+  transition: transform 0.3s ease-out, opacity 0.2s ease-out;
   /* Ensure it's interactable by default */
   pointer-events: auto;
+  transition-property: transform !important;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 0.1, 1) !important;
 }
 
 /* State when loading: Animate width from small size to full */
@@ -94,8 +96,17 @@ html.is-changing .banner.is-loading {
   /* Don't set transform here - let JS control the animation */
   transition-property: transform; /* Only animate transform during loading */
   transition-duration: 1.2s; /* Adjust duration as needed */
-  transition-timing-function: ease-in; /* Smoother easing */
+  transition-timing-function: ease-out; /* Smoother easing */
   pointer-events: none; /* Disable clicks while loading */
+}
+
+html.is-changing #swup * {
+  transition: none !important;
+  animation: none !important;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0 !important;
 }
 
 /* Ensure swup progress bar is hidden */
@@ -118,11 +129,11 @@ html.is-changing .banner.is-loading {
   width: 175px;
   /* height: 500px; */ /* Use min-height for flexibility */
   /* min-height: 500px; */ /* REMOVE this or comment out */
-  height: 500px; /* ADD THIS - Restore fixed height from index.html */
+  height: 500px !important; /* ADD THIS - Restore fixed height from index.html */
   border: 1px solid white;
   box-sizing: border-box; /* Include border in width */
-  overflow-y: auto; /* ADD THIS - Allow sideframe content to scroll if needed */
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto !important; /* ADD THIS - Allow sideframe content to scroll if needed */
+  overflow-x: hidden !important; /* Prevent horizontal scroll */
 }
 
 .mainframe {
@@ -130,11 +141,11 @@ html.is-changing .banner.is-loading {
   width: 510px; /* Adjusted width: 860 (total) - 175*2 (sides) = 510 - Keep this */
   /* height: 500px; */ /* Use min-height for flexibility */
   /* min-height: 500px; */ /* REMOVE this or comment out */
-  height: 500px; /* ADD THIS - Restore fixed height from index.html */
+  height: 500px !important; /* ADD THIS - Restore fixed height from index.html */
   border: 1px solid white;
   position: relative; /* Needed if children use absolute positioning */
   overflow-x: hidden;
-  overflow-y: scroll; /* Keep scroll for main content */
+  overflow-y: scroll !important; /* Keep scroll for main content */
   box-sizing: border-box; /* Include border in width */
 }
 
@@ -196,9 +207,26 @@ html.is-changing .banner.is-loading {
   padding-bottom: 0;
 }
 
+.left-section:not(.left-bottom-section) {
+  border-bottom: 1px dashed white !important;
+}
+
 .left-section .sidecontent {
   margin: 5px; /* Inner margin for section content */
   width: auto;
+}
+
+p {
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+.thumbnail-grid {
+  display: grid !important;
+}
+
+.transition-fade {
+  transition: opacity 0.4s ease-in-out !important;
 }
 
 /* Quick Links (Bottom Left) */
