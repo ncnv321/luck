@@ -172,10 +172,7 @@
   }
 }
 
-/* ===== JavaScript Fix Helper ===== */
-/* This script will be added to ensure mobile styles take precedence */
 @media screen and (max-width: 767px) {
-  /* Add !important to override any inline styles set by JavaScript */
   [style*="width"] {
     max-width: 100% !important;
   }
@@ -185,9 +182,7 @@
   }
 }
 
-/* Specific attribute selectors to override common JS properties */
 @media screen and (max-width: 767px) {
-  /* Keep images from breaking layout */
   img {
     max-width: 100% !important;
     height: auto !important;

@@ -33,7 +33,7 @@ a:hover {
   margin: auto;
 }
 
-/* Header placeholder - Style if needed */
+/* Header placeholder */
 div.header02 {
   width: 438px;
   height: 155px;
@@ -107,7 +107,6 @@ footer {
   margin: 10px;
 }
 
-/* Clearfix for floated elements inside maincontent */
 .maincontent::after {
   content: "";
   display: table;
@@ -144,7 +143,6 @@ footer {
   flex-direction: column;
 }
 
-/* Remove bottom border from the last section */
 .sideframe.left-sideframe .left-section:last-child {
   border-bottom: none;
   margin-bottom: 0;
@@ -296,12 +294,3 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(150, 150, 150);
 }
-
-/* ===================== */
-/* == Responsive Styles == */
-/* ===================== */
-
-/* Medium screens (tablets, small laptops) */
-/* Simple mobile styles - Add this to the bottom of each of your CSS files */
-
-/* Mobile-specific improvements - Add to the bottom of your CSS files */

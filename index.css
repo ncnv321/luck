@@ -35,7 +35,7 @@ a:hover {
 
 div.header02 {
   width: 438px;
-  height: 215px;
+  height: 155px; /* ALWAYS 155! Keep consistency. */
   margin: 5px auto;
 }
 
@@ -183,6 +183,3 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(150, 150, 150);
 }
-
-/* Medium screens (tablets, small laptops) */
-/* Simple mobile styles - Add this to the bottom of each of your CSS files */

@@ -1,7 +1,3 @@
-/**
- * aboutme-mobile.js - Simplified fix for About Me page
- */
-
 // Create and insert styles immediately
 (function () {
   // Create style element
@@ -103,9 +99,7 @@
     });
   }
 
-  // Apply direct styles to elements as they appear
   function fixElements() {
-    // Fix icon sizes immediately
     const icons = document.querySelectorAll(".quick-links img");
     icons.forEach((icon) => {
       icon.style.setProperty("height", "15px", "important");
@@ -113,14 +107,12 @@
       icon.style.setProperty("max-height", "15px", "important");
     });
 
-    // Fix changelog box
     const changelog = document.querySelector(".changelog");
     if (changelog && window.innerWidth <= 767) {
       changelog.style.setProperty("height", "80px", "important");
       changelog.style.setProperty("overflow", "hidden", "important");
     }
 
-    // Fix marquee
     const marquee = document.querySelector(".changelog marquee");
     if (marquee && window.innerWidth <= 767) {
       marquee.style.setProperty("height", "80px", "important");
@@ -129,7 +121,6 @@
     }
   }
 
-  // Run on load and whenever DOM changes
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", fixElements);
   } else {
@@ -139,7 +130,6 @@
   window.addEventListener("load", fixElements);
   window.addEventListener("resize", fixElements);
 
-  // Try to run multiple times during page load
   setTimeout(fixElements, 0);
   setTimeout(fixElements, 100);
   setTimeout(fixElements, 500);
