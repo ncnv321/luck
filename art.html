@@ -158,7 +158,6 @@
 
       /* Force captions to be visible */
       .sl-caption {
-        display: block !important;
         opacity: 1 !important;
         z-index: 10002 !important;
         background-color: rgba(0, 0, 0, 0.8) !important;
@@ -790,174 +789,174 @@
       /* Custom caption styles */
       .custom-caption {
         position: fixed;
-        bottom: 0;
+        bottom: 30px;
         left: 0;
         right: 0;
         background-color: rgba(0, 0, 0, 0.8);
         color: white;
         padding: 15px;
         text-align: left;
-        z-index: 10005; /* Above everything in the lightbox */
+        z-index: 10005;
         font-family: "MS Gothic", "MS PGothic", sans-serif;
         line-height: 1.5;
-        white-space: pre-line; /* Preserve line breaks */
-        display: none; /* Hidden by default */
+        white-space: pre-line;
+        display: none;
         max-width: 80%;
-        margin: 0 auto 30px auto;
+        margin: 0 auto;
         border-radius: 5px;
       }
 
-      /* Override SimpleLightbox styles to make sure our captions work */
-      .sl-overlay {
-        z-index: 10000 !important;
-      }
-
-      .sl-wrapper {
-        z-index: 10001 !important;
-      }
-
-      .sl-image {
-        z-index: 10002 !important;
-      }
-
-      .sl-close {
-        z-index: 10003 !important;
-      }
-
-      /* Hide the original caption */
+      /* Hide the original SimpleLightbox caption */
       .sl-caption {
         display: none !important;
       }
     </style>
 
     <script>
-      // Wait for the DOM to be fully loaded
-      document.addEventListener("DOMContentLoaded", function () {
-        // Create a custom caption element
-        const customCaption = document.createElement("div");
-        customCaption.className = "custom-caption";
-        document.body.appendChild(customCaption);
+      // Wait for page to be fully loaded
+      window.addEventListener("load", function () {
+        console.log("Loading custom caption solution");
 
-        // Add event listeners to all thumbnail links
-        document.querySelectorAll(".thumbnail a").forEach((link) => {
-          link.addEventListener("click", function (e) {
-            // Get the description from the data attributes
-            let captionText = "";
-
-            // Try to get data from various attributes
-            if (this.dataset.description) {
-              captionText = this.dataset.description;
-            } else if (this.dataset.caption) {
-              captionText = this.dataset.caption;
-            } else if (this.getAttribute("title")) {
-              captionText = this.getAttribute("title");
-            } else if (this.dataset.artworkJson) {
-              try {
-                const artworkData = JSON.parse(this.dataset.artworkJson);
-
-                // Build caption from artwork data
-                if (artworkData.title) {
-                  captionText = artworkData.title;
-                }
-
-                if (artworkData.description) {
-                  captionText +=
-                    (captionText ? "\n\n" : "") + artworkData.description;
-                }
-
-                if (artworkData.medium) {
-                  captionText +=
-                    (captionText ? "\n\n" : "") +
-                    "Medium: " +
-                    artworkData.medium;
-                }
-
-                if (artworkData.characters && artworkData.characters.length) {
-                  captionText +=
-                    (captionText ? "\n\n" : "") +
-                    "Characters: " +
-                    artworkData.characters.join(", ");
-                }
-              } catch (e) {
-                console.error("Error parsing artwork data:", e);
-              }
-            }
-
-            // Store caption text for later use
-            this.setAttribute("data-custom-caption", captionText);
-          });
-        });
-
-        // Create a MutationObserver to detect when SimpleLightbox is opened
-        const observer = new MutationObserver(function (mutations) {
-          for (const mutation of mutations) {
-            if (mutation.addedNodes.length) {
-              // Check if SimpleLightbox has been added to the DOM
-              if (document.querySelector(".sl-overlay")) {
-                showCustomCaption();
-              }
-            }
-
-            if (mutation.removedNodes.length) {
-              // Check if SimpleLightbox has been removed from the DOM
-              if (!document.querySelector(".sl-overlay")) {
-                hideCustomCaption();
-              }
-            }
+        // Delay execution to ensure SimpleLightbox is initialized
+        setTimeout(function () {
+          // Create our custom caption element
+          let customCaption = document.getElementById("custom-caption");
+          if (!customCaption) {
+            customCaption = document.createElement("div");
+            customCaption.id = "custom-caption";
+            customCaption.className = "custom-caption";
+            document.body.appendChild(customCaption);
+            console.log("Created custom caption element");
           }
-        });
 
-        // Start observing the document body for changes
-        observer.observe(document.body, { childList: true, subtree: true });
+          // Check if we already have a SimpleLightbox instance
+          if (window.lightboxInstance) {
+            // Register our custom events to the existing lightbox
+            setupCustomCaptions(window.lightboxInstance);
+          } else if (typeof SimpleLightbox !== "undefined") {
+            // Create a new instance with our custom events
+            window.lightboxInstance = new SimpleLightbox(".thumbnail a", {
+              captionPosition: "bottom",
+              closeOnOverlayClick: true,
+              disableScroll: false,
+            });
 
-        // Function to show our custom caption
-        function showCustomCaption() {
-          // Find the current image in the lightbox
-          const currentImage = document.querySelector(".sl-image img");
-          if (!currentImage) return;
+            setupCustomCaptions(window.lightboxInstance);
+          }
 
-          // Find the original thumbnail link that opened this image
-          const thumbnailLinks = document.querySelectorAll(".thumbnail a");
-          let captionText = "";
+          function setupCustomCaptions(lightbox) {
+            console.log("Setting up custom captions");
 
-          thumbnailLinks.forEach((link) => {
-            // Check if this is the link for the current image
-            if (
-              link.href === currentImage.src ||
-              currentImage.src.startsWith(link.href) ||
-              link.href.includes(currentImage.src.split("?")[0])
-            ) {
-              // Get caption from our custom attribute
-              captionText = link.getAttribute("data-custom-caption") || "";
+            // Add event handler for when an image is shown
+            lightbox.on("shown.simplelightbox", function () {
+              updateCustomCaption();
+            });
 
-              // If we couldn't find it there, try other attributes
+            // Add event handler for when navigating between images
+            lightbox.on("changed.simplelightbox", function () {
+              updateCustomCaption();
+            });
+
+            // Add event handler for when lightbox is closed
+            lightbox.on("closed.simplelightbox", function () {
+              customCaption.style.display = "none";
+            });
+          }
+
+          // Function to update the custom caption
+          function updateCustomCaption() {
+            console.log("Updating custom caption");
+
+            // Find the current image in the lightbox
+            const currentImage = document.querySelector(".sl-image img");
+            if (!currentImage) return;
+
+            // Get the source URL of the current image
+            const currentSrc = currentImage.src.split("?")[0];
+
+            // Find the matching thumbnail link
+            const matchingLink = Array.from(
+              document.querySelectorAll(".thumbnail a")
+            ).find((link) => {
+              const linkHref = link.href.split("?")[0];
+              return (
+                linkHref === currentSrc ||
+                currentSrc.includes(linkHref) ||
+                linkHref.includes(currentSrc)
+              );
+            });
+
+            if (matchingLink) {
+              console.log("Found matching thumbnail link");
+
+              // Try to get caption data from various attributes
+              let captionText = "";
+
+              // First try artworkJson if available
+              if (matchingLink.dataset.artworkJson) {
+                try {
+                  const artworkData = JSON.parse(
+                    matchingLink.dataset.artworkJson
+                  );
+
+                  // Build caption from artwork data
+                  if (artworkData.title) {
+                    captionText = artworkData.title;
+                  }
+
+                  if (artworkData.description) {
+                    captionText +=
+                      (captionText ? "\n\n" : "") + artworkData.description;
+                  }
+
+                  if (artworkData.medium) {
+                    captionText +=
+                      (captionText ? "\n\n" : "") +
+                      "Medium: " +
+                      artworkData.medium;
+                  }
+
+                  if (artworkData.characters && artworkData.characters.length) {
+                    captionText +=
+                      (captionText ? "\n\n" : "") +
+                      "Characters: " +
+                      artworkData.characters.join(", ");
+                  }
+
+                  console.log("Built caption from artworkJson");
+                } catch (e) {
+                  console.error("Error parsing artwork data:", e);
+                }
+              }
+
+              // Try other attributes if we couldn't build from artworkJson
               if (!captionText) {
-                if (link.dataset.description) {
-                  captionText = link.dataset.description;
-                } else if (link.getAttribute("title")) {
-                  captionText = link.getAttribute("title");
-                }
+                captionText =
+                  matchingLink.dataset.description ||
+                  matchingLink.dataset.caption ||
+                  matchingLink.getAttribute("title") ||
+                  "";
+                console.log("Got caption from other attributes");
               }
+
+              // Update and show the custom caption if we have text
+              if (captionText) {
+                customCaption.textContent = captionText;
+                customCaption.style.display = "block";
+                console.log(
+                  "Showing caption:",
+                  captionText.substring(0, 50) + "..."
+                );
+              } else {
+                customCaption.style.display = "none";
+                console.log("No caption text found");
+              }
+            } else {
+              console.log("No matching thumbnail link found");
+              customCaption.style.display = "none";
             }
-          });
-
-          // If we found a caption, show it
-          if (captionText) {
-            customCaption.textContent = captionText;
-            customCaption.style.display = "block";
           }
-        }
-
-        // Function to hide our custom caption
-        function hideCustomCaption() {
-          customCaption.style.display = "none";
-        }
-
-        // Also try to detect SimpleLightbox navigation events
-        document.addEventListener("click", function (e) {
-          // Wait a moment for the new image to load
-          setTimeout(showCustomCaption, 300);
-        });
+        }, 1000); // Wait 1 second to ensure everything is loaded
       });
     </script>
   </body>
