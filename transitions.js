@@ -1,7 +1,3 @@
-/**
- * transitions.js - Complete page fade transitions for luck's website
- */
-
 // Execute as soon as possible
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM loaded - initializing fade transitions");
@@ -28,9 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", handleLinkClicks);
 });
 
-/**
- * Create the fade overlay element
- */
 function createFadeOverlay() {
   // Create fade overlay if it doesn't exist
   if (!document.getElementById("fade-overlay")) {

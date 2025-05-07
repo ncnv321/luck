@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/index.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/mobile.css" rel="stylesheet" type="text/css" media="all" />
+    <title>Journal | luck</title>
+    <link rel="icon" type="image/x-icon" href=" " />
+
+    <script src="/transitions.js"></script>
+
+    <style>
+      .mainframe {
+        overflow-y: scroll !important;
+        height: 500px !important;
+      }
+
+      .sideframe {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: 500px !important;
+      }
+
+      .left-sideframe {
+        width: 175px !important;
+      }
+
+      .left-section:not(.left-bottom-section) {
+        border-bottom: 1px dashed white !important;
+      }
+
+      p {
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+      }
+
+      .journal-entry {
+        margin-bottom: 30px;
+        padding: 0 15px;
+      }
+
+      .journal-entry h3 {
+        border-bottom: 1px dashed white;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      .journal-entry-content {
+        line-height: 1.5;
+        white-space: pre-line;
+      }
+
+      .journal-entries-list {
+        padding: 5px;
+      }
+
+      .journal-entries-list a {
+        display: block;
+        padding: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #333;
+        text-align: left;
+        transition: background-color 0.2s;
+      }
+
+      .journal-entries-list a:hover {
+        background-color: #333;
+      }
+
+      .journal-entries-list a.active {
+        border-color: white;
+        background-color: #333;
+      }
+
+      .journal-title {
+        text-align: center !important;
+        margin-bottom: 20px !important;
+        font-size: 1.5em !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header02">
+      <a href="/"> <img src="" /> </a>
+    </div>
+
+    <div class="banner"></div>
+
+    <main>
+      <div class="mainwrapper">
+        <div style="display: flex">
+          <div class="sideframe left-sideframe">
+            <div class="left-section left-top-section">
+              <div class="sidecontent">
+                <script src="/lloadinfo.js"></script>
+                <center>
+                  <br />
+                  you are visitor #<span id="hitcount">...</span> <br /><br />
+                  <br />
+                  site last updated: <span id="lastupdate">...</span>
+                  <br /><br />
+                  <br />
+                  the time is...
+                  <p style="color: white; font-size: 20px">
+                    <span id="time">...</span>
+                  </p>
+                </center>
+                <script src="/time.js"></script>
+                <br />
+              </div>
+            </div>
+
+            <div class="left-section left-bottom-section">
+              <div class="sidecontent">
+                <center>
+                  <div style="margin: 0px 0">
+                    <a
+                      href="/"
+                      style="display: inline-block"
+                      class="about-link"
+                      title="Wah!"
+                    >
+                      <img
+                        src="/bnuuy_closed.png"
+                        alt="Home"
+                        class="icon-default"
+                        style="
+                          width: 75px;
+                          height: 103px;
+                          vertical-align: middle;
+                        "
+                      />
+                      <img
+                        src="/bnuuy_open.png"
+                        alt="Home Hover"
+                        class="icon-hover"
+                        style="
+                          width: 75px;
+                          height: 103px;
+                          display: none;
+                          vertical-align: middle;
+                        "
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="quick-links"
+                    style="text-align: left; margin-top: 15px"
+                  >
+                    <p style="line-height: 1.8 !important">
+                      <img
+                        src="/aboutmeee.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a href="/aboutme.html">About me</a><br />
+                      <img
+                        src="/galleryy.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a href="/art.html">Art Gallery</a><br />
+                      <img
+                        src="/musicc.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a href="/music.html">Music</a> <br />
+                      <img
+                        src="/chatt.png"
+                        style="height: 15px; vertical-align: middle"
+                        alt="icon"
+                      />
+                      <a
+                        href="http://users.smartgb.com/g/g.php?a=s&i=g19-00984-40"
+                        target="_blank"
+                        >Guestbook</a
+                      >
+                    </p>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
+
+          <div class="mainframe">
+            <div class="maincontent">
+              <h2 class="journal-title">Journal</h2>
+
+              <div id="journal-content">
+                <!-- Journal entries will be loaded here -->
+                <div class="journal-entry">
+                  <h3>Select an entry from the right column.</h3>
+                  <div class="journal-entry-content">
+                    Choose a journal entry to view it here!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sideframe">
+            <center><h3 id="h3rightmargins">Entries</h3></center>
+            <div class="sidecontent">
+              <div class="journal-entries-list" id="entries-list">
+                <!-- Journal entries list will be loaded here -->
+                <div style="text-align: center; padding: 20px">
+                  Loading journal entries...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p id="paragraphstyling"><small> luck est. 2023 </small></p>
+    </footer>
+
+    <script>
+      // Function to fetch and load journal entries list
+      async function loadJournalEntriesList() {
+        try {
+          const response = await fetch("/journal-entries.json");
+
+          if (!response.ok) {
+            throw new Error("Failed to load journal entries list");
+          }
+
+          const entries = await response.json();
+
+          const entriesListContainer = document.getElementById("entries-list");
+
+          entriesListContainer.innerHTML = "";
+
+          entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          entries.forEach((entry) => {
+            const entryLink = document.createElement("a");
+            entryLink.href = "#" + entry.id;
+            entryLink.textContent = entry.title;
+            entryLink.setAttribute("data-entry-id", entry.id);
+            entryLink.addEventListener("click", function (e) {
+              e.preventDefault();
+              loadJournalEntry(entry.id);
+
+              document
+                .querySelectorAll(".journal-entries-list a")
+                .forEach((link) => {
+                  link.classList.remove("active");
+                });
+              this.classList.add("active");
+            });
+
+            entriesListContainer.appendChild(entryLink);
+          });
+
+          if (entries.length > 0) {
+            loadJournalEntry(entries[0].id);
+            entriesListContainer.querySelector("a").classList.add("active");
+          }
+        } catch (error) {
+          console.error("Error loading journal entries:", error);
+          document.getElementById("entries-list").innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #ff6b6b;">
+              Failed to load journal entries. Please try again later.
+            </div>
+          `;
+        }
+      }
+
+      async function loadJournalEntry(entryId) {
+        try {
+          const response = await fetch(`/journal/${entryId}.txt`);
+
+          if (!response.ok) {
+            throw new Error(`Failed to load journal entry: ${entryId}`);
+          }
+
+          const content = await response.text();
+
+          const metadataResponse = await fetch("/journal-entries.json");
+          const entries = await metadataResponse.json();
+          const entryData = entries.find((entry) => entry.id === entryId);
+
+          if (!entryData) {
+            throw new Error(`Journal entry metadata not found: ${entryId}`);
+          }
+
+          document.getElementById("journal-content").innerHTML = `
+            <div class="journal-entry">
+              <h3>${entryData.title} - ${new Date(
+            entryData.date
+          ).toLocaleDateString()}</h3>
+              <div class="journal-entry-content">
+                ${content}
+              </div>
+            </div>
+          `;
+        } catch (error) {
+          console.error("Error loading journal entry:", error);
+          document.getElementById("journal-content").innerHTML = `
+            <div class="journal-entry">
+              <h3>Error</h3>
+              <div class="journal-entry-content" style="color: #ff6b6b;">
+                Failed to load journal entry. Please try again later.
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        initBnuuyHover();
+
+        loadJournalEntriesList();
+      });
+
+      function initBnuuyHover() {
+        const aboutLink = document.querySelector(".about-link");
+        if (!aboutLink) return;
+
+        const defaultIcon = aboutLink.querySelector(".icon-default");
+        const hoverIcon = aboutLink.querySelector(".icon-hover");
+
+        if (defaultIcon && hoverIcon) {
+          aboutLink.removeEventListener(
+            "mouseenter",
+            aboutLink._mouseEnterHandler
+          );
+          aboutLink.removeEventListener(
+            "mouseleave",
+            aboutLink._mouseLeaveHandler
+          );
+
+          aboutLink._mouseEnterHandler = function () {
+            defaultIcon.style.display = "none";
+            hoverIcon.style.display = "block";
+          };
+
+          aboutLink._mouseLeaveHandler = function () {
+            defaultIcon.style.display = "block";
+            hoverIcon.style.display = "none";
+          };
+
+          aboutLink.addEventListener(
+            "mouseenter",
+            aboutLink._mouseEnterHandler
+          );
+          aboutLink.addEventListener(
+            "mouseleave",
+            aboutLink._mouseLeaveHandler
+          );
+
+          defaultIcon.style.display = "block";
+          hoverIcon.style.display = "none";
+        }
+      }
+    </script>
+
+    <script src="/journal-mobile.js"></script>
+  </body>
+</html>

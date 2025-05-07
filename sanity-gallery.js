@@ -1,5 +1,3 @@
-// Simplified sanity-gallery.js - Fixed to work with Swup transitions
-
 // Global variables
 let allArtworks = [];
 let galleryInitialized = false;

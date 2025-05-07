@@ -1,8 +1,3 @@
-/**
- * art-mobile.js - Art Gallery page-specific mobile fixes
- * Add this file to your website and include it ONLY in art.html
- */
-
 // Wait until DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
   // Only apply fixes to art.html page

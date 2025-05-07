@@ -1,5 +1,3 @@
-// Updated bannerbar.js - Compatible with art gallery layout
-
 // Create a global function to handle style application and layout
 window.applyPageStyles = function () {
   console.log("Applying page styles and fixing layout");
