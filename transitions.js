@@ -354,3 +354,39 @@ window.addEventListener("resize", function () {
   fixArtGalleryMobile();
   fixIndexSidebarHeight();
 });
+////
+// Handle browser back/forward button events
+window.addEventListener("pageshow", function (event) {
+  // Checks if the page is being loaded from the browser cache (back/forward navigation)
+  if (event.persisted) {
+    console.log("Page loaded from cache (back/forward navigation)");
+
+    // Ensures fade overlay exists
+    createFadeOverlay();
+
+    // Get the fade overlay
+    const fadeOverlay = document.getElementById("fade-overlay");
+    if (fadeOverlay) {
+      // Ensure the overlay is visible initially
+      fadeOverlay.style.opacity = "1";
+
+      // Fade in the page after a short delay
+      setTimeout(function () {
+        fadeOverlay.style.opacity = "0";
+        console.log("Page faded in after back/forward navigation");
+      }, 100);
+    }
+
+    // Re-initialize components that might not have been properly initialized
+    setTimeout(function () {
+      initBannerAnimation();
+      initBnuuyHover();
+      applyGlobalStyles();
+
+      // Call mobile-specific fixes
+      fixArtGalleryMobile();
+      fixIndexSidebarHeight();
+      fixChangelogScroll();
+    }, 200);
+  }
+});
