@@ -1,3 +1,35 @@
+// ADDED: Immediate overlay creation before anything else runs
+(function () {
+  // Create overlay immediately before anything else
+  const overlay = document.createElement("div");
+  overlay.id = "fade-overlay";
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "#000";
+  overlay.style.zIndex = "9999";
+  overlay.style.opacity = "1"; // Start visible
+  overlay.style.pointerEvents = "none";
+  overlay.style.transition = "opacity 0.4s ease-in-out";
+
+  // Add to body as soon as it's available
+  if (document.body) {
+    document.body.appendChild(overlay);
+  } else {
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        if (!document.getElementById("fade-overlay")) {
+          document.body.appendChild(overlay);
+        }
+      },
+      { once: true }
+    );
+  }
+})();
+
 // Execute as soon as possible
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM loaded - initializing fade transitions");
@@ -7,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start with the overlay visible (black screen)
   const fadeOverlay = document.getElementById("fade-overlay");
-  fadeOverlay.style.opacity = "1";
+  // MODIFIED: No need to set opacity to 1 as it's already 1
 
   // Initialize other components
   initBannerAnimation();
@@ -24,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", handleLinkClicks);
 });
 
+// MODIFIED: Only create if it doesn't exist yet
 function createFadeOverlay() {
   // Create fade overlay if it doesn't exist
   if (!document.getElementById("fade-overlay")) {
@@ -39,7 +72,7 @@ function createFadeOverlay() {
     overlay.style.height = "100%";
     overlay.style.backgroundColor = "#000";
     overlay.style.zIndex = "9999";
-    overlay.style.opacity = "0"; // Start invisible
+    overlay.style.opacity = "1"; // MODIFIED: Start with opacity 1 to prevent flicker
     overlay.style.pointerEvents = "none"; // Allow clicks to pass through
     overlay.style.transition = "opacity 0.4s ease-in-out";
 
@@ -354,14 +387,14 @@ window.addEventListener("resize", function () {
   fixArtGalleryMobile();
   fixIndexSidebarHeight();
 });
-////
-// Handle browser back/forward button events
+
+// ADDED: Handle browser back/forward button events
 window.addEventListener("pageshow", function (event) {
-  // Checks if the page is being loaded from the browser cache (back/forward navigation)
+  // Check if the page is being loaded from the browser cache (back/forward navigation)
   if (event.persisted) {
     console.log("Page loaded from cache (back/forward navigation)");
 
-    // Ensures fade overlay exists
+    // Ensure fade overlay exists
     createFadeOverlay();
 
     // Get the fade overlay
