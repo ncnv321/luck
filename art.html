@@ -341,6 +341,43 @@
     </footer>
 
     <script>
+      // Function to extract date from description
+      function extractDateFromDescription(description) {
+        if (!description) return null;
+
+        // Look for date pattern MM/DD/YYYY in the description
+        const datePattern = /(\d{1,2})\/(\d{1,2})\/(\d{4})/;
+        const match = description.match(datePattern);
+
+        if (match) {
+          // Convert to Date object for sorting
+          const month = parseInt(match[1], 10);
+          const day = parseInt(match[2], 10);
+          const year = parseInt(match[3], 10);
+          return new Date(year, month - 1, day); // month is 0-indexed in JS
+        }
+
+        return null;
+      }
+
+      // Function to sort artworks by date within description
+      function sortArtworksByDate(artworks) {
+        return artworks.sort((a, b) => {
+          const dateA = extractDateFromDescription(a.description);
+          const dateB = extractDateFromDescription(b.description);
+
+          // If neither has a date, maintain original order
+          if (!dateA && !dateB) return 0;
+
+          // Items without dates go to the end
+          if (!dateA) return 1;
+          if (!dateB) return -1;
+
+          // Sort by date (most recent first)
+          return dateB - dateA;
+        });
+      }
+
       // Wait for Sanity client
       function waitForSanity(callback) {
         if (window.createClient) {
@@ -415,6 +452,11 @@
                     return; // Skip empty categories
                   }
 
+                  // MODIFIED: Sort artworks within this category by date
+                  const sortedArtworks = sortArtworksByDate(
+                    categories[category]
+                  );
+
                   // Create year section
                   const yearSection = document.createElement("div");
                   yearSection.className = "year-section";
@@ -439,8 +481,8 @@
                   thumbnailGrid.style.gap = "15px";
                   thumbnailGrid.style.marginBottom = "25px";
 
-                  // Add each artwork to the grid
-                  categories[category].forEach((artwork) => {
+                  // Add each artwork to the grid (now sorted)
+                  sortedArtworks.forEach((artwork) => {
                     const thumbnail = document.createElement("div");
                     thumbnail.className = "thumbnail";
 
@@ -448,7 +490,6 @@
                     link.href = artwork.imageUrl;
 
                     // Store the complete artwork data as a custom attribute
-                    // (this will help us access it for the lightbox caption)
                     link.dataset.artworkJson = JSON.stringify({
                       id: artwork._id,
                       title: artwork.title,
@@ -691,6 +732,9 @@
             return; // Skip empty categories
           }
 
+          // MODIFIED: Sort artworks within this category by date
+          const sortedArtworks = sortArtworksByDate(categories[category]);
+
           // Create year section
           const yearSection = document.createElement("div");
           yearSection.className = "year-section";
@@ -715,8 +759,8 @@
           thumbnailGrid.style.gap = "15px";
           thumbnailGrid.style.marginBottom = "25px";
 
-          // Add each artwork to the grid
-          categories[category].forEach((artwork) => {
+          // Add each artwork to the grid (now sorted)
+          sortedArtworks.forEach((artwork) => {
             const thumbnail = document.createElement("div");
             thumbnail.className = "thumbnail";
 
