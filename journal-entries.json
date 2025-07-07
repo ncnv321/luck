@@ -4,19 +4,5 @@
     "title": "first entry",
     "date": "2025-05-08",
     "tags": ["update", "personal"]
-  },
-
-  {
-    "id": "May222025",
-    "title": "May 22",
-    "date": "2025-05-22",
-    "tags": ["thoughts", "personal"]
-  },
-
-  {
-    "id": "June282025",
-    "title": "Graduation",
-    "date": "2025-06-29",
-    "tags": ["update", "personal"]
   }
 ]
