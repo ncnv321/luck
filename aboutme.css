@@ -218,7 +218,7 @@ p {
 
 @keyframes scroll-right {
   from {
-    transform: translateX(-550%);
+    transform: translateX(-150%);
   }
   to {
     transform: translateX(0);
