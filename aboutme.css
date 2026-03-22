@@ -206,7 +206,7 @@ p {
 .changelog-track {
   display: flex;
   width: max-content;
-  animation: scroll-right 6s linear infinite;
+  animation: scroll-right 12s linear infinite;
 }
 
 .changelog-track img {
@@ -218,10 +218,10 @@ p {
 
 @keyframes scroll-right {
   from {
-    transform: translateX(-150%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(0);
+    transform: translateX(-350%);
   }
 }
 
