@@ -1,4 +1,5 @@
 // schemas/artwork.js
+
 export default {
   name: 'artwork',
   title: 'Artwork',
