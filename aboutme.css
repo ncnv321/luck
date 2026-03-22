@@ -206,7 +206,7 @@ p {
 .changelog-track {
   display: flex;
   width: max-content;
-  animation: scroll-right 11s linear infinite;
+  animation: scroll-right 6s linear infinite;
 }
 
 .changelog-track img {
