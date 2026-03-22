@@ -196,10 +196,33 @@ p {
 /* Kins Marquee Container (Used .changelog class in HTML) */
 .changelog {
   width: 150px;
-  height: 120px;
-  border: 1px solid white;
+  height: 80px;
   overflow: hidden;
+  border: 1px solid white;
   margin: 0 auto 10px auto;
+  position: relative;
+}
+
+.changelog-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-right 11s linear infinite;
+}
+
+.changelog-track img {
+  height: 80px;
+  border: 1px solid #000;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-550%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* Likes/Dislikes Container */

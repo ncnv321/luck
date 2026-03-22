@@ -232,7 +232,14 @@ function renderGallery(artworks) {
   artworksContainer.innerHTML = "";
 
   // Categories to display in order
-  const orderedCategories = ["2025", "2024", "2023", "2022", "sketches"];
+  const orderedCategories = [
+    "2026",
+    "2025",
+    "2024",
+    "2023",
+    "2022",
+    "sketches",
+  ];
 
   // Create sections for each category
   orderedCategories.forEach((category) => {
