@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330">
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" />
+      <feDisplacementMap in="SourceGraphic" scale="3.2" />
+    </filter>
+    <style>
+      path, circle, rect { stroke: #000; stroke-linecap: round; stroke-linejoin: round; }
+      .body { fill: #f1e2bd; stroke-width: 4; }
+      .label { fill: #fffaf0; stroke-width: 3; }
+      .window { fill: #3a3530; stroke-width: 3.5; }
+      .bottom { fill: #e6d3a6; stroke-width: 3.5; }
+      .screw { fill: #d9c79c; stroke-width: 2.5; }
+      .hole { fill: #fff; stroke-width: 2.5; }
+      .thin { fill: none; stroke-width: 2; }
+      .tape { fill: none; stroke: #6b4a32; stroke-width: 5; }
+      text { font-family: "MS Gothic", "MS PGothic", msgothic, sans-serif; font-size: 26px; font-weight: bold; fill: #000; }
+    </style>
+  </defs>
+  <g filter="url(#wobble)">
+    <path class="body" d="M 26 18 Q 22 14 30 13 L 490 15 Q 504 16 505 30 L 507 300 Q 506 316 492 316 L 30 318 Q 14 317 15 302 L 14 32 Q 14 18 26 18 Z" />
+    <circle class="screw" cx="36" cy="36" r="7" />
+    <circle class="screw" cx="484" cy="36" r="7" />
+    <circle class="screw" cx="36" cy="296" r="7" />
+    <circle class="screw" cx="484" cy="296" r="7" />
+    <path class="thin" d="M 31 36 L 41 36 M 479 36 L 489 36 M 31 296 L 41 296 M 479 296 L 489 296" />
+    <path class="label" d="M 58 40 L 462 42 Q 470 43 469 52 L 467 214 Q 466 222 457 222 L 64 220 Q 55 219 55 211 L 54 50 Q 54 41 58 40 Z" />
+    <path class="thin" d="M 72 76 L 448 78" />
+    <path class="thin" d="M 72 100 L 300 101" />
+    <text x="76" y="70">luck's playlist</text>
+    <text x="436" y="70">A</text>
+    <path class="window" d="M 128 118 L 392 120 Q 404 121 404 133 L 403 185 Q 402 197 390 197 L 130 196 Q 117 195 117 183 L 118 131 Q 118 118 128 118 Z" />
+    <path class="tape" d="M 182 178 Q 260 190 338 178" />
+    <path class="bottom" d="M 120 316 L 136 252 Q 139 244 148 244 L 372 245 Q 381 245 384 253 L 400 316" />
+    <circle class="hole" cx="176" cy="284" r="7" />
+    <circle class="hole" cx="344" cy="284" r="7" />
+    <rect class="hole" x="236" y="276" width="16" height="14" rx="3" />
+    <rect class="hole" x="268" y="276" width="16" height="14" rx="3" />
+  </g>
+</svg>

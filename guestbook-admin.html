@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Guestbook admin | luck</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/guestbook-admin.css" />
+    <script src="/js/guestbook-admin.js" defer></script>
+  </head>
+
+  <body>
+    <main class="admin">
+      <h1>Guestbook admin</h1>
+      <p class="hint">
+        Private page for fixing or removing guestbook notes. Enter
+        GUESTBOOK_ADMIN_KEY to save changes.
+      </p>
+
+      <div class="key-row">
+        <input
+          id="adminKey"
+          type="password"
+          placeholder="admin key"
+          autocomplete="off"
+        />
+        <button id="useKey" type="button" class="primary">Use key</button>
+        <a href="/guestbook.html"
+          ><button type="button">Open guestbook</button></a
+        >
+      </div>
+
+      <input
+        id="filter"
+        class="filter"
+        type="search"
+        placeholder="search notes..."
+      />
+      <p class="status" id="status"></p>
+      <div id="list"></div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Art Gallery | luck</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.css"
+    />
+    <link rel="stylesheet" href="/css/art.css" />
+    <script src="/js/transitions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.12.1/simple-lightbox.min.js"></script>
+    <script src="/js/art.js" defer></script>
+  </head>
+
+  <body>
+    <main class="page-wrap">
+      <h1 class="page-title">Art Gallery</h1>
+      <section class="filters" aria-label="Filter artwork">
+        <div class="filter-row">
+          <label class="filter">
+            <span>Years</span>
+            <select id="yearFilter">
+              <option value="all">All Years</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="sketches">Sketches</option>
+            </select>
+          </label>
+
+          <label class="filter">
+            <span>Medium</span>
+            <select id="mediumFilter">
+              <option value="all">All Mediums</option>
+              <option value="traditional">Traditional</option>
+              <option value="digital">Digital</option>
+              <option value="mix">Mix</option>
+            </select>
+          </label>
+
+          <label class="filter">
+            <span>Characters</span>
+            <select id="characterFilter">
+              <option value="all">All Characters</option>
+              <option value="bnuuy">bnuuy</option>
+              <option value="fanart">fanart</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="filter-actions">
+          <a href="/" class="back-btn" aria-label="Back to home">
+            <span class="placeholder">back</span>
+            <img
+              src="/images/Back.webp"
+              alt=""
+              onload="this.parentElement.classList.add('loaded')"
+              onerror="this.remove()"
+            />
+          </a>
+
+          <button id="applyFilters" type="button" class="apply-btn">
+            Apply Filter
+          </button>
+        </div>
+      </section>
+      <section class="gallery-box" aria-label="Artwork">
+        <div class="artworks">
+          <div class="gallery-message">Loading gallery...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">luck est. 2023</footer>
+    <button id="descToggle" type="button" class="desc-toggle" hidden>
+      View Description
+    </button>
+    <div id="descPanel" class="desc-panel" hidden></div>
+  </body>
+</html>

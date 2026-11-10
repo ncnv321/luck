@@ -1,0 +1,332 @@
+{
+ "board": {
+  "width": 3200,
+  "height": 2400
+ },
+ "notes": [
+  {
+   "id": "smartgb-01",
+   "text": "hi :) just testing this out",
+   "name": "luck",
+   "date": "2023-08-30T03:26:00-05:00",
+   "author": "smartgb-a7a45ea923c6",
+   "x": 1628,
+   "y": 1197
+  },
+  {
+   "id": "smartgb-02",
+   "text": "awesome it works :D give it a shot if you'd like, i probably won't read these very often",
+   "name": "luck",
+   "date": "2023-08-30T03:29:00-05:00",
+   "author": "smartgb-a7a45ea923c6",
+   "x": 1365,
+   "y": 1751
+  },
+  {
+   "id": "smartgb-03",
+   "text": "hi! testing with anna :O",
+   "name": "luck",
+   "date": "2023-08-30T15:08:00-05:00",
+   "author": "smartgb-a7a45ea923c6",
+   "x": 2123,
+   "y": 550
+  },
+  {
+   "id": "smartgb-04",
+   "text": "hi! do you think you could make a tutorial on how you made your website?",
+   "name": "tiredghost",
+   "date": "2023-09-25T19:41:00-05:00",
+   "author": "smartgb-99e8e73e743b",
+   "x": 1553,
+   "y": 1340
+  },
+  {
+   "id": "smartgb-05",
+   "text": "i simply don't have the time 💔 but chatgpt and google are your best friends for html. if you want, you can inspect element any neocities page and paste the html code to chatgpt and ask it to break it down for you, it will explain what the code does and you can learn from there",
+   "name": "luck",
+   "date": "2023-11-10T14:40:00-05:00",
+   "author": "smartgb-a7a45ea923c6",
+   "x": 2194,
+   "y": 1257
+  },
+  {
+   "id": "smartgb-06",
+   "text": "sick portfolio 8)",
+   "name": "shibe",
+   "date": "2023-11-30T02:44:00-05:00",
+   "author": "smartgb-792cccf78763",
+   "x": 1817,
+   "y": 1776
+  },
+  {
+   "id": "smartgb-07",
+   "text": ":@ sigma :D",
+   "name": "bunbo",
+   "date": "2023-12-04T14:02:00-05:00",
+   "author": "smartgb-6b2d5a10b471",
+   "x": 1249,
+   "y": 1585
+  },
+  {
+   "id": "smartgb-08",
+   "text": "I love the art",
+   "name": "zen",
+   "date": "2023-12-24T11:31:00-05:00",
+   "author": "smartgb-92e4accd3d41",
+   "x": 2028,
+   "y": 641
+  },
+  {
+   "id": "smartgb-09",
+   "text": ":D Yooo",
+   "name": "bunbo",
+   "date": "2024-02-05T20:00:00-05:00",
+   "author": "smartgb-6b2d5a10b471",
+   "x": 2011,
+   "y": 1768
+  },
+  {
+   "id": "smartgb-10",
+   "text": "#2 bladee fan im #1",
+   "name": "violet",
+   "date": "2024-02-23T21:09:00-05:00",
+   "author": "smartgb-22d2084f0193",
+   "x": 928,
+   "y": 1074
+  },
+  {
+   "id": "smartgb-11",
+   "text": "luck is a noob :@",
+   "name": "ellie",
+   "date": "2024-02-23T22:52:00-05:00",
+   "author": "smartgb-027434cce111",
+   "x": 804,
+   "y": 1359
+  },
+  {
+   "id": "smartgb-12",
+   "text": ":P :P :P : :P :P :P :P\nlovey website i’m joyful",
+   "name": "leena a",
+   "date": "2024-02-23T23:12:00-05:00",
+   "author": "smartgb-f617d27f2b1e",
+   "x": 871,
+   "y": 1183
+  },
+  {
+   "id": "smartgb-13",
+   "text": "u r a genius",
+   "name": "hey",
+   "date": "2024-03-21T01:50:00-05:00",
+   "author": "smartgb-fa690b82061e",
+   "x": 1953,
+   "y": 1293
+  },
+  {
+   "id": "smartgb-14",
+   "text": "wow cool site,,, please give me a band :pray: :D",
+   "name": "lain",
+   "date": "2024-03-24T23:24:00-05:00",
+   "author": "smartgb-f9221e7e7ce0",
+   "x": 1796,
+   "y": 973
+  },
+  {
+   "id": "smartgb-15",
+   "text": "ur awesome ;-)",
+   "name": "mknvi",
+   "date": "2024-04-24T18:38:00-05:00",
+   "author": "smartgb-d3f586e06fb5",
+   "x": 1967,
+   "y": 1481
+  },
+  {
+   "id": "smartgb-16",
+   "text": "I got the same surname as you, Nico. We're like siblings at this point! And that means you're cool.\nCool website. Cool art. Cool music. Cool as hell hair as well - teach me your ways. You don't wear glasses though, and unfortunately, being a nerd is in fashion. 8)",
+   "name": "Nico",
+   "date": "2024-05-07T17:03:00-05:00",
+   "author": "smartgb-b18aaa6c6b92",
+   "x": 963,
+   "y": 1639
+  },
+  {
+   "id": "smartgb-17",
+   "text": "HAII ୨୧",
+   "name": "Saphy",
+   "date": "2024-06-27T05:28:00-05:00",
+   "author": "smartgb-2079f868c5f3",
+   "x": 849,
+   "y": 1711
+  },
+  {
+   "id": "smartgb-18",
+   "text": "hai hai :D",
+   "name": "Yuu",
+   "date": "2024-08-07T12:36:00-05:00",
+   "author": "smartgb-05fbd4a48732",
+   "x": 1632,
+   "y": 1663
+  },
+  {
+   "id": "smartgb-19",
+   "text": "I want you.",
+   "name": "anthony",
+   "date": "2024-11-03T03:07:00-05:00",
+   "author": "smartgb-502913bfdd49",
+   "x": 1180,
+   "y": 1025
+  },
+  {
+   "id": "smartgb-20",
+   "text": "webfishing!! i am also toronto so cool omgomg!! have fun csgo!",
+   "name": "alunami",
+   "date": "2024-11-05T20:13:00-05:00",
+   "author": "smartgb-d7e64d53664b",
+   "x": 1468,
+   "y": 954
+  },
+  {
+   "id": "smartgb-21",
+   "text": "very peaceful, i love it! :)",
+   "name": "Bean",
+   "date": "2024-11-12T23:06:00-05:00",
+   "author": "smartgb-b3fa55f98fcf",
+   "x": 908,
+   "y": 1470
+  },
+  {
+   "id": "smartgb-22",
+   "text": "hallo :[ :-( :-| :O :P :@ 8) :D ;-) :-)",
+   "name": "claire",
+   "date": "2025-02-16T00:45:00-05:00",
+   "author": "smartgb-c4cf94e75b60",
+   "x": 1445,
+   "y": 1524
+  },
+  {
+   "id": "smartgb-23",
+   "text": "website so cool :P",
+   "name": "meli",
+   "date": "2025-02-24T12:02:00-05:00",
+   "author": "smartgb-fdd0bda7ded4",
+   "x": 2051,
+   "y": 729
+  },
+  {
+   "id": "smartgb-24",
+   "text": "IVE GOT A BOMB :@",
+   "name": "Mads",
+   "date": "2025-05-03T04:54:00-05:00",
+   "author": "smartgb-22261f850040",
+   "x": 2149,
+   "y": 1781
+  },
+  {
+   "id": "smartgb-25",
+   "text": "so cool... so lucky",
+   "name": "kat",
+   "date": "2025-05-07T12:48:00-05:00",
+   "author": "smartgb-5455fc3fb94c",
+   "x": 2152,
+   "y": 990
+  },
+  {
+   "id": "smartgb-26",
+   "text": "very cool website friend ^•^ :P :P :P",
+   "name": "rhi",
+   "date": "2025-05-16T23:12:00-05:00",
+   "author": "smartgb-34576a893fee",
+   "x": 1214,
+   "y": 1318
+  },
+  {
+   "id": "smartgb-27",
+   "text": "fantastic website! i love bnuuy <3 :D :P",
+   "name": "thom",
+   "date": "2025-05-23T20:03:00-05:00",
+   "author": "smartgb-603444b89dab",
+   "x": 1214,
+   "y": 1196
+  },
+  {
+   "id": "smartgb-28",
+   "text": "haiii : :D :D",
+   "name": "val",
+   "date": "2025-05-23T20:19:00-05:00",
+   "author": "smartgb-97dfc65f7428",
+   "x": 2003,
+   "y": 1144
+  },
+  {
+   "id": "smartgb-29",
+   "text": "8) tuff site",
+   "name": "vynii",
+   "date": "2025-05-23T21:55:00-05:00",
+   "author": "smartgb-4b0064eea24e",
+   "x": 1896,
+   "y": 844
+  },
+  {
+   "id": "smartgb-30",
+   "text": "such cute art! :-)",
+   "name": "maddy",
+   "date": "2025-05-23T23:56:00-05:00",
+   "author": "smartgb-b5587bfd231a",
+   "x": 1378,
+   "y": 787
+  },
+  {
+   "id": "smartgb-31",
+   "text": "hello i am tit :@",
+   "name": "tit",
+   "date": "2025-07-20T01:28:00-05:00",
+   "author": "smartgb-cbbd0f71af28",
+   "x": 764,
+   "y": 917
+  },
+  {
+   "id": "smartgb-32",
+   "text": "very impressive art, cant wait to see what else you come up with :D",
+   "name": "brynsane",
+   "date": "2025-08-23T03:25:00-05:00",
+   "author": "smartgb-b7cafd3e40f6",
+   "x": 975,
+   "y": 586
+  },
+  {
+   "id": "smartgb-33",
+   "text": "very impressive art~\nnice to see it has evolved over the years\n- p",
+   "name": "p",
+   "date": "2025-09-26T12:18:00-05:00",
+   "author": "smartgb-148de9c5a7a4",
+   "x": 952,
+   "y": 865
+  },
+  {
+   "id": "smartgb-34",
+   "text": "so cool and talented i love :P :P :P :P :P :P :P",
+   "name": "cc",
+   "date": "2025-12-25T06:25:00-05:00",
+   "author": "smartgb-355b1bbfc967",
+   "x": 1318,
+   "y": 609
+  },
+  {
+   "id": "smartgb-35",
+   "text": "you are so inspiring i love your work :D miss you cutie mwah",
+   "name": "sawyer",
+   "date": "2026-03-22T13:47:00-05:00",
+   "author": "smartgb-23b2a54839ee",
+   "x": 2070,
+   "y": 1621
+  },
+  {
+   "id": "smartgb-36",
+   "text": "Beautiful site! I think your art captures a certain youthful, dreamlike feeling that's hard to explain. I love the colors you chose, and I hope to see more tangible work like your plushies and sculptures. ♡ please never stop creating",
+   "name": "Uni",
+   "date": "2026-05-30T04:53:00-05:00",
+   "author": "smartgb-8d9315fc224d",
+   "x": 1621,
+   "y": 576
+  }
+ ]
+}

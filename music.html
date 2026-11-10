@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Music | luck</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/music.css" />
+    <script src="/js/transitions.js"></script>
+    <script src="/js/music.js" defer></script>
+  </head>
+
+  <body>
+    <main class="page-wrap">
+      <div class="top-bar">
+        <a href="/" class="back-btn" aria-label="Back to home">
+          <span class="placeholder">back</span>
+          <img
+            src="/images/Back.webp"
+            alt=""
+            onload="this.parentElement.classList.add('loaded')"
+            onerror="this.remove()"
+          />
+        </a>
+      </div>
+
+      <h1 class="page-title">My Music</h1>
+
+      <section class="player" id="player" aria-label="Music player">
+        <div class="cassette">
+          <img src="/images/cassette.svg" alt="Cassette tape" />
+          <svg class="reels" viewBox="0 0 520 330" aria-hidden="true">
+            <defs>
+              <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.035"
+                  numOctaves="2"
+                  seed="7"
+                />
+                <feDisplacementMap in="SourceGraphic" scale="3.2" />
+              </filter>
+            </defs>
+            <g class="reel-left" transform="translate(182 157)">
+              <g class="reel-spin">
+                <circle class="reel-tape" r="30" />
+                <circle class="reel-hub" r="16" />
+                <path
+                  class="reel-spokes"
+                  d="M 0 -16 L 0 -7 M 14 8 L 6 3.5 M -14 8 L -6 3.5"
+                />
+              </g>
+            </g>
+            <g class="reel-right" transform="translate(338 157)">
+              <g class="reel-spin">
+                <circle class="reel-tape" r="22" />
+                <circle class="reel-hub" r="16" />
+                <path
+                  class="reel-spokes"
+                  d="M 0 -16 L 0 -7 M 14 8 L 6 3.5 M -14 8 L -6 3.5"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="controls">
+          <button
+            type="button"
+            class="ctrl"
+            id="prevBtn"
+            aria-label="Previous song"
+          >
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M 31 9 L 17 20 L 31 31 Z M 18 9 L 5 20 L 18 31 Z" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="ctrl ctrl-play"
+            id="playBtn"
+            aria-label="Play"
+          >
+            <svg class="icon-play" viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M 12 7 L 33 20 L 12 33 Z" />
+            </svg>
+            <svg class="icon-pause" viewBox="0 0 40 40" aria-hidden="true">
+              <path
+                d="M 11 8 L 17 8 L 17 32 L 11 32 Z M 23 8 L 29 8 L 29 32 L 23 32 Z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="ctrl"
+            id="nextBtn"
+            aria-label="Next song"
+          >
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M 9 9 L 23 20 L 9 31 Z M 22 9 L 35 20 L 22 31 Z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="progress" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="now-playing" id="nowPlaying" aria-live="polite">
+          <img class="cover" id="cover" alt="" />
+          <div class="info-row">
+            <span class="notes notes-left" aria-hidden="true">
+              <span>♪</span><span>♫</span><span>♪</span>
+            </span>
+            <p class="song-info" id="songInfo">
+              Tap me to view the full Playlist!
+            </p>
+            <span class="notes notes-right" aria-hidden="true">
+              <span>♫</span><span>♪</span><span>♫</span>
+            </span>
+          </div>
+          <a
+            class="spotify-link"
+            id="spotifyLink"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            hidden
+          >
+            30-second preview · View Song Here
+          </a>
+        </div>
+
+        <audio id="audio" preload="none"></audio>
+      </section>
+
+      <a
+        href="https://open.spotify.com/playlist/2QFVbRVvTRSJOpcNw8jniz"
+        class="playlist-link"
+        target="_blank"
+        rel="noopener"
+        aria-label="Open my playlist on Spotify"
+      >
+        <span class="placeholder">playlist.webp</span>
+        <img
+          src="/images/playlist.webp"
+          alt=""
+          onload="this.parentElement.classList.add('loaded')"
+          onerror="this.remove()"
+        />
+      </a>
+    </main>
+
+    <footer class="page-footer">luck est. 2023</footer>
+  </body>
+</html>

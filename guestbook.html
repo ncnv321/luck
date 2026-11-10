@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guestbook | luck</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/guestbook.css" />
+    <script src="/js/transitions.js"></script>
+    <script src="/js/guestbook.js" defer></script>
+  </head>
+
+  <body>
+    <main class="page-wrap">
+      <h1 class="page-title">Guestbook</h1>
+
+      <div class="guestbook-bar">
+        <a href="/" class="back-btn" aria-label="Back to home">
+          <span class="placeholder">back</span>
+          <img
+            src="/images/Back.webp"
+            alt=""
+            onload="this.parentElement.classList.add('loaded')"
+            onerror="this.remove()"
+          />
+        </a>
+        <p class="guestbook-hint">
+          tap anywhere on the page below to leave a note ✎<br />
+          scroll or drag to look around
+        </p>
+      </div>
+      <div class="board-frame" id="boardFrame">
+        <div class="board-sizer" id="boardSizer">
+          <div class="board" id="board" aria-label="Guestbook notes">
+            <svg class="arrows" id="arrows" aria-hidden="true"></svg>
+          </div>
+        </div>
+      </div>
+      <p class="board-status" id="boardStatus" aria-live="polite"></p>
+    </main>
+
+    <footer class="page-footer">luck est. 2023</footer>
+    <div class="focus" id="focus" hidden>
+      <div
+        class="focus-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Notes from the same person"
+      >
+        <button
+          type="button"
+          class="focus-close"
+          id="focusClose"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div class="focus-notes" id="focusNotes"></div>
+      </div>
+    </div>
+  </body>
+</html>

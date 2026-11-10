@@ -1,0 +1,203 @@
+:root {
+  --me-width: 58%;
+  --list-height: 220px;
+}
+
+.intro {
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.intro::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.intro p {
+  margin: 0 0 0.9em;
+}
+
+.intro-hello {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.me-link {
+  float: left;
+  width: var(--me-width);
+  margin: 0 14px 8px 0;
+  shape-outside: url("/images/Me.png");
+  shape-image-threshold: 0.3;
+  shape-margin: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.me {
+  display: block;
+  width: 100%;
+  height: 10%;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: transform 0.2s;
+}
+
+.me-link:hover .me,
+.me-link:focus-visible .me {
+  transform: rotate(-4deg) scale(1.03);
+  filter: var(--glow);
+}
+
+.me-link:focus-visible {
+  outline: none;
+}
+
+.inline-link {
+  text-decoration: underline;
+}
+
+.stats {
+  --paper-size: 165px;
+  --paper-max: 31%;
+  float: right;
+  width: min(calc(var(--paper-size) * 2), calc(var(--paper-max) * 2));
+  margin: 4px 0 6px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "top top"
+    "left right";
+  justify-items: center;
+  align-items: center;
+
+  shape-outside: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 46%, 25% 46%);
+  shape-margin: 14px;
+}
+
+.stat {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--paper-ratio);
+  background: var(--paper) center / 100% 100% no-repeat;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+.stat-text {
+  position: absolute;
+  inset: var(--paper-inset);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15em;
+  text-align: center;
+  line-height: 1.15;
+  font-size: 10px;
+
+  text-shadow:
+    0 0 2px #fff,
+    0 0 4px #fff,
+    0 0 7px rgba(255, 255, 255, 0.9);
+}
+
+.stat-top {
+  grid-area: top;
+  width: 50%;
+  --paper: url("/images/stickynote4.png");
+  --paper-ratio: 249 / 223;
+  --paper-inset: 16% 16% 14% 14%;
+  margin-bottom: -6%;
+  z-index: 1;
+}
+
+.stat-left {
+  grid-area: left;
+  --paper: url("/images/stickynote1.png");
+  --paper-ratio: 217 / 160;
+  --paper-inset: 24% 24% 16% 12%;
+}
+
+.stat-right {
+  grid-area: right;
+  --paper: url("/images/stickynote3.png");
+  --paper-ratio: 230 / 220;
+  --paper-inset: 22% 16% 16% 16%;
+}
+
+.stat-label {
+  font-size: 0.6em;
+}
+
+.stat-value {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  .stats.is-row {
+    float: none;
+    clear: both;
+    width: 100%;
+    margin: 18px 0 0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "left top right";
+    gap: 14px;
+    shape-outside: none;
+  }
+  .stats.is-row .stat {
+    width: 100%;
+    max-width: 200px;
+  }
+  .stats.is-row .stat-top {
+    margin-bottom: 0;
+  }
+}
+
+.likes {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.list-box {
+  display: flex;
+  flex-direction: column;
+  height: var(--list-height);
+  border: 2px solid var(--ink);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 8px 10px 10px;
+  min-width: 0;
+}
+
+.list-title {
+  margin: 0 0 6px;
+  padding-bottom: 4px;
+  text-align: center;
+  font-size: 1.05rem;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.list-items {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 4px 0 18px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.list-items::-webkit-scrollbar {
+  width: 5px;
+}
+
+@media (max-width: 560px) {
+  .intro {
+    font-size: 0.85rem;
+  }
+  .list-items {
+    font-size: 0.8rem;
+  }
+}

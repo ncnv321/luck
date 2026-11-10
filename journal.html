@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Journal | luck</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/journal.css" />
+    <script src="/js/transitions.js"></script>
+    <script src="/js/journal.js" defer></script>
+  </head>
+
+  <body>
+    <main class="page-wrap">
+      <h1 class="page-title">Journal</h1>
+      <nav class="timeline" id="timeline" aria-label="Journal timeline"></nav>
+
+      <div class="journal-actions">
+        <a href="/" class="back-btn" aria-label="Back to home">
+          <span class="placeholder">back</span>
+          <img
+            src="/images/Back.webp"
+            alt=""
+            onload="this.parentElement.classList.add('loaded')"
+            onerror="this.remove()"
+          />
+        </a>
+      </div>
+      <section class="entry-box" id="entryBox" aria-live="polite">
+        <div class="entry-message">Loading journal...</div>
+      </section>
+    </main>
+
+    <footer class="page-footer">luck est. 2023</footer>
+    <div
+      class="cal"
+      id="calendar"
+      role="dialog"
+      aria-labelledby="calTitle"
+      hidden
+    >
+      <button
+        type="button"
+        class="cal-close"
+        id="calClose"
+        aria-label="Close calendar"
+      >
+        &times;
+      </button>
+      <div class="cal-body">
+        <div class="cal-head">
+          <button
+            type="button"
+            class="cal-arrow"
+            id="calPrev"
+            aria-label="Previous month"
+          >
+            &larr;
+          </button>
+          <span class="cal-title" id="calTitle"></span>
+          <button
+            type="button"
+            class="cal-arrow"
+            id="calNext"
+            aria-label="Next month"
+          >
+            &rarr;
+          </button>
+        </div>
+        <div class="cal-weekdays" aria-hidden="true">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span
+          ><span>F</span><span>S</span>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+    </div>
+  </body>
+</html>
