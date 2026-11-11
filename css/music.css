@@ -1,6 +1,5 @@
 :root {
   --label: #fffaf0;
-  --tape: #6b4a32;
 }
 
 .top-bar {
@@ -21,57 +20,30 @@
 .cassette {
   position: relative;
   width: min(100%, 480px);
-  aspect-ratio: 520 / 330;
-  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+  aspect-ratio: 640 / 405;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
 }
 
-.cassette img,
-.reels {
+.cassette img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.reels circle,
-.reels path {
-  stroke: var(--ink);
-  stroke-linecap: round;
+.cassette-playing,
+.player.is-playing .cassette-still {
+  visibility: hidden;
 }
 
-.reel-tape {
-  fill: var(--tape);
-  stroke-width: 2.5;
+.player.is-playing .cassette-playing {
+  visibility: visible;
 }
 
-.reel-hub {
-  fill: #fff;
-  stroke-width: 3;
-}
-
-.reel-spokes {
-  fill: none;
-  stroke-width: 3.5;
-}
-
-.reel-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: spin 2.4s linear infinite paused;
-}
-
-.reel-right .reel-spin {
-  animation-duration: 1.8s;
-}
-
-.player.is-playing .reel-spin {
-  animation-play-state: running;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(-360deg);
-  }
+.filters {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .controls {
@@ -296,7 +268,7 @@
 .playlist-link {
   position: relative;
   display: flex;
-  width: min(60%, 240px);
+  width: min(60%, 340px);
   aspect-ratio: 1 / 1;
   margin: 30px auto 0;
   transition: transform 0.2s;
@@ -322,7 +294,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reel-spin,
   .notes span {
     animation: none;
   }

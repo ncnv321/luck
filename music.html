@@ -29,39 +29,26 @@
 
       <section class="player" id="player" aria-label="Music player">
         <div class="cassette">
-          <img src="/images/cassette.svg" alt="Cassette tape" />
-          <svg class="reels" viewBox="0 0 520 330" aria-hidden="true">
-            <defs>
-              <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
-                <feTurbulence
-                  type="fractalNoise"
-                  baseFrequency="0.035"
-                  numOctaves="2"
-                  seed="7"
-                />
-                <feDisplacementMap in="SourceGraphic" scale="3.2" />
-              </filter>
-            </defs>
-            <g class="reel-left" transform="translate(182 157)">
-              <g class="reel-spin">
-                <circle class="reel-tape" r="30" />
-                <circle class="reel-hub" r="16" />
-                <path
-                  class="reel-spokes"
-                  d="M 0 -16 L 0 -7 M 14 8 L 6 3.5 M -14 8 L -6 3.5"
-                />
-              </g>
-            </g>
-            <g class="reel-right" transform="translate(338 157)">
-              <g class="reel-spin">
-                <circle class="reel-tape" r="22" />
-                <circle class="reel-hub" r="16" />
-                <path
-                  class="reel-spokes"
-                  d="M 0 -16 L 0 -7 M 14 8 L 6 3.5 M -14 8 L -6 3.5"
-                />
-              </g>
-            </g>
+          <img
+            class="cassette-still"
+            src="/images/cassette.png"
+            alt="Cassette player"
+          />
+          <img
+            class="cassette-playing"
+            src="/images/cassette-playing.webp"
+            alt=""
+          />
+          <svg class="filters" aria-hidden="true">
+            <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.035"
+                numOctaves="2"
+                seed="7"
+              />
+              <feDisplacementMap in="SourceGraphic" scale="3.2" />
+            </filter>
           </svg>
         </div>
 
@@ -144,7 +131,7 @@
       >
         <span class="placeholder">playlist.webp</span>
         <img
-          src="/images/playlist.webp"
+          src="/images/musicbutton.webp"
           alt=""
           onload="this.parentElement.classList.add('loaded')"
           onerror="this.remove()"
