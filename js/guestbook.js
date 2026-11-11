@@ -121,11 +121,6 @@ function notesByAuthor(author) {
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
-const date = document.createElement("div");
-date.className = "note-date";
-date.textContent = formatDate(note.date);
-el.appendChild(date);
-
 function hasLinks(note) {
   return notesByAuthor(note.author).length > 1;
 }
@@ -148,6 +143,11 @@ function renderNote(note) {
     name.textContent = `- ${note.name}`;
     el.appendChild(name);
   }
+
+  const date = document.createElement("div");
+  date.className = "note-date";
+  date.textContent = formatDate(note.date);
+  el.appendChild(date);
 
   if (hasLinks(note)) {
     el.classList.add("is-linked");
@@ -417,17 +417,16 @@ function startDraft(x, y) {
     }
   });
   input.addEventListener("input", updateCount);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") removeDraft();
-    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) saveDraft();
-  });
-
   name.addEventListener("input", updateCount);
   name.addEventListener("paste", blockPaste);
   name.addEventListener("drop", blockPaste);
   name.addEventListener("keydown", (event) => {
     if (event.key === "Escape") removeDraft();
     if (event.key === "Enter") saveDraft();
+  });
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") removeDraft();
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) saveDraft();
   });
 
   cancel.addEventListener("click", (event) => {
@@ -473,6 +472,7 @@ async function saveDraft() {
     const result = await response.json().catch(() => ({}));
     if (!response.ok)
       throw new Error(result.error || "Couldn't save the note.");
+
     try {
       localStorage.setItem(NAME_KEY, name);
     } catch {}

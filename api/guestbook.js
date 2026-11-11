@@ -106,6 +106,7 @@ async function addNote(req, res) {
   const note = {
     id: `n-${Date.now().toString(36)}-${crypto.randomBytes(4).toString("hex")}`,
     text,
+    name,
     date: new Date().toISOString(),
     author: sha256(`guestbook-author:${token}`).slice(0, 16),
     x: Math.round(Math.min(Math.max(x, 0), seed.board.width - 40)),
@@ -144,7 +145,7 @@ async function editNote(req, res) {
 
   const json = await redis(["HGET", NOTES_KEY, id]);
   if (!json) return res.status(404).json({ error: "No note with that id." });
-  const note = { ...JSON.parse(json), text, name };
+  const note = { ...JSON.parse(json), text };
   await redis(["HSET", NOTES_KEY, id, JSON.stringify(note)]);
   return res.status(200).json({ note });
 }
