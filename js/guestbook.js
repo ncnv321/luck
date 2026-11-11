@@ -121,6 +121,11 @@ function notesByAuthor(author) {
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
+const date = document.createElement("div");
+date.className = "note-date";
+date.textContent = formatDate(note.date);
+el.appendChild(date);
+
 function hasLinks(note) {
   return notesByAuthor(note.author).length > 1;
 }
@@ -131,7 +136,6 @@ function renderNote(note) {
   el.dataset.id = note.id;
   el.style.left = `${note.x}px`;
   el.style.top = `${note.y}px`;
-  el.title = formatDate(note.date);
 
   const text = document.createElement("div");
   text.className = "note-text";
@@ -317,6 +321,13 @@ function removeDraft() {
   draft = null;
 }
 
+const NAME_KEY = "luck-guestbook-name";
+const MAX_NAME = 30;
+
+function draftName() {
+  return draft ? draft.name.value.trim() : "";
+}
+
 function draftText() {
   return draft ? draft.input.innerText.replace(/ /g, " ").trim() : "";
 }
@@ -324,7 +335,7 @@ function draftText() {
 function updateCount() {
   const length = [...draftText()].length;
   draft.count.textContent = `${length}/${MAX_LENGTH}`;
-  draft.confirm.disabled = length === 0;
+  draft.confirm.disabled = length === 0 || !draftName();
 }
 
 function blockPaste(event) {
@@ -354,6 +365,17 @@ function startDraft(x, y) {
   if (input.contentEditable !== "plaintext-only")
     input.contentEditable = "true";
 
+  const name = document.createElement("input");
+  name.className = "draft-name";
+  name.type = "text";
+  name.placeholder = "your name";
+  name.maxLength = MAX_NAME;
+  name.autocomplete = "nickname";
+  name.setAttribute("aria-label", "Your name");
+  try {
+    name.value = localStorage.getItem(NAME_KEY) || "";
+  } catch {}
+
   const tools = document.createElement("div");
   tools.className = "draft-tools";
 
@@ -373,10 +395,10 @@ function startDraft(x, y) {
   confirm.setAttribute("aria-label", "Keep note");
 
   tools.append(count, cancel, confirm);
-  el.append(input, tools);
+  el.append(input, name, tools);
   board.appendChild(el);
 
-  draft = { el, input, count, confirm, x, y, saving: false };
+  draft = { el, input, name, count, confirm, x, y, saving: false };
   updateCount();
 
   input.addEventListener("paste", blockPaste);
@@ -400,6 +422,14 @@ function startDraft(x, y) {
     if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) saveDraft();
   });
 
+  name.addEventListener("input", updateCount);
+  name.addEventListener("paste", blockPaste);
+  name.addEventListener("drop", blockPaste);
+  name.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") removeDraft();
+    if (event.key === "Enter") saveDraft();
+  });
+
   cancel.addEventListener("click", (event) => {
     event.stopPropagation();
     removeDraft();
@@ -416,7 +446,13 @@ function startDraft(x, y) {
 async function saveDraft() {
   if (!draft || draft.saving) return;
   const text = draftText();
+  const name = draftName();
   if (!text) return;
+  if (!name) {
+    setStatus("Please add your name ✎");
+    draft.name.focus();
+    return;
+  }
 
   draft.saving = true;
   draft.el.classList.add("is-saving");
@@ -426,12 +462,20 @@ async function saveDraft() {
     const response = await fetch("/api/guestbook", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, x: draft.x, y: draft.y, token: getToken() }),
+      body: JSON.stringify({
+        text,
+        name,
+        x: draft.x,
+        y: draft.y,
+        token: getToken(),
+      }),
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok)
       throw new Error(result.error || "Couldn't save the note.");
-
+    try {
+      localStorage.setItem(NAME_KEY, name);
+    } catch {}
     removeDraft();
     notes.push(result.note);
     renderAllNotes();
@@ -462,6 +506,7 @@ board.addEventListener("click", (event) => {
   if (noteEl) {
     const note = notes.find((n) => n.id === noteEl.dataset.id);
     if (note && hasLinks(note)) openFocus(note);
+    else noteEl.classList.toggle("show-date");
     return;
   }
 

@@ -1,27 +1,14 @@
 [
   {
-    "id": "June282025",
-    "title": "",
-    "date": "2025-06-28",
-    "tags": [
-      "personal"
-    ]
-  },
-  {
     "id": "May222025",
     "title": "",
     "date": "2025-05-22",
-    "tags": [
-      "personal"
-    ]
+    "tags": ["personal"]
   },
   {
     "id": "May72025",
     "title": "first entry",
     "date": "2025-05-08",
-    "tags": [
-      "update",
-      "personal"
-    ]
+    "tags": ["update", "personal"]
   }
 ]

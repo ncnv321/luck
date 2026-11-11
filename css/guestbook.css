@@ -104,6 +104,23 @@ body.focus-open {
   opacity: 0.75;
 }
 
+.note-date {
+  display: none;
+  margin-top: 2px;
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+.note.show-date .note-date {
+  display: block;
+}
+
+@media (hover: hover) {
+  .note:hover .note-date {
+    display: block;
+  }
+}
+
 .note.is-linked {
   cursor: pointer;
   border-radius: 6px;
@@ -135,6 +152,19 @@ body.focus-open {
   border: 2px dotted var(--ink);
   outline: none;
   caret-color: var(--ink);
+}
+
+.draft-name {
+  display: block;
+  width: 100%;
+  max-width: var(--note-width);
+  margin-top: 4px;
+  padding: 4px 8px;
+  font-size: 0.85em;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px dotted var(--ink);
+  outline: none;
 }
 
 .draft-tools {

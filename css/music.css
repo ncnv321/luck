@@ -178,6 +178,12 @@
   display: none;
 }
 
+.album-hint {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
 .notes {
   position: relative;
   flex-shrink: 0;

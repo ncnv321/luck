@@ -8,6 +8,7 @@ const SEED_EDITS_KEY = "guestbook:seed-edits";
 const SEED_HIDDEN_KEY = "guestbook:seed-hidden";
 const SEED_IDS = new Set(seed.notes.map((n) => n.id));
 const MAX_LENGTH = 300;
+const MAX_NAME = 30;
 const RATE_LIMIT = 5;
 const RATE_WINDOW = 10 * 60;
 
@@ -72,8 +73,15 @@ async function addNote(req, res) {
   const x = Number(body.x);
   const y = Number(body.y);
   const token = String(body.token || "");
+  const name = cleanText(body.name).replace(/\s+/g, " ");
 
   if (!text) return res.status(400).json({ error: "The note is empty." });
+  if (!name) return res.status(400).json({ error: "Please add your name." });
+  if ([...name].length > MAX_NAME) {
+    return res
+      .status(400)
+      .json({ error: `Names can be up to ${MAX_NAME} characters.` });
+  }
   if ([...text].length > MAX_LENGTH) {
     return res
       .status(400)
@@ -136,7 +144,7 @@ async function editNote(req, res) {
 
   const json = await redis(["HGET", NOTES_KEY, id]);
   if (!json) return res.status(404).json({ error: "No note with that id." });
-  const note = { ...JSON.parse(json), text };
+  const note = { ...JSON.parse(json), text, name };
   await redis(["HSET", NOTES_KEY, id, JSON.stringify(note)]);
   return res.status(200).json({ note });
 }
